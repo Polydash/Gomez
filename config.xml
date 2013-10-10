@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Options>
+	<Window Width='800' Height='600' BPP='32' Title='Tetris'/>
+</Options>
