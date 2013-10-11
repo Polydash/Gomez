@@ -16,12 +16,12 @@ vpath %.h Src
 
 all : main
 
-main : TetrisMain.o TetrisApp.o
+main : TetrisMain.o SDLApp.o
 	g++ -o $(EXEC) $^ $(LFLAGS)
 	mv *.o Temp
 
-TetrisMain.o : TetrisMain.cpp TetrisStd.h TetrisApp.h
-TetrisApp.o : TetrisApp.cpp TetrisApp.h TetrisStd.h
+TetrisMain.o : TetrisMain.cpp TetrisStd.h SDLApp.h
+SDLApp.o : SDLApp.cpp SDLApp.h TetrisStd.h
 
 %.o : %.cpp
 	g++ -c $< $(CFLAGS) -D$(VAR)

@@ -1,5 +1,5 @@
 #include "TetrisStd.h"
-#include "TetrisApp.h"
+#include "SDLApp.h"
 
 int main()
 {
@@ -7,12 +7,12 @@ int main()
 	remove("log.txt");
 	LOG("Program started"); 
 	
-	TetrisApp::Create();
+	SDLApp::Create();
 	
 	if(g_pApp->Init())
 		g_pApp->MainLoop();
 		
-	TetrisApp::Destroy();	
+	SDLApp::Destroy();	
 	
 	LOG("Program ended");
 	

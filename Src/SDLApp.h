@@ -1,10 +1,10 @@
-#ifndef TETRISAPP_H
-#define TETRISAPP_H
+#ifndef SDLAPP_H
+#define SDLAPP_H
 
 #include <SDL/SDL.h>
 #include <string>
 
-class TetrisApp
+class SDLApp
 {
 private :
 
@@ -23,8 +23,8 @@ public :
 	
 private :
 
-	TetrisApp();
-	~TetrisApp();
+	SDLApp();
+	~SDLApp();
 	
 	void LoadConfig();
 };

@@ -1,11 +1,11 @@
 #include <tinyxml.h>
 
-#include "TetrisApp.h"
+#include "SDLApp.h"
 #include "TetrisStd.h"
 
-TetrisApp* g_pApp = NULL;
+SDLApp* g_pApp = NULL;
 
-TetrisApp::TetrisApp():
+SDLApp::SDLApp():
 m_width(800),
 m_height(600),
 m_bitsPerPixel(32),
@@ -14,26 +14,26 @@ m_pScreen(NULL)
 {
 }
 
-TetrisApp::~TetrisApp()
+SDLApp::~SDLApp()
 {
 	SDL_Quit();
 	LOG("SDL Quit");
 }
 
-void TetrisApp::Create()
+void SDLApp::Create()
 {
 	if(g_pApp)
 		ERROR("Tetris application already created");
 	
-	g_pApp = new TetrisApp;
+	g_pApp = new SDLApp;
 }
 
-void TetrisApp::Destroy()
+void SDLApp::Destroy()
 {
 	SAFE_DELETE(g_pApp);
 }
 
-bool TetrisApp::Init()
+bool SDLApp::Init()
 {
 	if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER) == -1)
 	{
@@ -59,7 +59,7 @@ bool TetrisApp::Init()
 	return true;
 }
 
-void TetrisApp::MainLoop()
+void SDLApp::MainLoop()
 {
 	SDL_Event event;
 	unsigned int startTime, elapsedTime, FPSTime;
@@ -73,7 +73,7 @@ void TetrisApp::MainLoop()
 	{	
 		startTime = SDL_GetTicks();
 		
-		//Input Update
+		//Input Loop
 		while(SDL_PollEvent(&event))
 		{
 			if(event.type == SDL_QUIT)
@@ -84,12 +84,25 @@ void TetrisApp::MainLoop()
 				if(event.active.state & SDL_APPACTIVE)
 					bIsMinimized = !event.active.gain;
 			}
+			
+			if(!bIsMinimized)
+			{
+				switch(event.type)
+				{
+					case SDL_KEYDOWN :
+					case SDL_KEYUP :
+						//Send input to GameStateManager
+						break;
+						
+					default :
+						break;
+				}
+			}
 		}
 		
 		if(!bIsMinimized)
 		{
-			//Logic Update
-			//Graphics Update
+			//GameStateManager update
 		}
 		
 		elapsedTime = SDL_GetTicks() - startTime;	
@@ -100,7 +113,7 @@ void TetrisApp::MainLoop()
 	}
 }
 
-void TetrisApp::LoadConfig()
+void SDLApp::LoadConfig()
 {
 	TiXmlDocument configDoc("config.xml");
 	if(!configDoc.LoadFile())

@@ -7,8 +7,8 @@
 #include <string>
 
 //Game application singleton
-class TetrisApp;
-extern TetrisApp* g_pApp;
+class SDLApp;
+extern SDLApp* g_pApp;
 
 //Deallocation
 #define SAFE_DELETE(ptr) do{ if(ptr){delete ptr; ptr = NULL;} }while(0)
