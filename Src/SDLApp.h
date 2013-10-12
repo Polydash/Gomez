@@ -4,6 +4,8 @@
 #include <SDL/SDL.h>
 #include <string>
 
+#include "GameStateManager.h"
+
 class SDLApp
 {
 private :
@@ -12,6 +14,8 @@ private :
 	std::string m_title;
 
 	SDL_Surface *m_pScreen;
+	
+	GameStateManager *m_pGameStateMgr;
 
 public :
 	
@@ -20,6 +24,8 @@ public :
 	
 	bool Init();
 	void MainLoop();
+	
+	GameStateManager* GetGameStateMgr() const;
 	
 private :
 

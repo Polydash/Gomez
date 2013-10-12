@@ -10,12 +10,14 @@ m_width(800),
 m_height(600),
 m_bitsPerPixel(32),
 m_title("Tetris"),
-m_pScreen(NULL)
+m_pScreen(NULL),
+m_pGameStateMgr(NULL)
 {
 }
 
 SDLApp::~SDLApp()
 {
+	SAFE_DELETE(m_pGameStateMgr);
 	SDL_Quit();
 	LOG("SDL Quit");
 }
@@ -56,6 +58,10 @@ bool SDLApp::Init()
 	
 	LOG("SDL Configuration");
 	
+	m_pGameStateMgr = new GameStateManager;
+	if(!m_pGameStateMgr->Init())
+		return false;
+	
 	return true;
 }
 
@@ -70,7 +76,15 @@ void SDLApp::MainLoop()
 	startTime = SDL_GetTicks();
 	
 	while(!bIsDone)
-	{	
+	{		
+		//60 FPS Limit	
+		elapsedTime = SDL_GetTicks() - startTime;	
+		if(elapsedTime < FPSTime)
+		{
+			SDL_Delay(FPSTime - elapsedTime);
+			elapsedTime = SDL_GetTicks() - startTime;
+		}
+		
 		startTime = SDL_GetTicks();
 		
 		//Input Loop
@@ -100,17 +114,17 @@ void SDLApp::MainLoop()
 			}
 		}
 		
+		//Run game if not minimized
 		if(!bIsMinimized)
 		{
-			//GameStateManager update
-		}
-		
-		elapsedTime = SDL_GetTicks() - startTime;	
-		if(elapsedTime < FPSTime)
-		{
-			SDL_Delay(FPSTime - elapsedTime);
+			m_pGameStateMgr->Update(elapsedTime);
 		}
 	}
+}
+
+GameStateManager* SDLApp::GetGameStateMgr() const
+{
+	return m_pGameStateMgr;
 }
 
 void SDLApp::LoadConfig()
