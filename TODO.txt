@@ -1,0 +1,10 @@
+		Gomez Project
+		
+TODO :
+
+	- Complete GUIManager.h (Find a way to id IGUIElements)
+	- Create GUIManager.cpp
+	- Create IGUIElement.h and derived classes
+	- Add GUIManager to the project
+
+	- Document everything
