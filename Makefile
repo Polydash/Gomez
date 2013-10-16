@@ -28,7 +28,10 @@ EventManager.o : EventManager.cpp EventManager.h IEvent.h
 %.o : %.cpp
 	g++ -c $< $(CFLAGS) -D$(VAR)
 
-.PHONY : clean
+.PHONY : clean leakcheck
 
 clean :
 	rm Temp/*.o
+	
+leakcheck :
+	valgrind --suppressions=./SDLleaks.supp --leak-check=full Debug/Tetris

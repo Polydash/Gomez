@@ -2,3 +2,4 @@ log.txt
 Debug/*
 Release/*
 Temp/*
+SDLleaks.supp
