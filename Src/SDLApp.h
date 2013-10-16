@@ -5,6 +5,7 @@
 #include <string>
 
 #include "GameStateManager.h"
+#include "EventManager.h"
 
 class SDLApp
 {
@@ -16,6 +17,7 @@ private :
 	SDL_Surface *m_pScreen;
 	
 	GameStateManager *m_pGameStateMgr;
+	EventManager *m_pEventMgr;
 
 public :
 	

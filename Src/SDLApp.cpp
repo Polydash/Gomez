@@ -11,13 +11,21 @@ m_height(600),
 m_bitsPerPixel(32),
 m_title("Tetris"),
 m_pScreen(NULL),
-m_pGameStateMgr(NULL)
+m_pGameStateMgr(NULL),
+m_pEventMgr(NULL)
 {
 }
 
 SDLApp::~SDLApp()
 {
 	SAFE_DELETE(m_pGameStateMgr);
+	
+	if(m_pEventMgr)
+	{
+		EventManager::Destroy();
+		m_pEventMgr = NULL;
+	}
+	
 	SDL_Quit();
 	LOG("SDL Quit");
 }
@@ -25,9 +33,9 @@ SDLApp::~SDLApp()
 void SDLApp::Create()
 {
 	if(g_pApp)
-		ERROR("Tetris application already created");
-	
-	g_pApp = new SDLApp;
+		ERROR("SDLApp already created");
+	else
+		g_pApp = new SDLApp;
 }
 
 void SDLApp::Destroy()
@@ -60,6 +68,10 @@ bool SDLApp::Init()
 	
 	m_pGameStateMgr = new GameStateManager;
 	if(!m_pGameStateMgr->Init())
+		return false;
+	
+	m_pEventMgr = EventManager::Create();
+	if(!m_pEventMgr)
 		return false;
 	
 	return true;

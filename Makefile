@@ -1,5 +1,5 @@
 LFLAGS = -L./Libraries/SDL/lib -L./Libraries/TinyXML/lib -lSDL -lSDLmain -ltinyxml
-IFLAGS = -I./Libraries/SDL/include -I./Libraries/TinyXML/include
+IFLAGS = -I./Libraries/SDL/include -I./Libraries/TinyXML/include -I./Libraries/FastDelegate/include
 
 ifeq "$(MODE)" "RELEASE"
 	CFLAGS = $(IFLAGS)
@@ -16,13 +16,14 @@ vpath %.h Src
 
 all : main
 
-main : TetrisMain.o SDLApp.o GameStateManager.o
+main : TetrisMain.o SDLApp.o GameStateManager.o EventManager.o
 	g++ -o $(EXEC) $^ $(LFLAGS)
 	mv *.o Temp
 
 TetrisMain.o : TetrisMain.cpp TetrisStd.h SDLApp.h
-SDLApp.o : SDLApp.cpp SDLApp.h TetrisStd.h GameStateManager.h
+SDLApp.o : SDLApp.cpp SDLApp.h TetrisStd.h GameStateManager.h EventManager.h
 GameStateManager.o : GameStateManager.cpp GameStateManager.h IGameState.h
+EventManager.o : EventManager.cpp EventManager.h IEvent.h
 
 %.o : %.cpp
 	g++ -c $< $(CFLAGS) -D$(VAR)
