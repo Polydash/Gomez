@@ -1,5 +1,5 @@
-#include "TetrisStd.h"
-#include "SDLApp.h"
+#include "GameStd.h"
+#include "GameApp/SDLApp.h"
 
 int main()
 {

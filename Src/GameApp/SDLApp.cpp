@@ -1,7 +1,7 @@
 #include <tinyxml.h>
 
-#include "SDLApp.h"
-#include "TetrisStd.h"
+#include "../GameApp/SDLApp.h"
+#include "../GameStd.h"
 
 SDLApp* g_pApp = NULL;
 

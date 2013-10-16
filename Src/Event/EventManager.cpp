@@ -1,7 +1,7 @@
 #include <iostream>
 
 #include "EventManager.h"
-#include "TetrisStd.h"
+#include "../GameStd.h"
 
 EventManager* EventManager::m_pEventMgr = NULL;
 

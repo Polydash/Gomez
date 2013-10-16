@@ -1,5 +1,5 @@
-#ifndef TETRISSTD_H
-#define TETRISSTD_H
+#ifndef GAMESTD_H
+#define GAMESTD_H
 
 #include <iostream>
 #include <fstream>

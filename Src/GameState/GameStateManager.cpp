@@ -1,5 +1,5 @@
 #include "GameStateManager.h"
-#include "TetrisStd.h"
+#include "../GameStd.h"
 
 GameStateManager::GameStateManager():
 m_pCurrentState(NULL),
