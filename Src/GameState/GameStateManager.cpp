@@ -1,20 +1,30 @@
 #include "GameStateManager.h"
 #include "../GameStd.h"
+#include "../GameApp/SDLApp.h"
+#include "../Event/EventManager.h"
+#include "../Event/Events.h"
+#include "MenuState.h"
+#include "IntroState.h"
 
 GameStateManager::GameStateManager():
-m_pCurrentState(NULL),
-m_bIsPaused(false)
+m_pCurrentState(NULL)
 {
 }
 
 GameStateManager::~GameStateManager()
 {
-	DestroyState(); // destroy state when quit
+	DestroyState();
+	g_pApp->GetEventMgr()->RemoveListener(MakeDelegate(this, &GameStateManager::StateChangeDelegate), ET_STATECHANGE);
 }
 
 bool GameStateManager::Init()
 {
+	g_pApp->GetEventMgr()->AddListener(MakeDelegate(this, &GameStateManager::StateChangeDelegate), ET_STATECHANGE);
+	
 	IGameState *pState = CreateState(GS_INTRO);
+	if(!pState)
+		return false;
+		
 	ChangeState(pState);
 	
 	return true;
@@ -22,36 +32,36 @@ bool GameStateManager::Init()
 
 void GameStateManager::Update(unsigned int elapsedTime)
 {
-	if(!m_bIsPaused)
-		m_pCurrentState->VUpdate(elapsedTime);
-		
-	//Create a request to change states	
-		
-	//~ if(!m_pCurrentState->VGetStateActive()) // if we need to change state
-	//~ {
-		//~ if(m_pCurrentState->VGetState() == GS_INTRO) // if intro is over
-			//~ ChangeState(CreateState(GS_MENU));
-	//~ }
+	m_pCurrentState->VUpdate(elapsedTime);
+}
+
+void GameStateManager::StateChangeDelegate(EventSharedPtr pEvent)
+{
+	ERROR("Game state change processed");
+	shared_ptr<Evt_StateChange> pEvt = static_pointer_cast<Evt_StateChange>(pEvent);
+	ChangeState(CreateState(pEvt->GetState()));
 }
 
 IGameState* GameStateManager::CreateState(const eGameState gameState)
 {
 	if(gameState == GS_INTRO)
 	{
+		LOG("Entered Intro state");
 		return new IntroState();
 	}
-	else //if(gameState == GS_MENU)
+	else if(gameState == GS_MENU)
 	{
+		LOG("Entered Menu state");
 		return new MenuState();
 	}
+
+	ERROR("Invalid game state type");
+	return NULL;
 }
 
 void GameStateManager::ChangeState(IGameState *pState)
-{
-	if(!pState)
-		ERROR("GameState is invalid");
-		
-	if(m_pCurrentState != 0) // if there is a state
+{		
+	if(m_pCurrentState != NULL) // if there is a state
 	{
 		m_pCurrentState->VOnLeave(); // leave the state
 		DestroyState(); // and destroy it
@@ -65,10 +75,4 @@ void GameStateManager::DestroyState()
 {
 	if(m_pCurrentState)
 		SAFE_DELETE(m_pCurrentState);
-}
-
-void GameStateManager::Pause()
-{
-	m_bIsPaused = !m_bIsPaused;
-	LOG("Pause");
 }

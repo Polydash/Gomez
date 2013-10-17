@@ -1,5 +1,5 @@
 # Where to find libraries and source directories
-LFLAGS = -L./Libraries/SDL/lib -L./Libraries/TinyXML/lib -lSDL -lSDLmain -lSDL_image -ltinyxml
+LFLAGS = -L./Libraries/SDL/lib -L./Libraries/TinyXML/lib -Wl,-rpath=./Libraries/SDL/lib -lSDL -lSDLmain -lSDL_image -ltinyxml
 IFLAGS = -I./Libraries/SDL/include -I./Libraries/TinyXML/include -I./Libraries/FastDelegate/include
 SRCDIR = Src Src/Event Src/GameState Src/GameApp Src/Graphics
 
@@ -20,31 +20,37 @@ endif
 # Replace file names with correct path
 vpath %.cpp $(SRCDIR)
 vpath %.h $(SRCDIR)
+vpath %.o Temp/
 
-all : main
+all : $(EXEC)
 
 # Linking
-main : $(OBJLIST)
-	g++ -o $(EXEC) $^ $(LFLAGS)
-	mv *.o Temp
+$(EXEC) : $(OBJLIST)
+		@echo "Building  : $(EXEC)"
+		@g++ -o $(EXEC) $(patsubst %.o, Temp/%.o, $^) $(LFLAGS)
 
 # Dependencies
-TetrisMain.o : TetrisMain.cpp GameStd.h SDLApp.h
-SDLApp.o : SDLApp.cpp SDLApp.h GameStd.h GameStateManager.h EventManager.h
-GameStateManager.o : GameStateManager.cpp GameStateManager.h IGameState.h
-EventManager.o : EventManager.cpp EventManager.h IEvent.h
-GfxResource.o : GfxResource.cpp GfxResource.h
-GfxResImage.o : GfxResImage.cpp GfxResImage.h GfxResource.h
+TetrisMain.o : GameStd.h SDLApp.h
+SDLApp.o : SDLApp.h GameStd.h GameStateManager.h EventManager.h
+GameStateManager.o : GameStateManager.h GameStd.h IGameState.h MenuState.h IntroState.h EventManager.h Events.h
+IntroState.o : IntroState.h SDLApp.h Events.h IGameState.h
+MenuState.o : MenuState.h SDLApp.h Events.h IGameState.h
+EventManager.o : EventManager.h IEvent.h
+GfxResource.o : GfxResource.h
+GfxResImage.o : GfxResImage.h GfxResource.h
 
 # Compiling
 %.o : %.cpp
-	g++ -c $< $(CFLAGS) -D$(VAR)
+	@echo "Compiling : $<"
+	@g++ -c $< $(CFLAGS) -D$(VAR)
+	@mv $@ Temp
 
 .PHONY : clean leakcheck
 
 # Remove .o files
 clean :
-	rm Temp/*.o
+	@rm Temp/*.o
+	@echo "Cleaned \"Temp\" directory"
 
 # Execute Debug mode with leak check
 leakcheck :

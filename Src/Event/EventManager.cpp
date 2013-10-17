@@ -1,11 +1,13 @@
 #include <iostream>
 
 #include "EventManager.h"
+#include "Events.h"
 #include "../GameStd.h"
 
 EventManager* EventManager::m_pEventMgr = NULL;
 
-EventManager::EventManager()
+EventManager::EventManager():
+m_activeQueue(0)
 {
 }
 
@@ -26,6 +28,26 @@ EventManager* EventManager::Create()
 void EventManager::Destroy()
 {
 	SAFE_DELETE(m_pEventMgr);
+}
+
+void EventManager::Update()
+{
+	int updatedQueue = m_activeQueue;
+	
+	if(!m_activeQueue)
+		m_activeQueue = 1;
+	else
+		m_activeQueue = 0;
+		
+	m_eventQueue[m_activeQueue].clear();
+		
+	while(!m_eventQueue[updatedQueue].empty())
+	{
+		EventSharedPtr pEvent = m_eventQueue[updatedQueue].front();
+		m_eventQueue[updatedQueue].pop_front();
+		
+		TriggerEvent(pEvent);
+	}
 }
 
 void EventManager::AddListener(const EventListenerDelegate &eventDelegate, const eEventType eventType)
@@ -56,7 +78,7 @@ void EventManager::RemoveListener(const EventListenerDelegate &eventDelegate, eE
 	}
 }
 
-void EventManager::TriggerEvent(IEvent* pEvent)
+void EventManager::TriggerEvent(EventSharedPtr pEvent)
 {
 	EventListenerList &list = m_eventListeners[pEvent->VGetType()];
 	if(!list.empty())
@@ -67,4 +89,9 @@ void EventManager::TriggerEvent(IEvent* pEvent)
 			delegate(pEvent);
 		}
 	}
+}
+
+void EventManager::QueueEvent(EventSharedPtr pEvent)
+{
+	m_eventQueue[m_activeQueue].push_back(pEvent);
 }

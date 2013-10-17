@@ -1,4 +1,5 @@
 log.txt
+*.sh
 Debug/*
 Release/*
 Temp/*

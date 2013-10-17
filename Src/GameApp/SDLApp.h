@@ -4,8 +4,8 @@
 #include <SDL/SDL.h>
 #include <string>
 
-#include "../GameState/GameStateManager.h"
 #include "../Event/EventManager.h"
+#include "../GameState/GameStateManager.h"
 
 class SDLApp
 {
@@ -28,6 +28,7 @@ public :
 	void MainLoop();
 	
 	GameStateManager* GetGameStateMgr() const;
+	EventManager* GetEventMgr() const;
 	
 private :
 

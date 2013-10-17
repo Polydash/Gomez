@@ -66,12 +66,12 @@ bool SDLApp::Init()
 	
 	LOG("SDL Configuration");
 	
-	m_pGameStateMgr = new GameStateManager;
-	if(!m_pGameStateMgr->Init())
-		return false;
-	
 	m_pEventMgr = EventManager::Create();
 	if(!m_pEventMgr)
+		return false;
+	
+	m_pGameStateMgr = new GameStateManager;
+	if(!m_pGameStateMgr->Init())
 		return false;
 	
 	return true;
@@ -129,6 +129,7 @@ void SDLApp::MainLoop()
 		//Run game if not minimized
 		if(!bIsMinimized)
 		{
+			m_pEventMgr->Update();
 			m_pGameStateMgr->Update(elapsedTime);
 		}
 	}
@@ -137,6 +138,11 @@ void SDLApp::MainLoop()
 GameStateManager* SDLApp::GetGameStateMgr() const
 {
 	return m_pGameStateMgr;
+}
+
+EventManager* SDLApp::GetEventMgr() const
+{
+	return m_pEventMgr;
 }
 
 void SDLApp::LoadConfig()
