@@ -10,13 +10,12 @@ class EventManager
 {
 
 	typedef std::list<EventListenerDelegate> EventListenerList;
-	typedef std::map<eEventType, EventListenerList> EventListenerMap;
 
 private :
 
 	static EventManager* m_pEventMgr;
 
-	EventListenerMap m_eventListeners;
+	EventListenerList m_eventListeners[EVENT_NB];
 
 public :
 

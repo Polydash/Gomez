@@ -42,15 +42,14 @@ void EventManager::AddListener(const EventListenerDelegate &eventDelegate, const
 
 void EventManager::RemoveListener(const EventListenerDelegate &eventDelegate, eEventType eventType)
 {
-	EventListenerMap::iterator i = m_eventListeners.find(eventType);
-	if(i != m_eventListeners.end())
+	EventListenerList &list = m_eventListeners[eventType];
+	if(!list.empty())
 	{
-		EventListenerList &list = i->second;
-		for(EventListenerList::iterator j = list.begin(); j != list.end(); j++)
+		for(EventListenerList::iterator i = list.begin(); i != list.end(); i++)
 		{
-			if(eventDelegate == (*j))
+			if(eventDelegate == (*i))
 			{
-				list.erase(j);
+				list.erase(i);
 				break;
 			}
 		}
@@ -59,13 +58,12 @@ void EventManager::RemoveListener(const EventListenerDelegate &eventDelegate, eE
 
 void EventManager::TriggerEvent(IEvent* pEvent)
 {
-	EventListenerMap::iterator i = m_eventListeners.find(pEvent->VGetType());
-	if(i != m_eventListeners.end())
+	EventListenerList &list = m_eventListeners[pEvent->VGetType()];
+	if(!list.empty())
 	{
-		EventListenerList &list = i->second;
-		for(EventListenerList::iterator j = list.begin(); j != list.end(); j++)
+		for(EventListenerList::iterator i = list.begin(); i != list.end(); i++)
 		{
-			EventListenerDelegate delegate = (*j);
+			EventListenerDelegate delegate = (*i);
 			delegate(pEvent);
 		}
 	}

@@ -11,7 +11,7 @@ int main()
 	
 	if(g_pApp->Init())
 		g_pApp->MainLoop();
-		
+				
 	SDLApp::Destroy();	
 	
 	LOG("Program ended");

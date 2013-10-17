@@ -2,11 +2,10 @@
 #define IEVENT_H
 
 #include "FastDelegate.h"
-#include "FastDelegateBind.h"
 
 class IEvent;
 
-enum eEventType{ ET_TEST };
+enum eEventType{ ET_TEST, EVENT_NB };
 typedef fastdelegate::FastDelegate1<IEvent*> EventListenerDelegate;
 
 class IEvent
