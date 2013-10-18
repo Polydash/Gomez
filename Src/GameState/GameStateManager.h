@@ -1,5 +1,5 @@
-#ifndef GAMESTATEMANAGER_H_
-#define GAMESTATEMANAGER_H_
+#ifndef GAMESTATEMANAGER_H
+#define GAMESTATEMANAGER_H
 
 #include <string>
 

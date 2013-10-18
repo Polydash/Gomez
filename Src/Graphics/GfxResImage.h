@@ -7,14 +7,16 @@ class GfxResImage : public GfxResource
 {
 	private :
 	
-		std::string m_resName;
+		std::string m_fileName;
 		
 	public :
 	
-		GfxResImage(const std::string &resName);
+		GfxResImage(const std::string &resName, const std::string &fileName);
 		~GfxResImage();
 		
 		virtual bool VLoad();
+		
+		const std::string& GetFileName() const{ return m_fileName; }
 };
 
 #endif

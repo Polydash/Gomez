@@ -7,6 +7,10 @@
 #include "../Event/EventManager.h"
 #include "../GameState/GameStateManager.h"
 
+//Game Application Global
+class SDLApp;
+extern SDLApp* g_pApp;
+
 class SDLApp
 {
 private :
@@ -29,6 +33,9 @@ public :
 	
 	GameStateManager* GetGameStateMgr() const;
 	EventManager* GetEventMgr() const;
+	
+	int GetScreenWidth()  const{ return m_width;  }
+	int GetScreenHeight() const{ return m_height; }
 	
 private :
 

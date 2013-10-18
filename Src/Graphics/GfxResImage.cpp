@@ -3,8 +3,9 @@
 #include "GfxResImage.h"
 #include "../GameStd.h"
 
-GfxResImage::GfxResImage(const std::string &resName):
-m_resName(resName)
+GfxResImage::GfxResImage(const std::string &resName, const std::string &fileName):
+GfxResource(resName),
+m_fileName(fileName)
 {
 }
 

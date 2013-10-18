@@ -1,6 +1,7 @@
 #include "GfxResource.h"
 
-GfxResource::GfxResource():
+GfxResource::GfxResource(const std::string &resName):
+m_resName(resName),
 m_pSurface(NULL)
 {
 }

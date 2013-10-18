@@ -8,16 +8,19 @@ class GfxResource
 {
 	protected :
 		
+		std::string m_resName;
+		
 		SDL_Surface *m_pSurface;
 	
 	public :
 	
-		GfxResource();
+		GfxResource(const std::string &resName);
 		virtual ~GfxResource();
 		
 		virtual bool VLoad() = 0;
 
-		SDL_Surface* GetRes() const{ return m_pSurface; }
+		const SDL_Surface* GetRes() const{ return m_pSurface; }
+		const std::string& GetName() const{ return m_resName; }
 };
 
 #endif

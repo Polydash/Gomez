@@ -8,7 +8,7 @@ class MenuState : public IGameState
 public:
 
 	MenuState(){}
-	~MenuState(){}
+	virtual ~MenuState(){}
 	
 	virtual void VUpdate(unsigned int elapsedTime);
 												  
