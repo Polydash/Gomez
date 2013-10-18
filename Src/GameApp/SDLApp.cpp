@@ -83,6 +83,7 @@ void SDLApp::MainLoop()
 	unsigned int startTime, elapsedTime, FPSTime;
 	bool bIsDone = false;
 	bool bIsMinimized = false;
+	bool bHasFocus = true;
 	
 	FPSTime = 1000 / 60;
 	startTime = SDL_GetTicks();
@@ -109,6 +110,9 @@ void SDLApp::MainLoop()
 			{
 				if(event.active.state & SDL_APPACTIVE)
 					bIsMinimized = !event.active.gain;
+				
+				if(event.active.state & SDL_APPINPUTFOCUS)
+					bHasFocus = event.active.gain;
 			}
 			
 			if(!bIsMinimized)
@@ -117,13 +121,18 @@ void SDLApp::MainLoop()
 				{
 					case SDL_KEYDOWN :
 					case SDL_KEYUP :
-						//Send input to GameStateManager
+						//Queue GameInput Event
 						break;
 						
 					default :
 						break;
 				}
 			}
+		}
+		
+		if(!bHasFocus)
+		{
+			//Queue Lost Focus Event
 		}
 		
 		//Run game if not minimized

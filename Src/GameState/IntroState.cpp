@@ -4,7 +4,8 @@
 #include "../Event/Events.h"
 
 void IntroState::VUpdate(unsigned int elapsedTime)
-{// To remove
+{
+	//To remove
 	static unsigned int time = 0;
 	time += elapsedTime;
 	if(time > 1000)

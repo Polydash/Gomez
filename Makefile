@@ -3,8 +3,10 @@ LFLAGS = -L./Libraries/SDL/lib -L./Libraries/TinyXML/lib -Wl,-rpath=./Libraries/
 IFLAGS = -I./Libraries/SDL/include -I./Libraries/TinyXML/include -I./Libraries/FastDelegate/include
 SRCDIR = Src Src/Event Src/GameState Src/GameApp Src/Graphics
 
-# List of .o files to generate
-OBJLIST = $(foreach DIR, $(SRCDIR), $(patsubst $(DIR)/%.cpp, %.o, $(wildcard $(DIR)/*.cpp)))
+# Lists of .cpp, .o and .d files
+SRCLIST = $(foreach DIR, $(SRCDIR), $(patsubst $(DIR)/%.cpp, %.cpp, $(wildcard $(DIR)/*.cpp)))
+OBJLIST = $(patsubst %.cpp, %.o, $(SRCLIST))
+DEPLIST = $(patsubst %.cpp, Temp/%.d, $(SRCLIST))
 
 # Enable Release or Debug mode
 ifeq "$(MODE)" "RELEASE"
@@ -22,34 +24,37 @@ vpath %.cpp $(SRCDIR)
 vpath %.h $(SRCDIR)
 vpath %.o Temp/
 
-all : $(EXEC)
+all : folders $(EXEC)
 
-# Linking
-$(EXEC) : $(OBJLIST)
+# Link
+$(EXEC) : $(OBJLIST)  
 		@echo "Building  : $(EXEC)"
-		@g++ -o $(EXEC) $(patsubst %.o, Temp/%.o, $^) $(LFLAGS)
+		@g++ -o $(EXEC) $(patsubst %.o, Temp/%.o, $(OBJLIST)) $(LFLAGS)
 
-# Dependencies
-TetrisMain.o : GameStd.h SDLApp.h
-SDLApp.o : SDLApp.h GameStd.h GameStateManager.h EventManager.h
-GameStateManager.o : GameStateManager.h GameStd.h IGameState.h MenuState.h IntroState.h EventManager.h Events.h
-IntroState.o : IntroState.h SDLApp.h Events.h IGameState.h
-MenuState.o : MenuState.h SDLApp.h Events.h IGameState.h
-EventManager.o : EventManager.h IEvent.h
-GfxResource.o : GfxResource.h
-GfxResImage.o : GfxResImage.h GfxResource.h
+# Include dependencies
+-include $(DEPLIST)
 
-# Compiling
+# Compile and generate dependencies
 %.o : %.cpp
 	@echo "Compiling : $<"
 	@g++ -c $< $(CFLAGS) -D$(VAR)
+	@g++ $(CFLAGS) -MM -MT $@ $< -MF $(patsubst %.o, %.d, $@)
+	@sed -i -e 's/Src/..\/Src/g' $(patsubst %.o, %.d, $@) 
 	@mv $@ Temp
+	@mv $(patsubst %.o, %.d, $@) Temp
 
 .PHONY : clean leakcheck
 
-# Remove .o files
+# Create folders
+folders :
+	@mkdir -p Debug
+	@mkdir -p Release
+	@mkdir -p Temp
+
+# Clean Temp directory
 clean :
 	@rm Temp/*.o
+	@rm Temp/*.d
 	@echo "Cleaned \"Temp\" directory"
 
 # Execute Debug mode with leak check
