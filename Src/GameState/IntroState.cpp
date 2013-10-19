@@ -11,9 +11,14 @@ void IntroState::VUpdate(unsigned int elapsedTime)
 	time += elapsedTime;
 	if(time > 1000)
 	{
-		ERROR("Game state Menu asked");
 		shared_ptr<Evt_StateChange> pEvent(new Evt_StateChange(GS_MENU));
 		g_pApp->GetEventMgr()->QueueEvent(pEvent);
 		time = 0;
 	}
+}
+
+void IntroState::VOnEnter()
+{
+	INFO("Entering INTRO state");
+	LOG("Entering INTRO state");
 }

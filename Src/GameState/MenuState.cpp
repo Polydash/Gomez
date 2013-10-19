@@ -11,9 +11,14 @@ void MenuState::VUpdate(unsigned int elapsedTime)
 	time += elapsedTime;
 	if(time > 1000)
 	{
-		ERROR("Game state Pause asked");
 		shared_ptr<Evt_StateChange> pEvent(new Evt_StateChange(GS_PAUSE));
 		g_pApp->GetEventMgr()->QueueEvent(pEvent);
 		time = 0;
 	}
+}
+
+void MenuState::VOnEnter()
+{
+	INFO("Entering MENU state");
+	LOG("Entering MENU state");
 }

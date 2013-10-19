@@ -11,6 +11,7 @@ public:
 	virtual ~PauseState(){}
 	
 	virtual void VUpdate(unsigned int elapsedTime);
+	virtual void VOnEnter();
 												  
 	virtual eGameState VGetState() const { return GS_PAUSE; }
 };

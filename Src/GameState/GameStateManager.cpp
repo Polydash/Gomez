@@ -36,7 +36,6 @@ void GameStateManager::Update(unsigned int elapsedTime)
 
 void GameStateManager::StateChangeDelegate(EventSharedPtr pEvent)
 {
-	ERROR("Game state change processed");
 	shared_ptr<Evt_StateChange> pEvt = static_pointer_cast<Evt_StateChange>(pEvent);
 	ChangeState(pEvt->GetState());
 }
@@ -45,17 +44,14 @@ IGameState* GameStateManager::CreateState(const eGameState gameState)
 {
 	if(gameState == GS_PAUSE)
 	{		
-		LOG("Entered Pause state");
 		return new PauseState();
 	}
 	if(gameState == GS_INTRO)
 	{
-		LOG("Entered Intro state");
 		return new IntroState();
 	}
 	else if(gameState == GS_MENU)
 	{
-		LOG("Entered Menu state");
 		return new MenuState();
 	}
 
