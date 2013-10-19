@@ -1,6 +1,7 @@
 #include "IntroState.h"
 #include "../GameStd.h"
 #include "../GameApp/SDLApp.h"
+#include "../Event/EventManager.h"
 #include "../Event/Events.h"
 
 void IntroState::VUpdate(unsigned int elapsedTime)

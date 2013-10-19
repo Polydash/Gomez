@@ -2,6 +2,8 @@
 
 #include "../GameApp/SDLApp.h"
 #include "../GameStd.h"
+#include "../Event/EventManager.h"
+#include "../GameState/GameStateManager.h"
 
 SDLApp* g_pApp = NULL;
 

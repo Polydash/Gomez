@@ -2,6 +2,7 @@
 #include "../GameStd.h"
 #include "../GameApp/SDLApp.h"
 #include "../Event/Events.h"
+#include "../Event/EventManager.h"
 
 void MenuState::VUpdate(unsigned int elapsedTime)
 { 

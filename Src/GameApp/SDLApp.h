@@ -4,8 +4,8 @@
 #include <SDL/SDL.h>
 #include <string>
 
-#include "../Event/EventManager.h"
-#include "../GameState/GameStateManager.h"
+class EventManager;
+class GameStateManager;
 
 //Game Application Global
 class SDLApp;
