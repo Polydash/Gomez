@@ -3,7 +3,10 @@
 
 enum eGameState{ GS_INVALID = -1,
 				 GS_INTRO,
-				 GS_MENU };
+				 GS_MENU,
+				 GS_PAUSE,
+				 GS_PREVIOUS
+			   };
 
 class IGameState
 {

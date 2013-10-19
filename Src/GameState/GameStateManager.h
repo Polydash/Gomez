@@ -11,6 +11,7 @@ class GameStateManager
 private:
 
 	IGameState *m_pCurrentState;
+	IGameState *m_pPausedState;
 	
 public:
 
@@ -25,8 +26,8 @@ public:
 private :
 	
 	IGameState* CreateState(const eGameState gameState);
-	void ChangeState(IGameState *pState);
-	void DestroyState();
+	void ChangeState(const eGameState gameState);
+	void DestroyState(IGameState* &pState);
 };
 
 #endif
