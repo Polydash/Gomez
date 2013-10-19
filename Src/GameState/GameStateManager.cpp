@@ -66,7 +66,10 @@ void GameStateManager::ChangeState(const eGameState gameState)
 		if(gameState == GS_PAUSE)
 		{
 			if(m_pPausedState != NULL)
+			{
 				ERROR("Game has already been paused");
+				return;
+			}
 				
 			m_pPausedState = m_pCurrentState;
 		}
