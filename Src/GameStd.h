@@ -43,7 +43,7 @@
 	 */
 	#define LOG(str) do{\
 					std::ofstream logFileMacroVar;\
-					logFileMacroVar.open("log.txt", std::ios::app);\
+					logFileMacroVar.open("Data/log.txt", std::ios::app);\
 					logFileMacroVar << "[" << __FILE__ << "] " << __LINE__ << " : " << str << std::endl;\
 					logFileMacroVar.close();\
 					}while(0)

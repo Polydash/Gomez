@@ -3,6 +3,7 @@
 #include "../GameApp/SDLApp.h"
 #include "../Event/EventManager.h"
 #include "../Event/Events.h"
+#include "../Resource/ResourceManager.h"
 #include "MenuState.h"
 #include "IntroState.h"
 #include "PauseState.h"
@@ -38,6 +39,7 @@ void GameStateManager::StateChangeDelegate(EventSharedPtr pEvent)
 {
 	shared_ptr<Evt_StateChange> pEvt = static_pointer_cast<Evt_StateChange>(pEvent);
 	ChangeState(pEvt->GetState());
+	g_pResMgr->Clear();
 }
 
 IGameState* GameStateManager::CreateState(const eGameState gameState)

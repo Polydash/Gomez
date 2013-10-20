@@ -16,7 +16,7 @@ class SDLApp
 private :
 
 	int m_width, m_height, m_bitsPerPixel;
-	std::string m_title;
+	std::string m_title, m_imgPath;
 
 	SDL_Surface *m_pScreen;
 	
@@ -36,6 +36,7 @@ public :
 	
 	int GetScreenWidth()  const{ return m_width;  }
 	int GetScreenHeight() const{ return m_height; }
+	std::string GetImgPath() const{ return m_imgPath; }
 	
 private :
 

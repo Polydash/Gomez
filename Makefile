@@ -1,7 +1,7 @@
 # Where to find libraries and source directories
 LFLAGS = -L./Libraries/SDL/lib -L./Libraries/TinyXML/lib -Wl,-rpath=./Libraries/SDL/lib -lSDL -lSDLmain -lSDL_image -ltinyxml
 IFLAGS = -I./Libraries/SDL/include -I./Libraries/TinyXML/include -I./Libraries/FastDelegate/include
-SRCDIR = Src Src/Event Src/GameState Src/GameApp Src/Graphics
+SRCDIR = Src Src/Event Src/GameState Src/GameApp Src/Graphics Src/Resource
 
 # Lists of .cpp, .o and .d files
 SRCLIST = $(foreach DIR, $(SRCDIR), $(patsubst $(DIR)/%.cpp, %.cpp, $(wildcard $(DIR)/*.cpp)))

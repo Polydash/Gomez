@@ -4,6 +4,7 @@
 #include "../GameStd.h"
 #include "../Event/EventManager.h"
 #include "../GameState/GameStateManager.h"
+#include "../Resource/ResourceManager.h"
 
 SDLApp* g_pApp = NULL;
 
@@ -12,6 +13,7 @@ m_width(800),
 m_height(600),
 m_bitsPerPixel(32),
 m_title("Tetris"),
+m_imgPath("Data/Images"),
 m_pScreen(NULL),
 m_pGameStateMgr(NULL),
 m_pEventMgr(NULL)
@@ -20,13 +22,18 @@ m_pEventMgr(NULL)
 
 SDLApp::~SDLApp()
 {
+	LOG("GameState Manager Destruction");
 	SAFE_DELETE(m_pGameStateMgr);
 	
 	if(m_pEventMgr)
 	{
+		LOG("Event Manager Destruction");
 		EventManager::Destroy();
 		m_pEventMgr = NULL;
 	}
+	
+	LOG("Resource Manager Destruction");
+	ResourceManager::Destroy();
 	
 	SDL_Quit();
 	LOG("SDL Quit");
@@ -47,15 +54,21 @@ void SDLApp::Destroy()
 
 bool SDLApp::Init()
 {
+	LOG("SDL Init");
 	if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER) == -1)
 	{
 		ERROR("Failed to init SDL");
 		return false;
 	}
 	
-	LOG("SDL Init");
-	
+	LOG("Game Configuration");
 	LoadConfig();
+	
+	LOG("SDL Configuration");
+	// Forced conversion from const char* to char*
+	std::string param = "SDL_VIDEO_CENTERED=center";
+	SDL_putenv(const_cast<char*>(param.c_str()));
+	
 	m_pScreen = SDL_SetVideoMode(m_width, m_height, m_bitsPerPixel, SDL_HWSURFACE | SDL_DOUBLEBUF);
 	if(!m_pScreen)
 	{
@@ -66,15 +79,24 @@ bool SDLApp::Init()
 	SDL_WM_SetCaption("Tetris", NULL);
 	SDL_ShowCursor(SDL_ENABLE);
 	
-	LOG("SDL Configuration");
+	LOG("Resource Manager Init");
+	ResourceManager::Create();
 	
+	LOG("Event Manager Init");
 	m_pEventMgr = EventManager::Create();
 	if(!m_pEventMgr)
+	{
+		ERROR("Failed to init Event Manager");
 		return false;
+	}
 	
+	LOG("GameState Manager Init");
 	m_pGameStateMgr = new GameStateManager;
 	if(!m_pGameStateMgr->Init())
+	{
+		ERROR("Failed to init GameState Manager");
 		return false;
+	}
 	
 	return true;
 }
@@ -85,7 +107,6 @@ void SDLApp::MainLoop()
 	unsigned int startTime, elapsedTime, FPSTime;
 	bool bIsDone = false;
 	bool bIsMinimized = false;
-	bool bHasFocus = true;
 	
 	FPSTime = 1000 / 60;
 	startTime = SDL_GetTicks();
@@ -114,7 +135,9 @@ void SDLApp::MainLoop()
 					bIsMinimized = !event.active.gain;
 				
 				if(event.active.state & SDL_APPINPUTFOCUS)
-					bHasFocus = event.active.gain;
+				{	
+					//Queue gained/lost focus Event
+				}
 			}
 			
 			if(!bIsMinimized)
@@ -130,11 +153,6 @@ void SDLApp::MainLoop()
 						break;
 				}
 			}
-		}
-		
-		if(!bHasFocus)
-		{
-			//Queue Lost Focus Event
 		}
 		
 		//Run game if not minimized
@@ -158,7 +176,7 @@ EventManager* SDLApp::GetEventMgr() const
 
 void SDLApp::LoadConfig()
 {
-	TiXmlDocument configDoc("config.xml");
+	TiXmlDocument configDoc("Data/config.xml");
 	if(!configDoc.LoadFile())
 	{
 		LOG("Failed to load config.xml, configuration set to default");
@@ -175,6 +193,9 @@ void SDLApp::LoadConfig()
 		pElem->QueryIntAttribute("Height", &m_height);
 		pElem->QueryIntAttribute("BPP", &m_bitsPerPixel);
 		m_title = pElem->Attribute("Title");
+		
+		pElem = pElem->NextSiblingElement();
+		m_imgPath = pElem->Attribute("Images");
 	}
 }
 

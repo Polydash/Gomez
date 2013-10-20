@@ -11,7 +11,8 @@ using fastdelegate::MakeDelegate;
 class IEvent;
 
 enum eEventType{ ET_STATECHANGE, 
-				 EVENT_NB };
+				 EVENT_NB
+			   };
 
 typedef shared_ptr<IEvent> EventSharedPtr;
 typedef fastdelegate::FastDelegate1<EventSharedPtr> EventListenerDelegate;

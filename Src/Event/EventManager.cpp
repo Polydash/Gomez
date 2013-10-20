@@ -4,7 +4,7 @@
 #include "Events.h"
 #include "../GameStd.h"
 
-EventManager* EventManager::m_pEventMgr = NULL;
+EventManager* EventManager::s_pEventMgr = NULL;
 
 EventManager::EventManager():
 m_activeQueue(0)
@@ -17,17 +17,17 @@ EventManager::~EventManager()
 
 EventManager* EventManager::Create()
 {
-	if(m_pEventMgr)
+	if(s_pEventMgr)
 		ERROR("EventManager already created");
 	else
-		m_pEventMgr = new EventManager;
+		s_pEventMgr = new EventManager;
 
-	return m_pEventMgr;
+	return s_pEventMgr;
 }
 
 void EventManager::Destroy()
 {
-	SAFE_DELETE(m_pEventMgr);
+	SAFE_DELETE(s_pEventMgr);
 }
 
 void EventManager::Update()

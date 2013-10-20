@@ -14,7 +14,7 @@ class EventManager
 
 private :
 
-	static EventManager* m_pEventMgr;
+	static EventManager* s_pEventMgr;
 
 	int m_activeQueue;
 
@@ -38,7 +38,6 @@ private :
 
 	EventManager();
 	~EventManager();
-
 };
 
 #endif

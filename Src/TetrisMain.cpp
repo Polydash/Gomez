@@ -4,7 +4,7 @@
 int main()
 {
 	//Reset log file
-	remove("log.txt");
+	remove("Data/log.txt");
 	LOG("Program started"); 
 	
 	SDLApp::Create();
