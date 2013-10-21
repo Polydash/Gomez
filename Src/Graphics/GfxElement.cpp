@@ -2,24 +2,21 @@
 #include "../GameStd.h"
 #include "../GameApp/SDLApp.h"
 
-GfxElement::GfxElement(SDL_Surface *pSurface, int layer):
-m_pSurface(pSurface),
-m_layer(layer)
-{
-	if(!pSurface)
-		ERROR("GfxElement initialized with null pointer");
-	
+GfxElement::GfxElement(int layer):
+m_layer(layer),
+m_angle(0),
+m_alpha(255)
+{	
 	m_position.x = 0;
 	m_position.y = 0;
 }
 
-GfxElement::GfxElement(SDL_Surface *pSurface, int layer, const SDL_Rect &position):
+GfxElement::GfxElement(int layer, const SDL_Rect &position):
 m_position(position),
-m_pSurface(pSurface),
-m_layer(layer)
+m_layer(layer),
+m_angle(0),
+m_alpha(255)
 {
-	if(!pSurface)
-		ERROR("GfxElement initialized with null pointer");
 }
 
 GfxElement::~GfxElement()
@@ -54,29 +51,29 @@ const SDL_Rect& GfxElement::GetPosition() const
 	return m_position;
 }
 
-bool GfxElement::IsVisible() const
-{
-	int sWidth  = g_pApp->GetScreenWidth();
-	int sHeight = g_pApp->GetScreenHeight();
-	int posX    = m_position.x;
-	int posY	= m_position.y;
-	int width	= m_pSurface->w;
-	int height	= m_pSurface->h;
-	
-	if(IsPointOnScreen(posX, posY, sWidth, sHeight))
-		return true;
-	
-	if(IsPointOnScreen(posX + width, posY, sWidth, sHeight))
-		return true;
-		
-	if(IsPointOnScreen(posX + width, posY + height, sWidth, sHeight))
-		return true;
-	
-	if(IsPointOnScreen(posX, posY + height, sWidth, sHeight))
-		return true;
-	
-	return false;
-}
+//~ bool GfxElement::IsVisible() const
+//~ {
+	//~ int sWidth  = g_pApp->GetScreenWidth();
+	//~ int sHeight = g_pApp->GetScreenHeight();
+	//~ int posX    = m_position.x;
+	//~ int posY	= m_position.y;
+	//~ int width	= m_pSurface->w;
+	//~ int height	= m_pSurface->h;
+	//~ 
+	//~ if(IsPointOnScreen(posX, posY, sWidth, sHeight))
+		//~ return true;
+	//~ 
+	//~ if(IsPointOnScreen(posX + width, posY, sWidth, sHeight))
+		//~ return true;
+		//~ 
+	//~ if(IsPointOnScreen(posX + width, posY + height, sWidth, sHeight))
+		//~ return true;
+	//~ 
+	//~ if(IsPointOnScreen(posX, posY + height, sWidth, sHeight))
+		//~ return true;
+	//~ 
+	//~ return false;
+//~ }
 
 bool GfxElement::IsPointOnScreen(int x, int y, int sWidth, int sHeight) const
 {

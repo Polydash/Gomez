@@ -6,6 +6,9 @@
 #include <stdlib.h>
 #include <string>
 
+/// Typedef allowing bytes use
+typedef unsigned char byte;
+
 /**
  * SAFE_DELETE* macros
  * 
