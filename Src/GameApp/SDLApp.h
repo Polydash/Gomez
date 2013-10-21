@@ -4,12 +4,12 @@
 #include <SDL/SDL.h>
 #include <string>
 
-class EventManager;
-class GameStateManager;
-
 //Game Application Global
 class SDLApp;
 extern SDLApp* g_pApp;
+
+class GameStateManager;
+class GfxManager;
 
 class SDLApp
 {
@@ -21,7 +21,7 @@ private :
 	SDL_Surface *m_pScreen;
 	
 	GameStateManager *m_pGameStateMgr;
-	EventManager *m_pEventMgr;
+	GfxManager *m_pGfxMgr;
 
 public :
 	
@@ -32,7 +32,7 @@ public :
 	void MainLoop();
 	
 	GameStateManager* GetGameStateMgr() const;
-	EventManager* GetEventMgr() const;
+	GfxManager* GetGfxMgr() const;
 	
 	int GetScreenWidth()  const{ return m_width;  }
 	int GetScreenHeight() const{ return m_height; }

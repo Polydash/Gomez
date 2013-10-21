@@ -2,8 +2,9 @@
 #include "../GameStd.h"
 #include "../GameApp/SDLApp.h"
 
-GfxElement::GfxElement(SDL_Surface *pSurface):
-m_pSurface(pSurface)
+GfxElement::GfxElement(SDL_Surface *pSurface, int layer):
+m_pSurface(pSurface),
+m_layer(layer)
 {
 	if(!pSurface)
 		ERROR("GfxElement initialized with null pointer");
@@ -12,9 +13,10 @@ m_pSurface(pSurface)
 	m_position.y = 0;
 }
 
-GfxElement::GfxElement(SDL_Surface *pSurface, const SDL_Rect &position):
+GfxElement::GfxElement(SDL_Surface *pSurface, int layer, const SDL_Rect &position):
 m_position(position),
-m_pSurface(pSurface)
+m_pSurface(pSurface),
+m_layer(layer)
 {
 	if(!pSurface)
 		ERROR("GfxElement initialized with null pointer");

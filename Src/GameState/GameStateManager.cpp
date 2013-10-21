@@ -18,12 +18,12 @@ GameStateManager::~GameStateManager()
 {
 	DestroyState(m_pCurrentState);
 	DestroyState(m_pPausedState);
-	g_pApp->GetEventMgr()->RemoveListener(MakeDelegate(this, &GameStateManager::StateChangeDelegate), ET_STATECHANGE);
+	EventManager::Get()->RemoveListener(MakeDelegate(this, &GameStateManager::StateChangeDelegate), ET_STATECHANGE);
 }
 
 bool GameStateManager::Init()
 {
-	g_pApp->GetEventMgr()->AddListener(MakeDelegate(this, &GameStateManager::StateChangeDelegate), ET_STATECHANGE);
+	EventManager::Get()->AddListener(MakeDelegate(this, &GameStateManager::StateChangeDelegate), ET_STATECHANGE);
 		
 	ChangeState(GS_INTRO);
 	
@@ -39,7 +39,7 @@ void GameStateManager::StateChangeDelegate(EventSharedPtr pEvent)
 {
 	shared_ptr<Evt_StateChange> pEvt = static_pointer_cast<Evt_StateChange>(pEvent);
 	ChangeState(pEvt->GetState());
-	g_pResMgr->Clear();
+	ResourceManager::Get()->Clear();
 }
 
 IGameState* GameStateManager::CreateState(const eGameState gameState)

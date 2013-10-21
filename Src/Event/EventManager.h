@@ -14,7 +14,7 @@ class EventManager
 
 private :
 
-	static EventManager* s_pEventMgr;
+	static EventManager* s_pInstance;
 
 	int m_activeQueue;
 
@@ -23,7 +23,8 @@ private :
 
 public :
 
-	static EventManager* Create();
+	static void Create();
+	static EventManager* Get();
 	static void Destroy();
 	
 	void Update();

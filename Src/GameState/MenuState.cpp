@@ -12,7 +12,7 @@ void MenuState::VUpdate(unsigned int elapsedTime)
 	if(time > 1000)
 	{
 		shared_ptr<Evt_StateChange> pEvent(new Evt_StateChange(GS_PAUSE));
-		g_pApp->GetEventMgr()->QueueEvent(pEvent);
+		EventManager::Get()->QueueEvent(pEvent);
 		time = 0;
 	}
 }

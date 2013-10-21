@@ -3,9 +3,10 @@
 #include "GfxResource.h"
 #include "../GameStd.h"
 
-GfxResource::GfxResource(const std::string &fileName):
+GfxResource::GfxResource(const std::string &fileName, bool bHasTransparency):
+m_pSurface(NULL),
 m_fileName(fileName),
-m_pSurface(NULL)
+m_bHasTransparency(bHasTransparency)
 {
 }
 
@@ -30,6 +31,13 @@ bool GfxResource::VLoad()
 	{
 		ERROR("Failed to load \"" << m_fileName << "\"");
 		return false;
+	}
+	
+	if(m_bHasTransparency)
+	{
+		SDL_Surface* temp = m_pSurface;
+		m_pSurface = SDL_DisplayFormatAlpha(temp);
+		SDL_FreeSurface(temp);
 	}
 	
 	return true;

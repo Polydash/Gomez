@@ -59,4 +59,4 @@ clean :
 
 # Execute Debug mode with leak check
 leakcheck :
-	valgrind --suppressions=./SDLleaks.supp --leak-check=full Debug/Tetris
+	valgrind --suppressions=./Data/SDLleaks.supp --leak-check=full Debug/Tetris

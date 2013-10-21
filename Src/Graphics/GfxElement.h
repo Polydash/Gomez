@@ -10,10 +10,12 @@ class GfxElement
 		SDL_Rect 	 m_position;
 		SDL_Surface *m_pSurface;
 		
+		int m_layer;
+		
 	public :
 	
-		GfxElement(SDL_Surface* pSurface);
-		GfxElement(SDL_Surface* pSurface, const SDL_Rect &position);
+		GfxElement(SDL_Surface* pSurface, int layer);
+		GfxElement(SDL_Surface* pSurface, int layer, const SDL_Rect &position);
 		~GfxElement();
 		
 		void SetPosition(int x, int y);
@@ -22,6 +24,7 @@ class GfxElement
 		void Translate(int deltaX, int deltaY);
 		void Translate(const SDL_Rect &deltaPos);
 		
+		int GetLayer() const{ return m_layer; }
 		const SDL_Rect& GetPosition() const;
 		
 		bool IsVisible() const;

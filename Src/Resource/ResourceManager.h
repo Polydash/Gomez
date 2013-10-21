@@ -6,12 +6,11 @@
 
 #include "IResource.h"
 
-class ResourceManager;
-extern ResourceManager *g_pResMgr;
-
 class ResourceManager
 {	
 private :
+
+	static ResourceManager *s_pInstance;
 
 	typedef std::map<std::string, IResource*> ResourceMap;
 	
@@ -21,6 +20,7 @@ private :
 public :
 	
 	static void Create();
+	static ResourceManager* Get();
 	static void Destroy();
 	
 	const IResource* GetResource(const std::string &fileName, eResType resType);

@@ -10,12 +10,14 @@ class GfxResource : public IResource
 {
 	private :
 		
-		std::string m_fileName;
 		SDL_Surface *m_pSurface;
+	
+		std::string m_fileName;
+		bool m_bHasTransparency;
 	
 	public :
 	
-		GfxResource(const std::string &fileName);
+		GfxResource(const std::string &fileName, bool bHasTransparency = false);
 		virtual ~GfxResource();
 		
 		virtual bool VLoad();

@@ -3,7 +3,7 @@
 #include "../GameStd.h"
 #include "../GameApp/SDLApp.h"
 
-ResourceManager *g_pResMgr = NULL;
+ResourceManager* ResourceManager::s_pInstance = NULL;
 
 ResourceManager::ResourceManager()
 {
@@ -17,15 +17,20 @@ ResourceManager::~ResourceManager()
 
 void ResourceManager::Create()
 {
-	if(g_pResMgr)
+	if(s_pInstance)
 		ERROR("ResourceManager already created");
 	else
-		g_pResMgr = new ResourceManager;
+		s_pInstance = new ResourceManager;
+}
+
+ResourceManager* ResourceManager::Get()
+{
+	return s_pInstance;
 }
 
 void ResourceManager::Destroy()
 {
-	SAFE_DELETE(g_pResMgr);
+	SAFE_DELETE(s_pInstance);
 }
 
 const IResource* ResourceManager::GetResource(const std::string &fileName, eResType resType)
@@ -63,6 +68,7 @@ IResource* ResourceManager::CreateResource(const std::string &fileName, eResType
 	if(resType == RT_IMG)
 		return new GfxResource(filePath);
 		
+	ERROR("Unrecognized Resource type");
 	return NULL;
 }
 

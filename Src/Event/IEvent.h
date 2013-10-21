@@ -8,11 +8,11 @@ using std::tr1::static_pointer_cast;
 #include "FastDelegate.h"
 using fastdelegate::MakeDelegate;
 
-class IEvent;
-
 enum eEventType{ ET_STATECHANGE, 
 				 EVENT_NB
 			   };
+			   
+class IEvent;
 
 typedef shared_ptr<IEvent> EventSharedPtr;
 typedef fastdelegate::FastDelegate1<EventSharedPtr> EventListenerDelegate;

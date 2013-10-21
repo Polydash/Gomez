@@ -5,6 +5,7 @@
 #include "../Event/EventManager.h"
 #include "../GameState/GameStateManager.h"
 #include "../Resource/ResourceManager.h"
+#include "../Graphics/GfxManager.h"
 
 SDLApp* g_pApp = NULL;
 
@@ -16,7 +17,7 @@ m_title("Tetris"),
 m_imgPath("Data/Images"),
 m_pScreen(NULL),
 m_pGameStateMgr(NULL),
-m_pEventMgr(NULL)
+m_pGfxMgr(NULL)
 {
 }
 
@@ -25,11 +26,16 @@ SDLApp::~SDLApp()
 	LOG("GameState Manager Destruction");
 	SAFE_DELETE(m_pGameStateMgr);
 	
-	if(m_pEventMgr)
+	if(m_pGfxMgr)
+	{
+		LOG("Graphics Manager Destruction");
+		SAFE_DELETE(m_pGfxMgr);
+	}
+	
+	if(EventManager::Get())
 	{
 		LOG("Event Manager Destruction");
 		EventManager::Destroy();
-		m_pEventMgr = NULL;
 	}
 	
 	LOG("Resource Manager Destruction");
@@ -83,10 +89,18 @@ bool SDLApp::Init()
 	ResourceManager::Create();
 	
 	LOG("Event Manager Init");
-	m_pEventMgr = EventManager::Create();
-	if(!m_pEventMgr)
+	EventManager::Create();
+	if(!EventManager::Get())
 	{
 		ERROR("Failed to init Event Manager");
+		return false;
+	}
+	
+	LOG("Graphics Manager Init");
+	m_pGfxMgr = new GfxManager;
+	if(!m_pGfxMgr->Init(m_pScreen))
+	{
+		ERROR("Failed to init Graphics Manager");
 		return false;
 	}
 	
@@ -158,8 +172,10 @@ void SDLApp::MainLoop()
 		//Run game if not minimized
 		if(!bIsMinimized)
 		{
-			m_pEventMgr->Update();
+			EventManager::Get()->Update();
 			m_pGameStateMgr->Update(elapsedTime);
+			m_pGfxMgr->PreRender();
+			m_pGfxMgr->PostRender();
 		}
 	}
 }
@@ -167,11 +183,6 @@ void SDLApp::MainLoop()
 GameStateManager* SDLApp::GetGameStateMgr() const
 {
 	return m_pGameStateMgr;
-}
-
-EventManager* SDLApp::GetEventMgr() const
-{
-	return m_pEventMgr;
 }
 
 void SDLApp::LoadConfig()
