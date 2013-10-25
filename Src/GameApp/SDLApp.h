@@ -1,7 +1,7 @@
 #ifndef SDLAPP_H
 #define SDLAPP_H
 
-#include <SDL/SDL.h>
+#include <SDL2/SDL.h>
 #include <string>
 
 //Game Application Global
@@ -15,10 +15,10 @@ class SDLApp
 {
 private :
 
-	int m_width, m_height, m_bitsPerPixel;
+	int m_width, m_height;
 	std::string m_title, m_imgPath;
 
-	SDL_Surface *m_pScreen;
+	SDL_Window *m_pScreen;
 	
 	GameStateManager *m_pGameStateMgr;
 	GfxManager *m_pGfxMgr;

@@ -13,15 +13,14 @@ private :
 	
 	GfxElementList m_gfxElements;
 
-	SDL_Surface *m_pScreen;
-	SDL_Surface *m_pBlackSurface;
+	SDL_Window *m_pScreen;
 
 public :
 
 	GfxManager();
 	~GfxManager();
 	
-	bool Init(SDL_Surface* pScreen);
+	bool Init(SDL_Window* pScreen);
 	
 	void PreRender();
 	void Render();

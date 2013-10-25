@@ -1,5 +1,5 @@
 # Where to find libraries and source directories
-LFLAGS = -L./Libraries/SDL/lib -L./Libraries/TinyXML/lib -Wl,-rpath=./Libraries/SDL/lib -lSDL -lSDLmain -lSDL_image -lSDL2 -lSDL2_image -ltinyxml
+LFLAGS = -L./Libraries/SDL/lib -L./Libraries/TinyXML/lib -Wl,-rpath=./Libraries/SDL/lib -lSDL2 -lSDL2_image -ltinyxml
 IFLAGS = -I./Libraries/SDL/include -I./Libraries/TinyXML/include -I./Libraries/FastDelegate/include
 SRCDIR = Src Src/Event Src/GameState Src/GameApp Src/Graphics Src/Resource
 

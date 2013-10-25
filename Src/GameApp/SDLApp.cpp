@@ -1,4 +1,5 @@
 #include <tinyxml.h>
+#include <SDL2/SDL_image.h>
 
 #include "../GameApp/SDLApp.h"
 #include "../GameStd.h"
@@ -13,7 +14,6 @@ SDLApp* g_pApp = NULL;
 SDLApp::SDLApp():
 m_width(800),
 m_height(600),
-m_bitsPerPixel(32),
 m_title("Tetris"),
 m_imgPath("Data/Images"),
 m_pScreen(NULL),
@@ -42,6 +42,9 @@ SDLApp::~SDLApp()
 	LOG("Resource Manager Destruction");
 	ResourceManager::Destroy();
 	
+	SDL_DestroyWindow(m_pScreen);
+	
+	IMG_Quit();
 	SDL_Quit();
 	LOG("SDL Quit");
 }
@@ -72,19 +75,22 @@ bool SDLApp::Init()
 	LoadConfig();
 	
 	LOG("SDL Configuration");
-	// Forced conversion from const char* to char*
-	std::string param = "SDL_VIDEO_CENTERED=center";
-	SDL_putenv(const_cast<char*>(param.c_str()));
-	
-	m_pScreen = SDL_SetVideoMode(m_width, m_height, m_bitsPerPixel, SDL_HWSURFACE | SDL_DOUBLEBUF);
+	m_pScreen = SDL_CreateWindow(m_title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, m_width, m_height, SDL_WINDOW_SHOWN);
 	if(!m_pScreen)
 	{
 		ERROR("Failed to create SDL Screen : " << SDL_GetError());
 		return false;
 	}
 	
-	SDL_WM_SetCaption("Tetris", NULL);
-	SDL_ShowCursor(SDL_ENABLE);
+	SDL_ShowCursor(SDL_DISABLE);
+	
+	LOG("SDL_image Init");
+	int flags = IMG_INIT_PNG;
+	if(!(IMG_Init(flags) & flags))
+	{
+		ERROR("Failed to init SDL_image : " << IMG_GetError());
+		return false;
+	}
 	
 	LOG("Resource Manager Init");
 	ResourceManager::Create();
@@ -144,18 +150,22 @@ void SDLApp::MainLoop()
 			if(event.type == SDL_QUIT)
 				bIsDone = true;
 				
-			if(event.type == SDL_ACTIVEEVENT)
+			if(event.type == SDL_WINDOWEVENT)
 			{
-				if(event.active.state & SDL_APPACTIVE)
-					bIsMinimized = !event.active.gain;
-				
-				if(event.active.state & SDL_APPINPUTFOCUS)
-				{	
-					if(!event.active.gain)
-					{
+				switch(event.window.event)
+				{
+					case SDL_WINDOWEVENT_MINIMIZED :
+						bIsMinimized = true;
+						break;
+						
+					case SDL_WINDOWEVENT_RESTORED :
+						bIsMinimized = false;
+						break;
+						
+					case SDL_WINDOWEVENT_FOCUS_LOST :
 						shared_ptr<Evt_FocusLost> pEvent(new Evt_FocusLost());
 						EventManager::Get()->QueueEvent(pEvent);
-					}
+						break;
 				}
 			}
 			
@@ -207,7 +217,6 @@ void SDLApp::LoadConfig()
 	{
 		pElem->QueryIntAttribute("Width", &m_width);
 		pElem->QueryIntAttribute("Height", &m_height);
-		pElem->QueryIntAttribute("BPP", &m_bitsPerPixel);
 		m_title = pElem->Attribute("Title");
 		
 		pElem = pElem->NextSiblingElement();
