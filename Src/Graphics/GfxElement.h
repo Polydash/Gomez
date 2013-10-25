@@ -9,7 +9,8 @@ class GfxElement
 {
 	private :
 	
-		SDL_Rect m_position;
+		SDL_Rect 	 m_position;
+		SDL_Texture	*m_pTexture;
 
 		int m_layer;
 		byte m_alpha;
@@ -31,7 +32,7 @@ class GfxElement
 		const SDL_Rect& GetPosition() const;
 		
 		//Alpha blending methods
-		virtual void VSetAlpha(byte alpha) = 0;
+		virtual void VSetAlpha(byte alpha){ m_alpha = alpha; }
 		byte GetAlpha() const{ return m_alpha; } 
 		
 		//Layering
@@ -39,11 +40,6 @@ class GfxElement
 		
 		//Visibility
 		virtual bool VIsVisible() const = 0;
-		
-	private :
-	
-		//Visibilty helper function
-		bool IsPointOnScreen(int x, int y, int sWidth, int sHeight) const;
 };
 
 #endif

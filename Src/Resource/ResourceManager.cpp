@@ -1,5 +1,5 @@
 #include "ResourceManager.h"
-#include "GfxResource.h"
+#include "ImageResource.h"
 #include "../GameStd.h"
 #include "../GameApp/SDLApp.h"
 
@@ -66,7 +66,7 @@ IResource* ResourceManager::CreateResource(const std::string &fileName, eResType
 	std::string filePath = m_filePaths[resType] + '/' + fileName;
 	
 	if(resType == RT_IMG)
-		return new GfxResource(filePath);
+		return new ImageResource(filePath);
 		
 	ERROR("Unrecognized Resource type");
 	return NULL;

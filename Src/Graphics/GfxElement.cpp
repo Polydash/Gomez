@@ -3,6 +3,7 @@
 #include "../GameApp/SDLApp.h"
 
 GfxElement::GfxElement(int layer):
+m_pTexture(NULL),
 m_layer(layer),
 m_alpha(255)
 {	
@@ -12,6 +13,7 @@ m_alpha(255)
 
 GfxElement::GfxElement(int layer, const SDL_Rect &position):
 m_position(position),
+m_pTexture(NULL),
 m_layer(layer),
 m_alpha(255)
 {
@@ -47,33 +49,4 @@ void GfxElement::Translate(const SDL_Rect &deltaPos)
 const SDL_Rect& GfxElement::GetPosition() const
 {
 	return m_position;
-}
-
-//~ bool GfxElement::IsVisible() const
-//~ {
-	//~ int sWidth  = g_pApp->GetScreenWidth();
-	//~ int sHeight = g_pApp->GetScreenHeight();
-	//~ int posX    = m_position.x;
-	//~ int posY	= m_position.y;
-	//~ int width	= m_pSurface->w;
-	//~ int height	= m_pSurface->h;
-	//~ 
-	//~ if(IsPointOnScreen(posX, posY, sWidth, sHeight))
-		//~ return true;
-	//~ 
-	//~ if(IsPointOnScreen(posX + width, posY, sWidth, sHeight))
-		//~ return true;
-		//~ 
-	//~ if(IsPointOnScreen(posX + width, posY + height, sWidth, sHeight))
-		//~ return true;
-	//~ 
-	//~ if(IsPointOnScreen(posX, posY + height, sWidth, sHeight))
-		//~ return true;
-	//~ 
-	//~ return false;
-//~ }
-
-bool GfxElement::IsPointOnScreen(int x, int y, int sWidth, int sHeight) const
-{
-	return (x >= 0 && x <= sWidth && y >= 0 && y <= sHeight);
 }

@@ -1,15 +1,15 @@
 #include <SDL2/SDL_image.h>
 
-#include "GfxResource.h"
+#include "ImageResource.h"
 #include "../GameStd.h"
 
-GfxResource::GfxResource(const std::string &fileName):
+ImageResource::ImageResource(const std::string &fileName):
 m_pSurface(NULL),
 m_fileName(fileName)
 {
 }
 
-GfxResource::~GfxResource()
+ImageResource::~ImageResource()
 {
 	if(m_pSurface)
 	{
@@ -18,11 +18,11 @@ GfxResource::~GfxResource()
 	}
 }
 
-bool GfxResource::VLoad()
+bool ImageResource::VLoad()
 {
 	if(m_pSurface)
 	{
-		ERROR("GfxResource \"" << m_fileName << "\" already loaded");
+		ERROR("ImageResource \"" << m_fileName << "\" already loaded");
 		return false;
 	}
 	
@@ -35,7 +35,7 @@ bool GfxResource::VLoad()
 	return true;
 }
 
-const SDL_Texture* GfxResource::GetTexture(SDL_Renderer *pRenderer) const
+const SDL_Texture* ImageResource::GetTexture(SDL_Renderer *pRenderer) const
 {	
 	SDL_Texture *pTexture = SDL_CreateTextureFromSurface(pRenderer, m_pSurface);
 	

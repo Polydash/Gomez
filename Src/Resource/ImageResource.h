@@ -1,12 +1,12 @@
-#ifndef GFXRESOURCE_H
-#define GFXRESOURCE_H
+#ifndef IMAGERESOURCE_H
+#define IMAGERESOURCE_H
 
 #include <SDL2/SDL.h>
 #include <string>
 
 #include "IResource.h"
 
-class GfxResource : public IResource
+class ImageResource : public IResource
 {
 	private :
 		
@@ -16,8 +16,8 @@ class GfxResource : public IResource
 	
 	public :
 	
-		GfxResource(const std::string &fileName);
-		virtual ~GfxResource();
+		ImageResource(const std::string &fileName);
+		virtual ~ImageResource();
 		
 		virtual bool VLoad();
 
