@@ -12,7 +12,6 @@ class GfxElement
 		SDL_Rect m_position;
 
 		int m_layer;
-		double m_angle;
 		byte m_alpha;
 		
 	public :
@@ -30,11 +29,6 @@ class GfxElement
 		void Translate(int deltaX, int deltaY);
 		void Translate(const SDL_Rect &deltaPos);
 		const SDL_Rect& GetPosition() const;
-		
-		//Rotation methods
-		virtual void VSetAngle(double angle) = 0;
-		virtual void VRotate(double deltaAngle) = 0;
-		double GetAngle() const{ return m_angle; }
 		
 		//Alpha blending methods
 		virtual void VSetAlpha(byte alpha) = 0;

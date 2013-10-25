@@ -4,7 +4,6 @@
 
 GfxElement::GfxElement(int layer):
 m_layer(layer),
-m_angle(0),
 m_alpha(255)
 {	
 	m_position.x = 0;
@@ -14,7 +13,6 @@ m_alpha(255)
 GfxElement::GfxElement(int layer, const SDL_Rect &position):
 m_position(position),
 m_layer(layer),
-m_angle(0),
 m_alpha(255)
 {
 }

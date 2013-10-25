@@ -1,12 +1,11 @@
-#include <SDL/SDL_image.h>
+#include <SDL2/SDL_image.h>
 
 #include "GfxResource.h"
 #include "../GameStd.h"
 
-GfxResource::GfxResource(const std::string &fileName, bool bHasTransparency):
+GfxResource::GfxResource(const std::string &fileName):
 m_pSurface(NULL),
-m_fileName(fileName),
-m_bHasTransparency(bHasTransparency)
+m_fileName(fileName)
 {
 }
 
@@ -33,12 +32,18 @@ bool GfxResource::VLoad()
 		return false;
 	}
 	
-	if(m_bHasTransparency)
+	return true;
+}
+
+const SDL_Texture* GfxResource::GetTexture(SDL_Renderer *pRenderer) const
+{	
+	SDL_Texture *pTexture = SDL_CreateTextureFromSurface(pRenderer, m_pSurface);
+	
+	if(!pTexture)
 	{
-		SDL_Surface* temp = m_pSurface;
-		m_pSurface = SDL_DisplayFormatAlpha(temp);
-		SDL_FreeSurface(temp);
+		ERROR("Failed to create texture from file \"" << m_fileName << "\"");
+		return NULL;
 	}
 	
-	return true;
+	return pTexture;
 }
