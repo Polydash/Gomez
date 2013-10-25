@@ -3,7 +3,6 @@
 #include "../GameApp/SDLApp.h"
 
 GfxElement::GfxElement(int layer):
-m_pTexture(NULL),
 m_layer(layer),
 m_alpha(255)
 {	
@@ -13,7 +12,6 @@ m_alpha(255)
 
 GfxElement::GfxElement(int layer, const SDL_Rect &position):
 m_position(position),
-m_pTexture(NULL),
 m_layer(layer),
 m_alpha(255)
 {

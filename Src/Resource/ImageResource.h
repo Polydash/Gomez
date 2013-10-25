@@ -22,7 +22,7 @@ class ImageResource : public IResource
 		virtual bool VLoad();
 
 		const SDL_Surface* GetSurface() const{ return m_pSurface; }
-		const SDL_Texture* GetTexture(SDL_Renderer* pRenderer) const;
+		SDL_Texture* CreateTexture(SDL_Renderer* pRenderer) const;
 };
 
 #endif

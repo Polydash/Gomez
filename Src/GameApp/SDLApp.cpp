@@ -83,7 +83,12 @@ bool SDLApp::Init()
 	}
 	
 	SDL_ShowCursor(SDL_DISABLE);
-	
+	if(!SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "1"))
+	{
+		ERROR("Failed to enable linear texture filtering");
+		return false;
+	}
+		
 	LOG("SDL_image Init");
 	int flags = IMG_INIT_PNG;
 	if(!(IMG_Init(flags) & flags))
@@ -186,10 +191,11 @@ void SDLApp::MainLoop()
 		
 		//Run game if not minimized
 		if(!bIsMinimized)
-		{
+		{	
 			EventManager::Get()->Update();
 			m_pGameStateMgr->Update(elapsedTime);
 			m_pGfxMgr->PreRender();
+			m_pGfxMgr->Render();
 			m_pGfxMgr->PostRender();
 		}
 	}

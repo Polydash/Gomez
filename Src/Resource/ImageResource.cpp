@@ -35,7 +35,7 @@ bool ImageResource::VLoad()
 	return true;
 }
 
-const SDL_Texture* ImageResource::GetTexture(SDL_Renderer *pRenderer) const
+SDL_Texture* ImageResource::CreateTexture(SDL_Renderer *pRenderer) const
 {	
 	SDL_Texture *pTexture = SDL_CreateTextureFromSurface(pRenderer, m_pSurface);
 	
