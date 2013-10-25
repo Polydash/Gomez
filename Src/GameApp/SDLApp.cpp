@@ -3,6 +3,7 @@
 #include "../GameApp/SDLApp.h"
 #include "../GameStd.h"
 #include "../Event/EventManager.h"
+#include "../Event/Events.h"
 #include "../GameState/GameStateManager.h"
 #include "../Resource/ResourceManager.h"
 #include "../Graphics/GfxManager.h"
@@ -150,7 +151,11 @@ void SDLApp::MainLoop()
 				
 				if(event.active.state & SDL_APPINPUTFOCUS)
 				{	
-					//Queue gained/lost focus Event
+					if(!event.active.gain)
+					{
+						shared_ptr<Evt_FocusLost> pEvent(new Evt_FocusLost());
+						EventManager::Get()->QueueEvent(pEvent);
+					}
 				}
 			}
 			

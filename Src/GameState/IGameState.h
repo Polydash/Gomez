@@ -4,6 +4,7 @@
 enum eGameState{ GS_INVALID = -1,
 				 GS_INTRO,
 				 GS_MENU,
+				 GS_MAINGAME,
 				 GS_PAUSE,
 				 GS_PREVIOUS
 			   };

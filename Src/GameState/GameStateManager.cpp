@@ -1,12 +1,11 @@
 #include "GameStateManager.h"
 #include "../GameStd.h"
-#include "../GameApp/SDLApp.h"
 #include "../Event/EventManager.h"
 #include "../Event/Events.h"
-#include "../Resource/ResourceManager.h"
 #include "MenuState.h"
 #include "IntroState.h"
 #include "PauseState.h"
+#include "MainGameState.h"
 
 GameStateManager::GameStateManager():
 m_pCurrentState(NULL),
@@ -39,7 +38,6 @@ void GameStateManager::StateChangeDelegate(EventSharedPtr pEvent)
 {
 	shared_ptr<Evt_StateChange> pEvt = static_pointer_cast<Evt_StateChange>(pEvent);
 	ChangeState(pEvt->GetState());
-	ResourceManager::Get()->Clear();
 }
 
 IGameState* GameStateManager::CreateState(const eGameState gameState)
@@ -55,6 +53,10 @@ IGameState* GameStateManager::CreateState(const eGameState gameState)
 	else if(gameState == GS_MENU)
 	{
 		return new MenuState();
+	}
+	else if(gameState == GS_MAINGAME)
+	{
+		return new MainGameState();
 	}
 
 	ERROR("Invalid game state type");

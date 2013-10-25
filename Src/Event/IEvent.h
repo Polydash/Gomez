@@ -8,7 +8,8 @@ using std::tr1::static_pointer_cast;
 #include "FastDelegate.h"
 using fastdelegate::MakeDelegate;
 
-enum eEventType{ ET_STATECHANGE, 
+enum eEventType{ ET_STATECHANGE,
+				 ET_FOCUSLOST,
 				 EVENT_NB
 			   };
 			   

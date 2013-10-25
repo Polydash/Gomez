@@ -20,4 +20,14 @@ public :
 	virtual eEventType VGetType() const{ return ET_STATECHANGE; }
 };
 
+class Evt_FocusLost : public IEvent
+{
+public :
+
+	Evt_FocusLost(){}
+	~Evt_FocusLost(){}
+	
+	virtual eEventType VGetType() const{ return ET_FOCUSLOST; }
+};
+
 #endif
