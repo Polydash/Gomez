@@ -1,8 +1,8 @@
 #include "IntroState.h"
 #include "../GameStd.h"
-#include "../GameApp/SDLApp.h"
 #include "../Event/EventManager.h"
 #include "../Event/Events.h"
+#include "../Resource/ResourceManager.h"
 
 void IntroState::VUpdate(unsigned int elapsedTime)
 {
@@ -21,4 +21,5 @@ void IntroState::VOnEnter()
 {
 	INFO("Entering INTRO state");
 	LOG("Entering INTRO state");
+	ResourceManager::Get()->Clear();
 }

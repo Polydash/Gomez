@@ -13,15 +13,15 @@ private :
 	
 	GfxElementList m_gfxElements;
 
-	SDL_Surface *m_pScreen;
-	SDL_Surface *m_pBlackSurface;
+	SDL_Window 		*m_pScreen;
+	SDL_Renderer 	*m_pRenderer;
 
 public :
 
 	GfxManager();
 	~GfxManager();
 	
-	bool Init(SDL_Surface* pScreen);
+	bool Init(SDL_Window* pScreen);
 	
 	void PreRender();
 	void Render();
@@ -29,10 +29,10 @@ public :
 	
 	void Clear();
 	
-private :
-	
 	void AddElement(GfxElement* pElement);
 	void RemoveElement(GfxElement* pElement);
+	
+private :
 	
 	void AddElementDelegate(/*Evt_AddGfxElement*/);
 	void RemoveElementDelegate(/*Evt_RemoveGfxElement*/);

@@ -1,20 +1,26 @@
 #include <tinyxml.h>
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
 
 #include "../GameApp/SDLApp.h"
 #include "../GameStd.h"
 #include "../Event/EventManager.h"
+#include "../Event/Events.h"
 #include "../GameState/GameStateManager.h"
 #include "../Resource/ResourceManager.h"
 #include "../Graphics/GfxManager.h"
+
+//REMOVE
+#include "../Graphics/GfxText.h"
 
 SDLApp* g_pApp = NULL;
 
 SDLApp::SDLApp():
 m_width(800),
 m_height(600),
-m_bitsPerPixel(32),
 m_title("Tetris"),
 m_imgPath("Data/Images"),
+m_fontPath("Data/Fonts"),
 m_pScreen(NULL),
 m_pGameStateMgr(NULL),
 m_pGfxMgr(NULL)
@@ -41,6 +47,10 @@ SDLApp::~SDLApp()
 	LOG("Resource Manager Destruction");
 	ResourceManager::Destroy();
 	
+	SDL_DestroyWindow(m_pScreen);
+	
+	TTF_Quit();
+	IMG_Quit();
 	SDL_Quit();
 	LOG("SDL Quit");
 }
@@ -60,30 +70,11 @@ void SDLApp::Destroy()
 
 bool SDLApp::Init()
 {
-	LOG("SDL Init");
-	if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER) == -1)
-	{
-		ERROR("Failed to init SDL");
-		return false;
-	}
-	
 	LOG("Game Configuration");
 	LoadConfig();
 	
-	LOG("SDL Configuration");
-	// Forced conversion from const char* to char*
-	std::string param = "SDL_VIDEO_CENTERED=center";
-	SDL_putenv(const_cast<char*>(param.c_str()));
-	
-	m_pScreen = SDL_SetVideoMode(m_width, m_height, m_bitsPerPixel, SDL_HWSURFACE | SDL_DOUBLEBUF);
-	if(!m_pScreen)
-	{
-		ERROR("Failed to create SDL Screen : " << SDL_GetError());
+	if(!SDLInit())
 		return false;
-	}
-	
-	SDL_WM_SetCaption("Tetris", NULL);
-	SDL_ShowCursor(SDL_ENABLE);
 	
 	LOG("Resource Manager Init");
 	ResourceManager::Create();
@@ -125,6 +116,15 @@ void SDLApp::MainLoop()
 	FPSTime = 1000 / 60;
 	startTime = SDL_GetTicks();
 	
+	//=====
+	
+	GfxText *pText = new GfxText(0, "operator.ttf", "Hello World");
+	m_pGfxMgr->AddElement(pText);
+	
+	pText->SetPosition(m_width/2, m_height/2);
+	
+	//=====
+	
 	while(!bIsDone)
 	{		
 		//60 FPS Limit	
@@ -143,14 +143,22 @@ void SDLApp::MainLoop()
 			if(event.type == SDL_QUIT)
 				bIsDone = true;
 				
-			if(event.type == SDL_ACTIVEEVENT)
+			if(event.type == SDL_WINDOWEVENT)
 			{
-				if(event.active.state & SDL_APPACTIVE)
-					bIsMinimized = !event.active.gain;
-				
-				if(event.active.state & SDL_APPINPUTFOCUS)
-				{	
-					//Queue gained/lost focus Event
+				switch(event.window.event)
+				{
+					case SDL_WINDOWEVENT_MINIMIZED :
+						bIsMinimized = true;
+						break;
+						
+					case SDL_WINDOWEVENT_RESTORED :
+						bIsMinimized = false;
+						break;
+						
+					case SDL_WINDOWEVENT_FOCUS_LOST :
+						shared_ptr<Evt_FocusLost> pEvent(new Evt_FocusLost());
+						EventManager::Get()->QueueEvent(pEvent);
+						break;
 				}
 			}
 			
@@ -171,10 +179,21 @@ void SDLApp::MainLoop()
 		
 		//Run game if not minimized
 		if(!bIsMinimized)
-		{
+		{	
+			//=====
+				
+				static double angle = 0;
+				angle += 0.1;
+				pText->SetAngle(cos(angle)*10);
+				pText->SetScale(sin(angle)*0.1 + 1.0f);
+				pText->SetAlpha(cos(angle)*64 + 127);
+			
+			//=====
+			
 			EventManager::Get()->Update();
 			m_pGameStateMgr->Update(elapsedTime);
 			m_pGfxMgr->PreRender();
+			m_pGfxMgr->Render();
 			m_pGfxMgr->PostRender();
 		}
 	}
@@ -202,12 +221,51 @@ void SDLApp::LoadConfig()
 	{
 		pElem->QueryIntAttribute("Width", &m_width);
 		pElem->QueryIntAttribute("Height", &m_height);
-		pElem->QueryIntAttribute("BPP", &m_bitsPerPixel);
 		m_title = pElem->Attribute("Title");
 		
 		pElem = pElem->NextSiblingElement();
 		m_imgPath = pElem->Attribute("Images");
+		m_fontPath = pElem->Attribute("Fonts");
 	}
 }
 
-
+bool SDLApp::SDLInit()
+{
+	LOG("SDL Init");
+	if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER) == -1)
+	{
+		ERROR("Failed to init SDL");
+		return false;
+	}
+	
+	LOG("SDL Configuration");
+	m_pScreen = SDL_CreateWindow(m_title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, m_width, m_height, SDL_WINDOW_SHOWN);
+	if(!m_pScreen)
+	{
+		ERROR("Failed to create SDL Screen : " << SDL_GetError());
+		return false;
+	}
+	
+	SDL_ShowCursor(SDL_DISABLE);
+	if(!SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "1"))
+	{
+		ERROR("Failed to enable linear texture filtering");
+		return false;
+	}
+		
+	LOG("SDL_image Init");
+	int flags = IMG_INIT_PNG;
+	if(!(IMG_Init(flags) & flags))
+	{
+		ERROR("Failed to init SDL_image : " << IMG_GetError());
+		return false;
+	}
+	
+	if(TTF_Init() == -1)
+	{
+		ERROR("Failed to init SDL_ttf : " << TTF_GetError());
+		return false;
+	}
+	
+	return true;
+}
