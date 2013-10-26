@@ -16,7 +16,7 @@ class SDLApp
 private :
 
 	int m_width, m_height;
-	std::string m_title, m_imgPath;
+	std::string m_title, m_imgPath, m_fontPath;
 
 	SDL_Window *m_pScreen;
 	
@@ -37,6 +37,7 @@ public :
 	int GetScreenWidth()  const{ return m_width;  }
 	int GetScreenHeight() const{ return m_height; }
 	std::string GetImgPath() const{ return m_imgPath; }
+	std::string GetFontPath() const{ return m_fontPath; }
 	
 private :
 
@@ -44,6 +45,7 @@ private :
 	~SDLApp();
 	
 	void LoadConfig();
+	bool SDLInit();
 };
 
 #endif

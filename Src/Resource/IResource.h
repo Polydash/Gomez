@@ -2,6 +2,7 @@
 #define IRESOURCE_H
 
 enum eResType{ RT_IMG,
+			   RT_FONT,
 			   RESOURCE_NB
 			 };
 

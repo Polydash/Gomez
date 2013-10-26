@@ -8,20 +8,20 @@
 
 class GfxImage : public GfxElement
 {
-	private :
+	protected :
 	
 		SDL_Texture *m_pTexture;
 		SDL_Rect	 m_renderingPos;
 		
-		std::string m_imgName;
+		std::string m_fileName;
 		
 		double m_angle;
 		float  m_scale;
 
 	public :
 	
-		GfxImage(int layer, const std::string &imgName);
-		GfxImage(int layer, const std::string &imgName, const SDL_Rect &position);
+		GfxImage(int layer, const std::string &m_fileName);
+		GfxImage(int layer, const std::string &m_fileName, const SDL_Rect &position);
 		virtual ~GfxImage();
 		
 		virtual bool VInit(SDL_Renderer *pRenderer);

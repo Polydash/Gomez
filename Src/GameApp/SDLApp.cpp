@@ -1,5 +1,6 @@
 #include <tinyxml.h>
 #include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
 
 #include "../GameApp/SDLApp.h"
 #include "../GameStd.h"
@@ -9,6 +10,9 @@
 #include "../Resource/ResourceManager.h"
 #include "../Graphics/GfxManager.h"
 
+//REMOVE
+#include "../Graphics/GfxText.h"
+
 SDLApp* g_pApp = NULL;
 
 SDLApp::SDLApp():
@@ -16,6 +20,7 @@ m_width(800),
 m_height(600),
 m_title("Tetris"),
 m_imgPath("Data/Images"),
+m_fontPath("Data/Fonts"),
 m_pScreen(NULL),
 m_pGameStateMgr(NULL),
 m_pGfxMgr(NULL)
@@ -44,6 +49,7 @@ SDLApp::~SDLApp()
 	
 	SDL_DestroyWindow(m_pScreen);
 	
+	TTF_Quit();
 	IMG_Quit();
 	SDL_Quit();
 	LOG("SDL Quit");
@@ -64,38 +70,11 @@ void SDLApp::Destroy()
 
 bool SDLApp::Init()
 {
-	LOG("SDL Init");
-	if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER) == -1)
-	{
-		ERROR("Failed to init SDL");
-		return false;
-	}
-	
 	LOG("Game Configuration");
 	LoadConfig();
 	
-	LOG("SDL Configuration");
-	m_pScreen = SDL_CreateWindow(m_title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, m_width, m_height, SDL_WINDOW_SHOWN);
-	if(!m_pScreen)
-	{
-		ERROR("Failed to create SDL Screen : " << SDL_GetError());
+	if(!SDLInit())
 		return false;
-	}
-	
-	SDL_ShowCursor(SDL_DISABLE);
-	if(!SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "1"))
-	{
-		ERROR("Failed to enable linear texture filtering");
-		return false;
-	}
-		
-	LOG("SDL_image Init");
-	int flags = IMG_INIT_PNG;
-	if(!(IMG_Init(flags) & flags))
-	{
-		ERROR("Failed to init SDL_image : " << IMG_GetError());
-		return false;
-	}
 	
 	LOG("Resource Manager Init");
 	ResourceManager::Create();
@@ -136,6 +115,15 @@ void SDLApp::MainLoop()
 	
 	FPSTime = 1000 / 60;
 	startTime = SDL_GetTicks();
+	
+	//=====
+	
+	GfxText *pText = new GfxText(0, "operator.ttf", "Hello World");
+	m_pGfxMgr->AddElement(pText);
+	
+	pText->SetPosition(m_width/2, m_height/2);
+	
+	//=====
 	
 	while(!bIsDone)
 	{		
@@ -192,6 +180,16 @@ void SDLApp::MainLoop()
 		//Run game if not minimized
 		if(!bIsMinimized)
 		{	
+			//=====
+				
+				static double angle = 0;
+				angle += 0.1;
+				pText->SetAngle(cos(angle)*10);
+				pText->SetScale(sin(angle)*0.1 + 1.0f);
+				pText->SetAlpha(cos(angle)*64 + 127);
+			
+			//=====
+			
 			EventManager::Get()->Update();
 			m_pGameStateMgr->Update(elapsedTime);
 			m_pGfxMgr->PreRender();
@@ -227,7 +225,47 @@ void SDLApp::LoadConfig()
 		
 		pElem = pElem->NextSiblingElement();
 		m_imgPath = pElem->Attribute("Images");
+		m_fontPath = pElem->Attribute("Fonts");
 	}
 }
 
-
+bool SDLApp::SDLInit()
+{
+	LOG("SDL Init");
+	if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER) == -1)
+	{
+		ERROR("Failed to init SDL");
+		return false;
+	}
+	
+	LOG("SDL Configuration");
+	m_pScreen = SDL_CreateWindow(m_title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, m_width, m_height, SDL_WINDOW_SHOWN);
+	if(!m_pScreen)
+	{
+		ERROR("Failed to create SDL Screen : " << SDL_GetError());
+		return false;
+	}
+	
+	SDL_ShowCursor(SDL_DISABLE);
+	if(!SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "1"))
+	{
+		ERROR("Failed to enable linear texture filtering");
+		return false;
+	}
+		
+	LOG("SDL_image Init");
+	int flags = IMG_INIT_PNG;
+	if(!(IMG_Init(flags) & flags))
+	{
+		ERROR("Failed to init SDL_image : " << IMG_GetError());
+		return false;
+	}
+	
+	if(TTF_Init() == -1)
+	{
+		ERROR("Failed to init SDL_ttf : " << TTF_GetError());
+		return false;
+	}
+	
+	return true;
+}

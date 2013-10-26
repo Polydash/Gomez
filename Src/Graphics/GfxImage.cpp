@@ -2,17 +2,17 @@
 #include "../Resource/ResourceManager.h"
 #include "../Resource/ImageResource.h"
 
-GfxImage::GfxImage(int layer, const std::string &imgName):
+GfxImage::GfxImage(int layer, const std::string &fileName):
 GfxElement(layer),
-m_imgName(imgName),
+m_fileName(fileName),
 m_angle(0.0),
 m_scale(1.0f)
 {
 }
 
-GfxImage::GfxImage(int layer, const std::string &imgName, const SDL_Rect &position):
+GfxImage::GfxImage(int layer, const std::string &fileName, const SDL_Rect &position):
 GfxElement(layer, position),
-m_imgName(imgName),
+m_fileName(fileName),
 m_angle(0.0),
 m_scale(1.0f)
 {
@@ -29,7 +29,7 @@ GfxImage::~GfxImage()
 
 bool GfxImage::VInit(SDL_Renderer *pRenderer)
 {
-	const IResource* pResource = ResourceManager::Get()->GetResource(m_imgName.c_str(), RT_IMG);
+	const IResource* pResource = ResourceManager::Get()->GetResource(m_fileName.c_str(), RT_IMG);
 	if(!pResource)
 		return false;
 		
@@ -45,7 +45,7 @@ bool GfxImage::VInit(SDL_Renderer *pRenderer)
 	
 	if(SDL_SetTextureBlendMode(m_pTexture, SDL_BLENDMODE_BLEND) < 0)
 	{
-		ERROR("Failed to enable blending mode : " << m_imgName);
+		ERROR("Failed to enable blending mode : " << m_fileName);
 		return false;
 	}
 		
