@@ -59,6 +59,24 @@ void GfxImage::VRender(SDL_Renderer *pRenderer)
 	m_renderingPos.w = m_position.w*m_scale;
 	m_renderingPos.h = m_position.h*m_scale;
 	
-	SDL_SetTextureAlphaMod(m_pTexture, m_alpha);
 	SDL_RenderCopyEx(pRenderer, m_pTexture, NULL, &m_renderingPos, m_angle, NULL, SDL_FLIP_NONE);
+}
+
+void GfxImage::SetColor(byte r, byte g, byte b)
+{
+	m_color.r = r;
+	m_color.g = g;
+	m_color.b = b;
+	SDL_SetTextureColorMod(m_pTexture, r, g, b);
+}
+
+void GfxImage::ResetColor()
+{
+	SetColor(255, 255, 255);
+}
+
+void GfxImage::VSetAlpha(byte alpha)
+{
+	m_alpha = alpha;
+	SDL_SetTextureAlphaMod(m_pTexture, m_alpha);
 }

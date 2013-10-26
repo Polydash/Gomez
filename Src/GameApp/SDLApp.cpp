@@ -10,9 +10,6 @@
 #include "../Resource/ResourceManager.h"
 #include "../Graphics/GfxManager.h"
 
-//REMOVE
-#include "../Graphics/GfxText.h"
-
 SDLApp* g_pApp = NULL;
 
 SDLApp::SDLApp():
@@ -116,15 +113,6 @@ void SDLApp::MainLoop()
 	FPSTime = 1000 / 60;
 	startTime = SDL_GetTicks();
 	
-	//=====
-	
-	GfxText *pText = new GfxText(0, "operator.ttf", "Hello World");
-	m_pGfxMgr->AddElement(pText);
-	
-	pText->SetPosition(m_width/2, m_height/2);
-	
-	//=====
-	
 	while(!bIsDone)
 	{		
 		//60 FPS Limit	
@@ -180,16 +168,6 @@ void SDLApp::MainLoop()
 		//Run game if not minimized
 		if(!bIsMinimized)
 		{	
-			//=====
-				
-				static double angle = 0;
-				angle += 0.1;
-				pText->SetAngle(cos(angle)*10);
-				pText->SetScale(sin(angle)*0.1 + 1.0f);
-				pText->SetAlpha(cos(angle)*64 + 127);
-			
-			//=====
-			
 			EventManager::Get()->Update();
 			m_pGameStateMgr->Update(elapsedTime);
 			m_pGfxMgr->PreRender();

@@ -33,7 +33,7 @@ class GfxElement
 		const SDL_Rect& GetPosition() const;
 		
 		//Alpha blending methods
-		void SetAlpha(byte alpha){ m_alpha = alpha; }
+		virtual void VSetAlpha(byte alpha){ m_alpha = alpha; }
 		byte GetAlpha() const{ return m_alpha; } 
 		
 		//Layering
