@@ -49,8 +49,8 @@ bool GfxText::VInit(SDL_Renderer *pRenderer)
 	
 	int w, h;
 	SDL_QueryTexture(m_pTexture, NULL, NULL, &w, &h);
-	m_position.w = w;
-	m_position.h = h;
+	m_dimension.w = w;
+	m_dimension.h = h;
 	
 	if(SDL_SetTextureBlendMode(m_pTexture, SDL_BLENDMODE_BLEND) < 0)
 	{

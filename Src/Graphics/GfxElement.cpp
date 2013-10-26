@@ -6,15 +6,18 @@ GfxElement::GfxElement(int layer):
 m_layer(layer),
 m_alpha(255)
 {	
-	m_position.x = 0;
-	m_position.y = 0;
+	m_dimension.x = 0;
+	m_dimension.y = 0;
+	m_dimension.w = 0;
+	m_dimension.h = 0;
 }
 
 GfxElement::GfxElement(int layer, const SDL_Rect &position):
-m_position(position),
 m_layer(layer),
 m_alpha(255)
 {
+	m_dimension.x = position.x;
+	m_dimension.y = position.y;
 }
 
 GfxElement::~GfxElement()
@@ -23,28 +26,36 @@ GfxElement::~GfxElement()
 
 void GfxElement::SetPosition(int x, int y)
 {
-	m_position.x = x;
-	m_position.y = y;
+	m_dimension.x = x;
+	m_dimension.y = y;
 }
 
 void GfxElement::SetPosition(const SDL_Rect &position)
 {
-	m_position = position;
+	m_dimension.x = position.x;
+	m_dimension.y = position.y;
 }
 
 void GfxElement::Translate(int deltaX, int deltaY)
 {
-	m_position.x += deltaX;
-	m_position.y += deltaY;
+	m_dimension.x += deltaX;
+	m_dimension.y += deltaY;
 }
 
 void GfxElement::Translate(const SDL_Rect &deltaPos)
 {
-	m_position.x += deltaPos.x;
-	m_position.y += deltaPos.y;
+	m_dimension.x += deltaPos.x;
+	m_dimension.y += deltaPos.y;
 }
 
-const SDL_Rect& GfxElement::GetPosition() const
+void GfxElement::VSetColor(byte r, byte g, byte b)
 {
-	return m_position;
+	m_color.r = r;
+	m_color.g = g;
+	m_color.b = b;
+}
+
+const SDL_Rect& GfxElement::GetDimension() const
+{
+	return m_dimension;
 }

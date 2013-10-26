@@ -40,8 +40,8 @@ bool GfxImage::VInit(SDL_Renderer *pRenderer)
 		
 	int w, h;
 	SDL_QueryTexture(m_pTexture, NULL, NULL, &w, &h);
-	m_position.w = w;
-	m_position.h = h;
+	m_dimension.w = w;
+	m_dimension.h = h;
 	
 	if(SDL_SetTextureBlendMode(m_pTexture, SDL_BLENDMODE_BLEND) < 0)
 	{
@@ -54,15 +54,15 @@ bool GfxImage::VInit(SDL_Renderer *pRenderer)
 
 void GfxImage::VRender(SDL_Renderer *pRenderer)
 {	
-	m_renderingPos.x = m_position.x - (m_position.w*m_scale / 2);
-	m_renderingPos.y = m_position.y - (m_position.h*m_scale / 2);
-	m_renderingPos.w = m_position.w*m_scale;
-	m_renderingPos.h = m_position.h*m_scale;
+	m_renderingPos.x = m_dimension.x - (m_dimension.w*m_scale / 2);
+	m_renderingPos.y = m_dimension.y - (m_dimension.h*m_scale / 2);
+	m_renderingPos.w = m_dimension.w*m_scale;
+	m_renderingPos.h = m_dimension.h*m_scale;
 	
 	SDL_RenderCopyEx(pRenderer, m_pTexture, NULL, &m_renderingPos, m_angle, NULL, SDL_FLIP_NONE);
 }
 
-void GfxImage::SetColor(byte r, byte g, byte b)
+void GfxImage::VSetColor(byte r, byte g, byte b)
 {
 	m_color.r = r;
 	m_color.g = g;
@@ -72,7 +72,7 @@ void GfxImage::SetColor(byte r, byte g, byte b)
 
 void GfxImage::ResetColor()
 {
-	SetColor(255, 255, 255);
+	VSetColor(255, 255, 255);
 }
 
 void GfxImage::VSetAlpha(byte alpha)

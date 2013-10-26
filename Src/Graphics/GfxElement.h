@@ -9,7 +9,8 @@ class GfxElement
 {
 	protected :
 	
-		SDL_Rect m_position;
+		SDL_Rect  m_dimension;
+		SDL_Color m_color;
 
 		int m_layer;
 		byte m_alpha;
@@ -30,7 +31,10 @@ class GfxElement
 		void SetPosition(const SDL_Rect &pos);
 		void Translate(int deltaX, int deltaY);
 		void Translate(const SDL_Rect &deltaPos);
-		const SDL_Rect& GetPosition() const;
+		const SDL_Rect& GetDimension() const;
+		
+		virtual void VSetColor(byte r, byte g, byte b);
+		SDL_Color GetColor() const{ return m_color; }
 		
 		//Alpha blending methods
 		virtual void VSetAlpha(byte alpha){ m_alpha = alpha; }

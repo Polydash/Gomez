@@ -12,7 +12,6 @@ class GfxImage : public GfxElement
 	
 		SDL_Texture *m_pTexture;
 		SDL_Rect	 m_renderingPos;
-		SDL_Color	 m_color;
 		
 		std::string m_fileName;
 		
@@ -33,9 +32,8 @@ class GfxImage : public GfxElement
 		void SetScale(float scale){ m_scale = scale; }
 		float GetScale() const{ return m_scale; }
 		
-		void SetColor(byte r, byte g, byte b);
+		virtual void VSetColor(byte r, byte g, byte b);
 		void ResetColor();
-		SDL_Color GetColor() const{ return m_color; }
 		
 		virtual void VSetAlpha(byte alpha);
 		
