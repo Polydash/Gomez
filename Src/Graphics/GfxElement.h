@@ -2,8 +2,14 @@
 #define GFXELEMENT_H
 
 #include <SDL2/SDL.h>
+#include <tr1/memory>
+using std::tr1::shared_ptr;
 
 #include "../GameStd.h"
+
+class GfxElement;
+
+typedef shared_ptr<GfxElement> GfxElementSharedPtr;
 
 class GfxElement
 {

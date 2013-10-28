@@ -1,7 +1,6 @@
 #include <iostream>
 
 #include "EventManager.h"
-#include "Events.h"
 #include "../GameStd.h"
 
 EventManager* EventManager::s_pInstance = NULL;

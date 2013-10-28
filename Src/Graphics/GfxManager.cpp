@@ -54,15 +54,12 @@ void GfxManager::Clear()
 {
 	GfxElementList::iterator i;
 	for(i = m_gfxElements.begin(); i != m_gfxElements.end(); i++)
-	{
-		delete (*i);
-		(*i) = NULL;
-	}
+		(*i).reset();
 	
 	m_gfxElements.clear();
 }
 
-void GfxManager::AddElement(GfxElement *pElement)
+void GfxManager::AddElement(GfxElementSharedPtr pElement)
 {
 	int layer = pElement->GetLayer();
 	
@@ -76,14 +73,14 @@ void GfxManager::AddElement(GfxElement *pElement)
 	m_gfxElements.insert(i, pElement);
 }
 
-void GfxManager::RemoveElement(GfxElement *pElement)
+void GfxManager::RemoveElement(GfxElementSharedPtr pElement)
 {
 	GfxElementList::iterator i;
 	for(i = m_gfxElements.begin(); i != m_gfxElements.end(); i++)
 	{
 		if((*i) == pElement)
 		{
-			delete (*i);
+			(*i).reset();
 			m_gfxElements.erase(i);
 			break;
 		}

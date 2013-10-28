@@ -9,7 +9,7 @@ using std::tr1::static_pointer_cast;
 using fastdelegate::MakeDelegate;
 
 enum eEventType{ ET_STATECHANGE,
-				 ET_FOCUSLOST,
+				 ET_LOSTFOCUS,
 				 EVENT_NB
 			   };
 			   
@@ -23,7 +23,6 @@ class IEvent
 public :
 
 	virtual eEventType VGetType() const = 0;
-
 };
 
 #endif

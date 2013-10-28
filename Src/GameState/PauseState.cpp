@@ -1,7 +1,7 @@
 #include "PauseState.h"
 #include "../GameStd.h"
 #include "../GameApp/SDLApp.h"
-#include "../Event/Events.h"
+#include "../Event/Events/Evt_StateChange.h"
 #include "../Event/EventManager.h"
 
 void PauseState::VUpdate(unsigned int elapsedTime)

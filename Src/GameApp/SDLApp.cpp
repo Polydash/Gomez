@@ -5,7 +5,7 @@
 #include "../GameApp/SDLApp.h"
 #include "../GameStd.h"
 #include "../Event/EventManager.h"
-#include "../Event/Events.h"
+#include "../Event/Events/Evt_LostFocus.h"
 #include "../GameState/GameStateManager.h"
 #include "../Resource/ResourceManager.h"
 #include "../Graphics/GfxManager.h"
@@ -144,7 +144,7 @@ void SDLApp::MainLoop()
 						break;
 						
 					case SDL_WINDOWEVENT_FOCUS_LOST :
-						shared_ptr<Evt_FocusLost> pEvent(new Evt_FocusLost());
+						shared_ptr<Evt_LostFocus> pEvent(new Evt_LostFocus());
 						EventManager::Get()->QueueEvent(pEvent);
 						break;
 				}

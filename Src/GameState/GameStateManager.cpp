@@ -1,7 +1,7 @@
 #include "GameStateManager.h"
 #include "../GameStd.h"
 #include "../Event/EventManager.h"
-#include "../Event/Events.h"
+#include "../Event/Events/Evt_StateChange.h"
 #include "MenuState.h"
 #include "IntroState.h"
 #include "PauseState.h"

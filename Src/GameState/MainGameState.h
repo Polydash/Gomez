@@ -16,7 +16,7 @@ public:
 												  
 	virtual eGameState VGetState() const { return GS_MAINGAME; }
 	
-	void FocusChangeDelegate(EventSharedPtr pEvent);
+	void LostFocusDelegate(EventSharedPtr pEvent);
 };
 
 #endif

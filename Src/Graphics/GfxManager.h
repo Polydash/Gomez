@@ -9,7 +9,7 @@ class GfxManager
 {
 private :
 
-	typedef std::list<GfxElement*> GfxElementList;
+	typedef std::list<GfxElementSharedPtr> GfxElementList;
 	
 	GfxElementList m_gfxElements;
 
@@ -29,13 +29,8 @@ public :
 	
 	void Clear();
 	
-	void AddElement(GfxElement* pElement);
-	void RemoveElement(GfxElement* pElement);
-	
-private :
-	
-	void AddElementDelegate(/*Evt_AddGfxElement*/);
-	void RemoveElementDelegate(/*Evt_RemoveGfxElement*/);
+	void AddElement(GfxElementSharedPtr pElement);
+	void RemoveElement(GfxElementSharedPtr pElement);
 };
 
 #endif

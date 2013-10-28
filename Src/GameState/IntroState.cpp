@@ -1,7 +1,7 @@
 #include "IntroState.h"
 #include "../GameStd.h"
 #include "../Event/EventManager.h"
-#include "../Event/Events.h"
+#include "../Event/Events/Evt_StateChange.h"
 #include "../Resource/ResourceManager.h"
 
 void IntroState::VUpdate(unsigned int elapsedTime)

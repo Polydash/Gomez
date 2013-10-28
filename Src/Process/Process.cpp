@@ -9,7 +9,7 @@ Process::~Process()
 {
 }
 
-void Process::Succeed()
+void Process::Success()
 {
 	m_state = PS_SUCCEEDED;
 	VOnSuccess();

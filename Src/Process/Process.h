@@ -26,7 +26,7 @@ public :
 	Process();
 	virtual ~Process();
 	
-	void Succeed();
+	void Success();
 	void Abort();
 	bool Init();
 	
