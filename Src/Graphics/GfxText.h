@@ -12,7 +12,7 @@ private :
 public :
 
 	GfxText(int layer, const std::string &fileName, const std::string &text);
-	GfxText(int layer, const std::string &fileName, const std::string &text, const SDL_Rect &position);
+	GfxText(int layer, const std::string &fileName, const std::string &text, float posX, float posY);
 	virtual ~GfxText();
 	
 	virtual bool VInit(SDL_Renderer *pRenderer);

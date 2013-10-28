@@ -11,17 +11,17 @@ class GfxImage : public GfxElement
 	protected :
 	
 		SDL_Texture *m_pTexture;
-		SDL_Rect	 m_renderingPos;
 		
 		std::string m_fileName;
 		
+		int	   m_width, m_height;
 		double m_angle;
 		float  m_scale;
 
 	public :
 	
 		GfxImage(int layer, const std::string &m_fileName);
-		GfxImage(int layer, const std::string &m_fileName, const SDL_Rect &position);
+		GfxImage(int layer, const std::string &m_fileName, float posX, float posY);
 		virtual ~GfxImage();
 		
 		virtual bool VInit(SDL_Renderer *pRenderer);
@@ -37,8 +37,7 @@ class GfxImage : public GfxElement
 		
 		virtual void VSetAlpha(byte alpha);
 		
-		//To complete
-		virtual bool VIsVisible() const{ return true; }
+		virtual bool VIsVisible() const;
 };
 
 #endif

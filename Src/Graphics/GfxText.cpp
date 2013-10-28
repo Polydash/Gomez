@@ -8,8 +8,8 @@ m_text(text)
 {
 }
 
-GfxText::GfxText(int layer, const std::string &fileName, const std::string &text, const SDL_Rect &position):
-GfxImage(layer, fileName, position),
+GfxText::GfxText(int layer, const std::string &fileName, const std::string &text, float posX, float posY):
+GfxImage(layer, fileName, posX, posY),
 m_text(text)
 {
 }
@@ -47,10 +47,7 @@ bool GfxText::VInit(SDL_Renderer *pRenderer)
 		return false;
 	}
 	
-	int w, h;
-	SDL_QueryTexture(m_pTexture, NULL, NULL, &w, &h);
-	m_dimension.w = w;
-	m_dimension.h = h;
+	SDL_QueryTexture(m_pTexture, NULL, NULL, &m_width, &m_height);
 	
 	if(SDL_SetTextureBlendMode(m_pTexture, SDL_BLENDMODE_BLEND) < 0)
 	{

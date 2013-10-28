@@ -1,15 +1,14 @@
 #include "GfxRect.h"
+#include "../GameApp/SDLApp.h"
 
 GfxRect::GfxRect(int layer):
 GfxElement(layer)
 {
 }
 
-GfxRect::GfxRect(int layer, const SDL_Rect &dimension):
-GfxElement(layer, dimension)
+GfxRect::GfxRect(int layer, float posX, float posY):
+GfxElement(layer, posX, posY)
 {
-	m_dimension.w = dimension.w;
-	m_dimension.h = dimension.h;
 }
 
 GfxRect::~GfxRect()
@@ -23,23 +22,39 @@ bool GfxRect::VInit(SDL_Renderer *pRenderer)
 
 void GfxRect::VRender(SDL_Renderer* pRenderer)
 {
+	SDL_Rect renderingPos;
+	
+	renderingPos.x = m_posX - (m_width / 2);
+	renderingPos.y = m_posY - (m_height / 2);
+	renderingPos.w = m_width;
+	renderingPos.h = m_height;
+	
 	SDL_SetRenderDrawColor(pRenderer, m_color.r, m_color.g, m_color.b, m_color.a);
-	SDL_RenderFillRect(pRenderer, &m_dimension);
+	SDL_RenderFillRect(pRenderer, &renderingPos);
 }
 
 bool GfxRect::VIsVisible() const
 {
+	int sWidth    = g_pApp->GetScreenWidth();
+	int sHeight   = g_pApp->GetScreenHeight();
+	
+	if(m_posX + m_width/2 < 0)
+		return false;
+		
+	if(m_posX - m_width/2 > sWidth)
+		return false;
+		
+	if(m_posY + m_height/2 < 0)
+		return false;
+		
+	if(m_posY - m_height/2 > sHeight)
+		return false;
+	
 	return true;
 }
 
-void GfxRect::SetDimension(int x, int y, int w, int h)
+void GfxRect::SetDimensions(float w, float h)
 {
-	m_dimension.x = x;
-	m_dimension.y = y;
-	m_dimension.w = w;
-	m_dimension.h = h;
-}
-void GfxRect::SetDimension(const SDL_Rect &dimension)
-{
-	m_dimension = dimension;
+	m_width = w;
+	m_height = h;
 }

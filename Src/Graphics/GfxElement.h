@@ -9,7 +9,7 @@ class GfxElement
 {
 	protected :
 	
-		SDL_Rect  m_dimension;
+		float m_posX, m_posY;
 		SDL_Color m_color;
 
 		int m_layer;
@@ -18,7 +18,7 @@ class GfxElement
 	public :
 		
 		GfxElement(int layer);
-		GfxElement(int layer, const SDL_Rect &position);
+		GfxElement(int layer, float posX, float posY);
 		virtual ~GfxElement();
 		
 		//Methods to override
@@ -27,11 +27,10 @@ class GfxElement
 		virtual bool VIsVisible() const = 0;
 		
 		//Position methods
-		void SetPosition(int x, int y);
-		void SetPosition(const SDL_Rect &pos);
-		void Translate(int deltaX, int deltaY);
-		void Translate(const SDL_Rect &deltaPos);
-		const SDL_Rect& GetDimension() const;
+		void SetPosition(float posX, float posY);
+		void Translate(float deltaX, float deltaY);
+		const float GetPosX() const{ return m_posX; }
+		const float GetPosY() const{ return m_posY; }
 		
 		virtual void VSetColor(byte r, byte g, byte b);
 		SDL_Color GetColor() const{ return m_color; }

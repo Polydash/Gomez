@@ -5,18 +5,23 @@
 
 class GfxRect : public GfxElement
 {
+	private :
+	
+		float m_width, m_height;
+	
 	public :
 	
 		GfxRect(int layer);
-		GfxRect(int layer, const SDL_Rect &dimension);
+		GfxRect(int layer, float posX, float posY);
 		~GfxRect();
 	
 		virtual bool VInit(SDL_Renderer *pRenderer);
 		virtual void VRender(SDL_Renderer* pRenderer);
 		virtual bool VIsVisible() const;
 		
-		void SetDimension(int x, int y, int w, int h);
-		void SetDimension(const SDL_Rect &dimension);
+		void SetDimensions(float w, float h);
+		float GetWidth() const{ return m_width; }
+		float GetHeight() const{ return m_height; }
 };
 
 #endif
