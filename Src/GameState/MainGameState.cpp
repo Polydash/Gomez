@@ -17,8 +17,7 @@ MainGameState::~MainGameState()
 
 void MainGameState::LostFocusDelegate(EventSharedPtr pEvent)
 {
-	shared_ptr<Evt_StateChange> pEventChange(new Evt_StateChange(GS_PAUSE));
-	EventManager::Get()->QueueEvent(pEventChange);
+	//Toggle Pause
 }
 
 void MainGameState::VUpdate(unsigned int elapsedTime)

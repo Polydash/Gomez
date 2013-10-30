@@ -1,10 +1,10 @@
 #ifndef MAINGAMESTATE_H
 #define MAINGAMESTATE_H
 
-#include "IGameState.h"
+#include "BaseGameState.h"
 #include "../Event/IEvent.h"
 
-class MainGameState : public IGameState
+class MainGameState : public BaseGameState
 {
 public:
 

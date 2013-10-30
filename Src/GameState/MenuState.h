@@ -1,9 +1,9 @@
 #ifndef MENUSTATE_H
 #define MENUSTATE_H
 
-#include "IGameState.h"
+#include "BaseGameState.h"
 
-class MenuState : public IGameState
+class MenuState : public BaseGameState
 {
 public:
 

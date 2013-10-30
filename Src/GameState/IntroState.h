@@ -1,9 +1,9 @@
 #ifndef INTROSTATE_H
 #define INTROSTATE_H
 
-#include "IGameState.h"
+#include "BaseGameState.h"
 
-class IntroState : public IGameState
+class IntroState : public BaseGameState
 {
 public:
 

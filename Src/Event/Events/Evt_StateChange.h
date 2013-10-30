@@ -2,7 +2,7 @@
 #define EVT_STATECHANGE_H
 
 #include "../IEvent.h"
-#include "../../GameState/IGameState.h"
+#include "../../GameState/BaseGameState.h"
 
 class Evt_StateChange : public IEvent
 {

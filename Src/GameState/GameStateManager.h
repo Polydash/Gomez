@@ -3,15 +3,14 @@
 
 #include <string>
 
-#include "IGameState.h"
+#include "BaseGameState.h"
 #include "../Event/IEvent.h"
 
 class GameStateManager
 {
 private:
 
-	IGameState *m_pCurrentState;
-	IGameState *m_pPausedState;
+	BaseGameState *m_pCurrentState;
 	
 public:
 
@@ -21,13 +20,13 @@ public:
 	bool Init();
 	void Update(unsigned int elapsedTime);
 	
+private :
+
 	void StateChangeDelegate(EventSharedPtr pEvent);
 	
-private :
-	
-	IGameState* CreateState(const eGameState gameState);
+	BaseGameState* CreateState(const eGameState gameState);
 	void ChangeState(const eGameState gameState);
-	void DestroyState(IGameState* &pState);
+	void DestroyState(BaseGameState* &pState);
 };
 
 #endif
