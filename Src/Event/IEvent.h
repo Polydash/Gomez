@@ -11,6 +11,7 @@ using fastdelegate::MakeDelegate;
 enum eEventType{ ET_STATECHANGE,
 				 ET_LOSTFOCUS,
 				 ET_ATTACHLOGICPROCESS,
+				 ET_MAINGAMEINPUT,
 				 EVENT_NB
 			   };
 			   

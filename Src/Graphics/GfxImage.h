@@ -6,6 +6,10 @@
 
 #include "GfxElement.h"
 
+class GfxImage;
+
+typedef shared_ptr<GfxImage> GfxImageSharedPtr;
+
 class GfxImage : public GfxElement
 {
 	protected :

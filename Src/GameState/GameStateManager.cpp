@@ -26,6 +26,11 @@ bool GameStateManager::Init()
 	return true;
 }
 
+void GameStateManager::OnInput(const SDL_Event &event)
+{
+	m_pCurrentState->VOnInput(event);
+}
+
 void GameStateManager::Update(unsigned int elapsedTime)
 {
 	m_pCurrentState->VUpdate(elapsedTime);

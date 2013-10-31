@@ -1,6 +1,7 @@
 #ifndef GAMESTATEMANAGER_H
 #define GAMESTATEMANAGER_H
 
+#include <SDL2/SDL.h>
 #include <string>
 
 #include "BaseGameState.h"
@@ -18,6 +19,7 @@ public:
 	~GameStateManager();
 	
 	bool Init();
+	void OnInput(const SDL_Event &event);
 	void Update(unsigned int elapsedTime);
 	
 private :

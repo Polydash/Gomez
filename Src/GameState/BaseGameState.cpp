@@ -29,6 +29,11 @@ bool BaseGameState::Init()
 	return true;
 }
 
+void BaseGameState::VUpdate(unsigned int elapsedTime)
+{
+	m_pProcessMgr->UpdateProcesses(elapsedTime);
+}
+
 void BaseGameState::AttachLogicProcessDelegate(EventSharedPtr pEvent)
 {
 	shared_ptr<Evt_AttachLogicProcess> pEvt = static_pointer_cast<Evt_AttachLogicProcess>(pEvent);

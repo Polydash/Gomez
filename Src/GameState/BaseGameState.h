@@ -1,6 +1,8 @@
 #ifndef BASEGAMESTATE_H
 #define BASEGAMESTATE_H
 
+#include <SDL2/SDL.h>
+
 #include "../Event/IEvent.h"
 
 class ProcessManager;
@@ -24,7 +26,8 @@ public :
 	
 	bool Init();
 	
-	virtual void VUpdate(unsigned int elapsedTime) = 0;
+	virtual void VOnInput(const SDL_Event &event){}
+	virtual void VUpdate(unsigned int elapsedTime);
 	virtual void VOnEnter(){}
 	virtual void VOnLeave(){}
 	

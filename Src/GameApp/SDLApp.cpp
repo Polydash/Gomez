@@ -156,7 +156,7 @@ void SDLApp::MainLoop()
 				{
 					case SDL_KEYDOWN :
 					case SDL_KEYUP :
-						//Queue GameInput Event
+						m_pGameStateMgr->OnInput(event);
 						break;
 						
 					default :
@@ -167,7 +167,7 @@ void SDLApp::MainLoop()
 		
 		//Run game if not minimized
 		if(!bIsMinimized)
-		{	
+		{			
 			EventManager::Get()->Update();
 			m_pGameStateMgr->Update(elapsedTime);
 			m_pGfxMgr->PreRender();
@@ -180,6 +180,11 @@ void SDLApp::MainLoop()
 GameStateManager* SDLApp::GetGameStateMgr() const
 {
 	return m_pGameStateMgr;
+}
+
+GfxManager* SDLApp::GetGfxMgr() const
+{
+	return m_pGfxMgr;
 }
 
 void SDLApp::LoadConfig()

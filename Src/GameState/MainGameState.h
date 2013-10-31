@@ -11,7 +11,7 @@ public:
 	MainGameState();
 	virtual ~MainGameState();
 	
-	virtual void VUpdate(unsigned int elapsedTime);
+	virtual void VOnInput(const SDL_Event &event);
 	virtual void VOnEnter();						
 												  
 	virtual eGameState VGetState() const { return GS_MAINGAME; }

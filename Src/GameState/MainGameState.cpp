@@ -1,7 +1,7 @@
 #include "MainGameState.h"
 #include "../GameStd.h"
 #include "../Event/EventManager.h"
-#include "../Event/Events/Evt_StateChange.h"
+#include "../Event/Events/Evt_MainGameInput.h"
 #include "../Event/Events/Evt_LostFocus.h"
 #include "../Resource/ResourceManager.h"
 
@@ -20,8 +20,39 @@ void MainGameState::LostFocusDelegate(EventSharedPtr pEvent)
 	//Toggle Pause
 }
 
-void MainGameState::VUpdate(unsigned int elapsedTime)
-{ 
+void MainGameState::VOnInput(const SDL_Event &event)
+{
+	//Possibly send some input to UI
+	
+	if(event.type == SDL_KEYDOWN)
+	{
+		shared_ptr<Evt_MainGameInput> pInput;
+		switch(event.key.keysym.sym)
+		{
+			case SDLK_LEFT :
+				pInput.reset(new Evt_MainGameInput(GI_MOVELEFT));
+				EventManager::Get()->QueueEvent(pInput);
+				break;
+				
+			case SDLK_RIGHT :
+				pInput.reset(new Evt_MainGameInput(GI_MOVERIGHT));
+				EventManager::Get()->QueueEvent(pInput);
+				break;
+				
+			case SDLK_DOWN : 
+				pInput.reset(new Evt_MainGameInput(GI_DROP));
+				EventManager::Get()->QueueEvent(pInput);
+				break;
+				
+			case SDLK_UP :
+				pInput.reset(new Evt_MainGameInput(GI_ROTATE));
+				EventManager::Get()->QueueEvent(pInput);
+				break;
+				
+			default :
+				break;
+		}
+	}
 }
 
 void MainGameState::VOnEnter()
