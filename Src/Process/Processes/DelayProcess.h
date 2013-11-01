@@ -15,8 +15,6 @@ public:
 	DelayProcess(unsigned long timeToDelay);
 	~DelayProcess();
 
-protected:
-
 	virtual void VUpdate(unsigned int elapsedTime);
 };
 

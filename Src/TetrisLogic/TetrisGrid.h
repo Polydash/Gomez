@@ -26,6 +26,9 @@ class TetrisGrid
 		void RemoveBlock(int i, int j);
 		TetrisBlock* GetBlock(int i, int j) const;
 		
+		float GetSpawnPosX() const;
+		float GetSpawnPosY() const;
+		
 	private :
 	
 		void AllocateBlocksArray();

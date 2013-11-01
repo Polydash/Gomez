@@ -4,8 +4,14 @@
 #include "BaseGameState.h"
 #include "../Event/IEvent.h"
 
+class TetrisGrid;
+
 class MainGameState : public BaseGameState
 {
+private :
+
+	TetrisGrid* m_pTetrisGrid;
+	
 public:
 
 	MainGameState();

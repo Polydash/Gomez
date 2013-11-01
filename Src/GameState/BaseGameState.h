@@ -4,6 +4,7 @@
 #include <SDL2/SDL.h>
 
 #include "../Event/IEvent.h"
+#include "../Process/Process.h"
 
 class ProcessManager;
 
@@ -33,10 +34,13 @@ public :
 	
 	virtual eGameState VGetState() const = 0;
 	
+protected :
+
+	void AttachLogicProcess(ProcessSharedPtr pProcess);
+	
 private :
 
 	void AttachLogicProcessDelegate(EventSharedPtr pEvent);
-
 	void RegisterEvents();
 	void UnregisterEvents();
 };

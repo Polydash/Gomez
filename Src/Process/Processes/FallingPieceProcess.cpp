@@ -1,0 +1,61 @@
+#include "FallingPieceProcess.h"
+#include "../../GameStd.h"
+#include "../../Event/EventManager.h"
+#include "../../Event/Events/Evt_MainGameInput.h"
+
+FallingPieceProcess::FallingPieceProcess()
+{
+}
+
+FallingPieceProcess::~FallingPieceProcess()
+{
+	UnregisterEvents();
+}
+
+bool FallingPieceProcess::VOnInit()
+{
+	RegisterEvents();
+	return true;
+}
+
+void FallingPieceProcess::VUpdate(unsigned int elapsedTime)
+{
+}
+
+void FallingPieceProcess::MainGameInputDelegate(EventSharedPtr pEvent)
+{
+	shared_ptr<Evt_MainGameInput> pEvt = static_pointer_cast<Evt_MainGameInput>(pEvent);
+	eGameInput input = pEvt->GetInput();
+	
+	switch(input)
+	{
+		case GI_MOVELEFT :
+			INFO("Move left");
+			break;
+			
+		case GI_MOVERIGHT :
+			INFO("Move right");
+			break;
+			
+		case GI_DROP :
+			INFO("Dropped");
+			break;
+			
+		case GI_ROTATE :
+			INFO("Rotation");
+			break;
+			
+		default :
+			break;
+	}
+}
+
+void FallingPieceProcess::RegisterEvents()
+{
+	EventManager::Get()->AddListener(MakeDelegate(this, &FallingPieceProcess::MainGameInputDelegate), ET_MAINGAMEINPUT);
+}
+
+void FallingPieceProcess::UnregisterEvents()
+{
+	EventManager::Get()->RemoveListener(MakeDelegate(this, &FallingPieceProcess::MainGameInputDelegate), ET_MAINGAMEINPUT);
+}

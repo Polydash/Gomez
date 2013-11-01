@@ -4,8 +4,11 @@
 #include "../Event/Events/Evt_MainGameInput.h"
 #include "../Event/Events/Evt_LostFocus.h"
 #include "../Resource/ResourceManager.h"
+#include "../Process/Processes/FallingPieceProcess.h"
+#include "../TetrisLogic/TetrisGrid.h"
 
-MainGameState::MainGameState()
+MainGameState::MainGameState():
+m_pTetrisGrid(NULL)
 {
 	EventManager::Get()->AddListener(MakeDelegate(this, &MainGameState::LostFocusDelegate), ET_LOSTFOCUS);
 }
@@ -13,6 +16,9 @@ MainGameState::MainGameState()
 MainGameState::~MainGameState()
 {
 	EventManager::Get()->RemoveListener(MakeDelegate(this, &MainGameState::LostFocusDelegate), ET_LOSTFOCUS);
+
+	if(m_pTetrisGrid)
+		SAFE_DELETE(m_pTetrisGrid);
 }
 
 void MainGameState::LostFocusDelegate(EventSharedPtr pEvent)
@@ -60,4 +66,9 @@ void MainGameState::VOnEnter()
 	INFO("Entering MAINGAME state");
 	LOG("Entering MAINGAME state");
 	ResourceManager::Get()->Clear();
+	
+	m_pTetrisGrid = new TetrisGrid(10, 20, 60, 60);
+	
+	ProcessSharedPtr pProcess = ProcessSharedPtr(new FallingPieceProcess());
+	AttachLogicProcess(pProcess);
 }

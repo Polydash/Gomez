@@ -72,6 +72,17 @@ TetrisBlock* TetrisGrid::GetBlock(int i, int j) const
 	return m_pBlocksArray[j*m_width + i];
 }
 
+float TetrisGrid::GetSpawnPosX() const
+{
+	int block = (m_width - 1)/2;
+	return m_posX + (block + 0.5f)*TetrisPiece::s_pieceSize;
+}
+
+float TetrisGrid::GetSpawnPosY() const
+{
+	return m_posY + 2.5f*TetrisPiece::s_pieceSize;
+}
+
 void TetrisGrid::AllocateBlocksArray()
 {
 	m_pBlocksArray = new TetrisBlock*[m_width*m_height];

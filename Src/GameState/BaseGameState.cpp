@@ -37,7 +37,12 @@ void BaseGameState::VUpdate(unsigned int elapsedTime)
 void BaseGameState::AttachLogicProcessDelegate(EventSharedPtr pEvent)
 {
 	shared_ptr<Evt_AttachLogicProcess> pEvt = static_pointer_cast<Evt_AttachLogicProcess>(pEvent);
-	m_pProcessMgr->AttachProcess(pEvt->GetProcessPtr());
+	AttachLogicProcess(pEvt->GetProcessPtr());
+}
+
+void BaseGameState::AttachLogicProcess(ProcessSharedPtr pProcess)
+{
+	m_pProcessMgr->AttachProcess(pProcess);
 }
 
 void BaseGameState::RegisterEvents()
