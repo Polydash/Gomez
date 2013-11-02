@@ -2,8 +2,11 @@
 #include "../../GameStd.h"
 #include "../../Event/EventManager.h"
 #include "../../Event/Events/Evt_MainGameInput.h"
+#include "../../Event/Events/Evt_AttachLogicProcess.h"
 
-FallingPieceProcess::FallingPieceProcess()
+FallingPieceProcess::FallingPieceProcess(TetrisGrid *pGrid):
+m_pGrid(pGrid),
+m_pPiece(NULL)
 {
 }
 
@@ -14,7 +17,7 @@ FallingPieceProcess::~FallingPieceProcess()
 
 bool FallingPieceProcess::VOnInit()
 {
-	RegisterEvents();
+	RegisterEvents();	
 	return true;
 }
 
@@ -30,11 +33,11 @@ void FallingPieceProcess::MainGameInputDelegate(EventSharedPtr pEvent)
 	switch(input)
 	{
 		case GI_MOVELEFT :
-			INFO("Move left");
+			INFO("Moved left");
 			break;
 			
 		case GI_MOVERIGHT :
-			INFO("Move right");
+			INFO("Moved right");
 			break;
 			
 		case GI_DROP :
@@ -42,7 +45,7 @@ void FallingPieceProcess::MainGameInputDelegate(EventSharedPtr pEvent)
 			break;
 			
 		case GI_ROTATE :
-			INFO("Rotation");
+			INFO("Rotated");
 			break;
 			
 		default :

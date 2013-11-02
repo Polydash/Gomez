@@ -3,12 +3,18 @@
 
 #include "../Process.h"
 #include "../../Event/IEvent.h"
+#include "../../TetrisLogic/TetrisGrid.h"
 
 class FallingPieceProcess : public Process
 {
+private :
+	
+	TetrisGrid  *m_pGrid;
+	TetrisPiece *m_pPiece;
+	
 public :
 
-	FallingPieceProcess();
+	FallingPieceProcess(TetrisGrid *pGrid);
 	~FallingPieceProcess(); 
 
 	virtual bool VOnInit();

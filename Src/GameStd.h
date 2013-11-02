@@ -9,6 +9,9 @@
 /// Typedef allowing bytes use
 typedef unsigned char byte;
 
+/// Constant defining PI value
+#define PI 3.1415926535
+
 /**
  * SAFE_DELETE* macros
  * 

@@ -9,8 +9,8 @@ m_posX(posX),
 m_posY(posY)
 {
 	m_pGfxGrid = shared_ptr<GfxImage>(new GfxImage(1, "grid24.png"));
-	float posGridX = TetrisPiece::s_pieceSize*m_width/2 + m_posX;
-	float posGridY = TetrisPiece::s_pieceSize*m_height/2 + m_posY;
+	float posGridX = TetrisGfxBlock::s_pieceSize*m_width/2 + m_posX;
+	float posGridY = TetrisGfxBlock::s_pieceSize*m_height/2 + m_posY;
 	m_pGfxGrid->SetPosition(posGridX, posGridY);
 	g_pApp->GetGfxMgr()->AddElement(m_pGfxGrid);
 	m_pGfxGrid->VSetAlpha(40);
@@ -32,11 +32,11 @@ void TetrisGrid::AddBlock(int i, int j, ePieceType pieceType)
 		return;
 	}
 	
-	m_pBlocksArray[j*m_width + i] = new TetrisBlock(pieceType);
+	m_pBlocksArray[j*m_width + i] = new TetrisGfxBlock(0, pieceType);
 	
-	float posX = TetrisPiece::s_pieceSize*(i + 0.5f) + m_posX;
-	float posY = TetrisPiece::s_pieceSize*((m_height - 1) - j + 0.5f) + m_posY; 
-	m_pBlocksArray[j*m_width + i]->SetPosition(posX, posY); 
+	float posX = TetrisGfxBlock::s_pieceSize*(i + 0.5f) + m_posX;
+	float posY = TetrisGfxBlock::s_pieceSize*(j + 0.5f) + m_posY; 
+	m_pBlocksArray[j*m_width + i]->GetGfxImage()->SetPosition(posX, posY); 
 }
 
 void TetrisGrid::MoveBlock(int i1, int j1, int i2, int j2)
@@ -50,9 +50,9 @@ void TetrisGrid::MoveBlock(int i1, int j1, int i2, int j2)
 	m_pBlocksArray[j2*m_width + i2] = m_pBlocksArray[j1*m_width + i1];
 	m_pBlocksArray[j1*m_width + i1] = NULL;
 	
-	float posX = TetrisPiece::s_pieceSize*(i2 + 0.5f) + m_posX;
-	float posY = TetrisPiece::s_pieceSize*((m_height - 1) - j2 + 0.5f) + m_posY; 
-	m_pBlocksArray[j2*m_width + i2]->SetPosition(posX, posY);
+	float posX = TetrisGfxBlock::s_pieceSize*(i2 + 0.5f) + m_posX;
+	float posY = TetrisGfxBlock::s_pieceSize*(j2 + 0.5f) + m_posY; 
+	m_pBlocksArray[j2*m_width + i2]->GetGfxImage()->SetPosition(posX, posY);
 }
 
 void TetrisGrid::RemoveBlock(int i, int j)
@@ -67,25 +67,27 @@ void TetrisGrid::RemoveBlock(int i, int j)
 	m_pBlocksArray[j*m_width + i] = NULL;
 }
 
-TetrisBlock* TetrisGrid::GetBlock(int i, int j) const
+TetrisGfxBlock* TetrisGrid::GetBlock(int i, int j) const
 {
 	return m_pBlocksArray[j*m_width + i];
 }
 
-float TetrisGrid::GetSpawnPosX() const
+
+void TetrisGrid::InitPosition(TetrisPiece *pPiece)
 {
-	int block = (m_width - 1)/2;
-	return m_posX + (block + 0.5f)*TetrisPiece::s_pieceSize;
+	pPiece->InitPosition((m_width - 1)/2, 2);
 }
 
-float TetrisGrid::GetSpawnPosY() const
-{
-	return m_posY + 2.5f*TetrisPiece::s_pieceSize;
-}
+//~ void TetrisGrid::InitPosition(TetrisGfxBlock *pBlock)
+//~ {
+	//~ float posX = m_posX + (((m_width - 1)/2 + 0.5f)*TetrisGfxBlock::s_pieceSize);
+	//~ float posY = m_posY + 2.5f*TetrisGfxBlock::s_pieceSize;
+	//~ pBlock->GetGfxImage()->SetPosition(posX, posY);
+//~ }
 
 void TetrisGrid::AllocateBlocksArray()
 {
-	m_pBlocksArray = new TetrisBlock*[m_width*m_height];
+	m_pBlocksArray = new TetrisGfxBlock*[m_width*m_height];
 	for(int i=0; i<m_width*m_height; i++)
 		m_pBlocksArray[i] = NULL;
 }

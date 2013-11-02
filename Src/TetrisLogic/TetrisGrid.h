@@ -1,7 +1,7 @@
 #ifndef TETRISGRID_H
 #define TETRISGRID_H
 
-#include "TetrisBlock.h"
+#include "TetrisGfxBlock.h"
 #include "TetrisPiece.h"
 #include "../Graphics/GfxImage.h"
 
@@ -12,7 +12,7 @@ class TetrisGrid
 		const int m_width, m_height;
 		const int m_posX, m_posY;
 		
-		TetrisBlock** m_pBlocksArray;
+		TetrisGfxBlock** m_pBlocksArray;
 	
 		GfxImageSharedPtr m_pGfxGrid;
 		
@@ -24,10 +24,10 @@ class TetrisGrid
 		void AddBlock(int i, int j, ePieceType pieceType);
 		void MoveBlock(int i1, int j1, int i2, int j2);
 		void RemoveBlock(int i, int j);
-		TetrisBlock* GetBlock(int i, int j) const;
+		TetrisGfxBlock* GetBlock(int i, int j) const;
 		
-		float GetSpawnPosX() const;
-		float GetSpawnPosY() const;
+		void InitPosition(TetrisPiece *pPiece);
+		//void InitPosition(TetrisGfxBlock *pBlock);
 		
 	private :
 	
