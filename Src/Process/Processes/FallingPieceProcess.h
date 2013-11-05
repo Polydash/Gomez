@@ -4,6 +4,7 @@
 #include "../Process.h"
 #include "../../Event/IEvent.h"
 #include "../../TetrisLogic/TetrisGrid.h"
+#include "SmoothFollowProcess.h"
 
 class FallingPieceProcess : public Process
 {
@@ -11,6 +12,8 @@ private :
 	
 	TetrisGrid  *m_pGrid;
 	TetrisPiece *m_pPiece;
+	
+	shared_ptr<SmoothFollowProcess> m_pMoveProc;
 	
 public :
 
@@ -22,6 +25,9 @@ public :
 	
 private :
 
+	void SetPiece();
+	void SetMoveProc();
+	GfxImageSharedPtr SetImage(TetrisPiece *pPiece);
 	void MainGameInputDelegate(EventSharedPtr pEvent);
 	void RegisterEvents();
 	void UnregisterEvents();

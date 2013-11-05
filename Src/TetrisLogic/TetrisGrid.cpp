@@ -78,12 +78,12 @@ void TetrisGrid::InitPosition(TetrisPiece *pPiece)
 	pPiece->InitPosition((m_width - 1)/2, 2);
 }
 
-//~ void TetrisGrid::InitPosition(TetrisGfxBlock *pBlock)
-//~ {
-	//~ float posX = m_posX + (((m_width - 1)/2 + 0.5f)*TetrisGfxBlock::s_pieceSize);
-	//~ float posY = m_posY + 2.5f*TetrisGfxBlock::s_pieceSize;
-	//~ pBlock->GetGfxImage()->SetPosition(posX, posY);
-//~ }
+void TetrisGrid::InitPosition(GfxImageSharedPtr pImage)
+{
+	float posX = m_posX + (((m_width - 1)/2 + 0.5f)*TetrisGfxBlock::s_pieceSize);
+	float posY = m_posY + 2.5f*TetrisGfxBlock::s_pieceSize;
+	pImage->SetPosition(posX, posY);
+}
 
 void TetrisGrid::AllocateBlocksArray()
 {
