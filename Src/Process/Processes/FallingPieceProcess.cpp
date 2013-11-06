@@ -34,7 +34,7 @@ void FallingPieceProcess::VUpdate(unsigned int elapsedTime)
 
 void FallingPieceProcess::SetMoveProc()
 {
-	GfxImageSharedPtr pImage = SetImage(m_pPiece);
+	GfxImageSharedPtr pImage = GetImage(m_pPiece);
 	m_pMoveProc.reset(new SmoothFollowProcess(pImage, 0.01f));
 		
 	shared_ptr<Evt_AttachLogicProcess> pEvt;
@@ -44,30 +44,53 @@ void FallingPieceProcess::SetMoveProc()
 
 void FallingPieceProcess::SetPiece()
 {
-	m_pPiece = new TetrisPiece(PT_IBLOCK);
+	m_pPiece = new TetrisPiece(PT_SBLOCK);
 }
 
-GfxImageSharedPtr FallingPieceProcess::SetImage(TetrisPiece *pPiece)
+GfxImageSharedPtr FallingPieceProcess::GetImage(TetrisPiece *pPiece)
 {
 	ePieceType type = pPiece->GetPieceType();
-	byte r, g, b;
+	SDL_Color color;
 	GfxImageSharedPtr pImage;
+	
+	color = TetrisGfxBlock::GetColor(type);
 	
 	switch(type)
 	{
 		case PT_IBLOCK : 
 			pImage.reset(new GfxImage(0, "ipiece24.png"));
-			r = 0; g = 128; b = 255;
 			break;
 			
+		case PT_JBLOCK :
+			pImage.reset(new GfxImage(0, "jpiece24.png"));
+			break;
+			
+		case PT_TBLOCK :
+			pImage.reset(new GfxImage(0, "tpiece24.png"));
+			break;
+		
+		case PT_LBLOCK :
+			pImage.reset(new GfxImage(0, "lpiece24.png"));
+			break;
+		
+		case PT_ZBLOCK :
+			pImage.reset(new GfxImage(0, "zpiece24.png"));
+			break;
+		
+		case PT_OBLOCK :
+			pImage.reset(new GfxImage(0, "opiece24.png"));
+			break;
+			
+		case PT_SBLOCK :
+			pImage.reset(new GfxImage(0, "spiece24.png"));
+			break;
+		
 		default :
-			pImage.reset(new GfxImage(0, "block24.png"));
-			r = 255; g = 255; b = 255;
 			break;
 	}
 	
 	g_pApp->GetGfxMgr()->AddElement(pImage);
-	pImage->VSetColor(r, g, b);
+	pImage->VSetColor(color.r, color.g, color.b);
 	m_pGrid->InitPosition(pImage);
 	
 	return pImage;

@@ -27,7 +27,7 @@ private :
 
 	void SetPiece();
 	void SetMoveProc();
-	GfxImageSharedPtr SetImage(TetrisPiece *pPiece);
+	GfxImageSharedPtr GetImage(TetrisPiece *pPiece);
 	void MainGameInputDelegate(EventSharedPtr pEvent);
 	void RegisterEvents();
 	void UnregisterEvents();

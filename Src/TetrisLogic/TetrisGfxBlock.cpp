@@ -17,39 +17,50 @@ TetrisGfxBlock::~TetrisGfxBlock()
 	g_pApp->GetGfxMgr()->RemoveElement(m_pGfxImage);
 }
 
-void TetrisGfxBlock::SetColor(ePieceType pieceType)
+SDL_Color TetrisGfxBlock::GetColor(ePieceType pieceType)
 {
+	SDL_Color color;
+	color.r = 255; color.g = 255; color.b = 255;
+	
 	switch(pieceType)
 	{
 		case PT_IBLOCK :
-			m_pGfxImage->VSetColor(0, 128, 255);
+			color.r = 0; color.g = 128; color.b = 255;
 			break;
 			
 		case PT_JBLOCK :
-			m_pGfxImage->VSetColor(0, 0, 255);
+			color.r = 0; color.g = 0; color.b = 255;
 			break;
 		
 		case PT_TBLOCK :
-			m_pGfxImage->VSetColor(160, 45, 220);
+			color.r = 160; color.g = 45; color.b = 120;
 			break;
 			
 		case PT_LBLOCK :
-			m_pGfxImage->VSetColor(255, 140, 20);
+			color.r = 255; color.g = 140; color.b = 20;
 			break;
 			
 		case PT_ZBLOCK :
-			m_pGfxImage->VSetColor(255, 20, 20);
+			color.r = 255; color.g = 20; color.b = 20;
 			break;
 			
 		case PT_OBLOCK :
-			m_pGfxImage->VSetColor(255, 230, 20);
+			color.r = 255; color.g = 230; color.b = 20;
 			break;
 			
 		case PT_SBLOCK :
-			m_pGfxImage->VSetColor(0, 180, 45);
+			color.r = 0; color.g = 180; color.b = 45;
 			break;
 			
 		default :
 			break;
 	}
+	
+	return color;
+}
+
+void TetrisGfxBlock::SetColor(ePieceType pieceType)
+{
+	SDL_Color color = GetColor(pieceType);
+	m_pGfxImage->VSetColor(color.r, color.g, color.b);
 }

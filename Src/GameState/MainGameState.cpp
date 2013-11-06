@@ -30,7 +30,7 @@ void MainGameState::VOnInput(const SDL_Event &event)
 {
 	//Possibly send some input to UI
 	
-	if(event.type == SDL_KEYDOWN)
+	if(event.type == SDL_KEYDOWN && !event.key.repeat)
 	{
 		shared_ptr<Evt_MainGameInput> pInput;
 		switch(event.key.keysym.sym)

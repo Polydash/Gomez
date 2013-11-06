@@ -23,6 +23,7 @@ private :
 public :
 
 	static const int s_pieceSize;
+	static SDL_Color GetColor(ePieceType pieceType);
 
 	TetrisGfxBlock(int layer, ePieceType pieceType);
 	~TetrisGfxBlock();
