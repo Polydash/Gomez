@@ -27,7 +27,10 @@ class TetrisGrid
 		TetrisGfxBlock* GetBlock(int i, int j) const;
 		
 		void InitPosition(TetrisPiece *pPiece);
-		void InitPosition(GfxImageSharedPtr pImage);	
+		void InitPosition(GfxImageSharedPtr pImage);
+		
+		int GetWidth() const{ return m_width; }
+		int GetHeight() const{ return m_height; }	
 		
 	private :
 	

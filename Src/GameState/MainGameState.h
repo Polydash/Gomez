@@ -21,7 +21,7 @@ public:
 	virtual void VOnEnter();						
 												  
 	virtual eGameState VGetState() const { return GS_MAINGAME; }
-	
+
 	void LostFocusDelegate(EventSharedPtr pEvent);
 };
 

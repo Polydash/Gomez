@@ -27,6 +27,8 @@ void TetrisPiece::RotateRight()
 void TetrisPiece::RotateLeft()
 {
 	m_currentRotation = (m_currentRotation - 1) % 4;
+	if(m_currentRotation < 0)
+		m_currentRotation += 4;
 }
 
 void TetrisPiece::Move(int x, int y)

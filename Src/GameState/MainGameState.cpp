@@ -69,6 +69,6 @@ void MainGameState::VOnEnter()
 	
 	m_pTetrisGrid = new TetrisGrid(10, 20, 60, 60);
 	
-	ProcessSharedPtr pProcess = ProcessSharedPtr(new FallingPieceProcess(m_pTetrisGrid));
+	ProcessSharedPtr pProcess = ProcessSharedPtr(new FallingPieceProcess(m_pTetrisGrid, 2.0f));
 	AttachLogicProcess(pProcess);
 }

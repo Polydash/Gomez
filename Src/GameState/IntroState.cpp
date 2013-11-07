@@ -4,7 +4,7 @@
 #include "../Event/Events/Evt_StateChange.h"
 #include "../Resource/ResourceManager.h"
 
-void IntroState::VUpdate(unsigned int elapsedTime)
+void IntroState::VOnUpdate(unsigned int elapsedTime)
 {
 	//To remove
 	static unsigned int time = 0;

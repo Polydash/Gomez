@@ -65,3 +65,25 @@ void SmoothFollowProcess::AddAngle(double deltaAngle)
 {
 	m_angle += deltaAngle;
 }
+
+bool SmoothFollowProcess::IsMoving(float diff) const
+{
+	float diffX = m_posX - m_pImage->GetPosX();
+	float diffY = m_posY - m_pImage->GetPosY();
+	double diffAngle = m_angle - m_pImage->GetAngle();
+
+	if(fabs(diffX) > diff || fabs(diffY) > diff || fabs(diffAngle) > diff)
+		return true;
+		
+	return false;
+}
+
+void SmoothFollowProcess::VOnSuccess()
+{
+	ClearMove();
+}
+
+void SmoothFollowProcess::ClearMove()
+{
+	m_pImage->SetPosition(m_posX, m_posY);
+}

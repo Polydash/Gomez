@@ -58,10 +58,10 @@ void GfxImage::VRender(SDL_Renderer *pRenderer)
 {	
 	SDL_Rect renderingPos;
 	
-	renderingPos.x = m_posX - (m_width*m_scale / 2);
-	renderingPos.y = m_posY - (m_height*m_scale / 2);
-	renderingPos.w = m_width*m_scale;
-	renderingPos.h = m_height*m_scale;
+	renderingPos.x = round(m_posX - (m_width*m_scale / 2));
+	renderingPos.y = round(m_posY - (m_height*m_scale / 2));
+	renderingPos.w = round(m_width*m_scale);
+	renderingPos.h = round(m_height*m_scale);
 	
 	SDL_RenderCopyEx(pRenderer, m_pTexture, NULL, &renderingPos, m_angle, NULL, SDL_FLIP_NONE);
 }

@@ -4,7 +4,7 @@
 #include "../Event/EventManager.h"
 #include "../Resource/ResourceManager.h"
 
-void MenuState::VUpdate(unsigned int elapsedTime)
+void MenuState::VOnUpdate(unsigned int elapsedTime)
 { 
 	//To remove
 	static unsigned int time = 0;

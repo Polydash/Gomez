@@ -29,6 +29,7 @@ public :
 	
 	virtual void VOnInput(const SDL_Event &event){}
 	virtual void VUpdate(unsigned int elapsedTime);
+	virtual void VOnUpdate(unsigned int elapsedTime){}
 	virtual void VOnEnter(){}
 	virtual void VOnLeave(){}
 	

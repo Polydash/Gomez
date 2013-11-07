@@ -9,7 +9,8 @@ enum ePieceType{ PT_IBLOCK,
 				 PT_LBLOCK,
 				 PT_ZBLOCK,
 				 PT_OBLOCK,
-				 PT_SBLOCK
+				 PT_SBLOCK,
+				 PIECETYPE_NB
 			   };
 
 class TetrisGfxBlock

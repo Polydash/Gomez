@@ -26,6 +26,16 @@ public :
 	void Translate(float deltaX, float deltaY);
 	void SetAngle(double angle);
 	void AddAngle(double deltaAngle);
+	
+	bool IsMoving(float diff) const;
+
+protected :
+
+	void VOnSuccess();
+
+private :
+
+	void ClearMove();
 };
 
 #endif

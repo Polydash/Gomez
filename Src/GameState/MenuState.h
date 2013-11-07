@@ -10,7 +10,7 @@ public:
 	MenuState(){}
 	virtual ~MenuState(){}
 	
-	virtual void VUpdate(unsigned int elapsedTime);
+	virtual void VOnUpdate(unsigned int elapsedTime);
 	virtual void VOnEnter();						
 												  
 	virtual eGameState VGetState() const { return GS_MENU; }

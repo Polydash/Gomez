@@ -1,6 +1,7 @@
 #include <tinyxml.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
+#include <time.h>
 
 #include "../GameApp/SDLApp.h"
 #include "../GameStd.h"
@@ -67,6 +68,8 @@ void SDLApp::Destroy()
 
 bool SDLApp::Init()
 {
+	srand(time(NULL));
+	
 	LOG("Game Configuration");
 	LoadConfig();
 	
