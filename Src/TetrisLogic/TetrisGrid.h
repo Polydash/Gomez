@@ -24,6 +24,7 @@ class TetrisGrid
 		void AddBlock(int i, int j, ePieceType pieceType);
 		void MoveBlock(int i1, int j1, int i2, int j2);
 		void RemoveBlock(int i, int j);
+		void LowerBlocks(int line);
 		TetrisGfxBlock* GetBlock(int i, int j) const;
 		
 		void InitPosition(TetrisPiece *pPiece);

@@ -67,6 +67,24 @@ void TetrisGrid::RemoveBlock(int i, int j)
 	m_pBlocksArray[j*m_width + i] = NULL;
 }
 
+void TetrisGrid::LowerBlocks(int line)
+{
+	for(int i=0; i<m_width; i++)
+	{
+		if(GetBlock(i, line))
+			RemoveBlock(i, line);
+	}
+	
+	for(int j=line; j>0; j--)
+	{
+		for(int i=0; i<m_width; i++)
+		{
+			if(GetBlock(i, j-1))
+				MoveBlock(i, j-1, i, j);
+		}
+	}
+}
+
 TetrisGfxBlock* TetrisGrid::GetBlock(int i, int j) const
 {
 	return m_pBlocksArray[j*m_width + i];

@@ -1,5 +1,6 @@
 #include "FallingPieceProcess.h"
 #include "DroppedPieceProcess.h"
+#include "DeleteLinesProcess.h"
 #include "../../GameStd.h"
 #include "../../GameApp/SDLApp.h"
 #include "../../Graphics/GfxManager.h"
@@ -141,7 +142,7 @@ void FallingPieceProcess::PlacePiece()
 	g_pApp->GetGfxMgr()->RemoveElement(m_pImage);
 	SAFE_DELETE(m_pPiece);
 	
-	ProcessSharedPtr pProc = ProcessSharedPtr(new FallingPieceProcess(m_pGrid, 2.0f));
+	ProcessSharedPtr pProc = ProcessSharedPtr(new DeleteLinesProcess(m_pGrid));
 	AttachChild(pProc);
 }
 
