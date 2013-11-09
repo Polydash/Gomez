@@ -46,7 +46,7 @@ private :
 	
 	//Init methods
 	void SetPiece();
-	void SetMoveProc();
+	void SetProc();
 	void SetImage(TetrisPiece *pPiece);
 	void RegisterEvents();
 	void UnregisterEvents();

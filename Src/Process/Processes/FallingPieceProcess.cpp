@@ -1,5 +1,6 @@
 #include "FallingPieceProcess.h"
 #include "DroppedPieceProcess.h"
+#include "SpawnAnimationProcess.h"
 #include "DeleteLinesProcess.h"
 #include "../../GameStd.h"
 #include "../../GameApp/SDLApp.h"
@@ -51,7 +52,7 @@ bool FallingPieceProcess::VOnInit()
 	RegisterEvents();
 	
 	SetPiece();
-	SetMoveProc();
+	SetProc();
 		
 	return true;
 }
@@ -153,13 +154,19 @@ void FallingPieceProcess::DropPiece()
 	AttachChild(pProc);
 }
 
-void FallingPieceProcess::SetMoveProc()
+void FallingPieceProcess::SetProc()
 {
 	SetImage(m_pPiece);
 	m_pMoveProc.reset(new SmoothFollowProcess(m_pImage, 0.01f));
-		
+	
 	shared_ptr<Evt_AttachLogicProcess> pEvt;
 	pEvt.reset(new Evt_AttachLogicProcess(m_pMoveProc));
+	EventManager::Get()->QueueEvent(pEvt);
+	
+	ProcessSharedPtr m_pSpawn;
+	m_pSpawn.reset(new SpawnAnimationProcess(m_pImage, 0.008f));
+	
+	pEvt.reset(new Evt_AttachLogicProcess(m_pSpawn));
 	EventManager::Get()->QueueEvent(pEvt);
 }
 
