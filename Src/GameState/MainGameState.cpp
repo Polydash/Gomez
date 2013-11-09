@@ -8,7 +8,10 @@
 #include "../TetrisLogic/TetrisGrid.h"
 
 MainGameState::MainGameState():
-m_pTetrisGrid(NULL)
+m_pTetrisGrid(NULL),
+m_moveRight(false),
+m_moveLeft(false),
+m_inputRepeat(0)
 {
 	EventManager::Get()->AddListener(MakeDelegate(this, &MainGameState::LostFocusDelegate), ET_LOSTFOCUS);
 }
@@ -36,11 +39,13 @@ void MainGameState::VOnInput(const SDL_Event &event)
 		switch(event.key.keysym.sym)
 		{
 			case SDLK_LEFT :
+				m_moveLeft = true;
 				pInput.reset(new Evt_MainGameInput(GI_MOVELEFT));
 				EventManager::Get()->QueueEvent(pInput);
 				break;
 				
 			case SDLK_RIGHT :
+				m_moveRight = true;
 				pInput.reset(new Evt_MainGameInput(GI_MOVERIGHT));
 				EventManager::Get()->QueueEvent(pInput);
 				break;
@@ -62,12 +67,53 @@ void MainGameState::VOnInput(const SDL_Event &event)
 	else if(event.type == SDL_KEYUP)
 	{
 		shared_ptr<Evt_MainGameInput> pInput;
-		if(event.key.keysym.sym == SDLK_DOWN)
+		switch(event.key.keysym.sym)
 		{
-			pInput.reset(new Evt_MainGameInput(GI_DROP, false));
-			EventManager::Get()->QueueEvent(pInput);
+			case SDLK_DOWN :
+				pInput.reset(new Evt_MainGameInput(GI_DROP, false));
+				EventManager::Get()->QueueEvent(pInput);
+				break;
+				
+			case SDLK_LEFT : 
+				m_moveLeft = false;
+				break;
+				
+			case SDLK_RIGHT :
+				m_moveRight = false;
+				break;
+				
+			default :
+				break;
 		}
 	}		
+}
+
+void MainGameState::VOnUpdate(unsigned int elapsedTime)
+{
+	if(m_moveLeft && !m_moveRight)
+	{
+		m_inputRepeat += elapsedTime;
+		if(m_inputRepeat > 150)
+		{
+			shared_ptr<Evt_MainGameInput> pInput;
+			pInput.reset(new Evt_MainGameInput(GI_MOVELEFT));
+			EventManager::Get()->QueueEvent(pInput);
+			m_inputRepeat = 0;
+		}
+	}
+	else if(m_moveRight && !m_moveLeft)
+	{
+		m_inputRepeat += elapsedTime;
+		if(m_inputRepeat > 150)
+		{
+			shared_ptr<Evt_MainGameInput> pInput;
+			pInput.reset(new Evt_MainGameInput(GI_MOVERIGHT));
+			EventManager::Get()->QueueEvent(pInput);
+			m_inputRepeat = 0;
+		}
+	}
+	else
+		m_inputRepeat = 0;
 }
 
 void MainGameState::VOnEnter()
