@@ -13,9 +13,10 @@ private :
 	TetrisGrid  *m_pGrid;
 	TetrisPiece *m_pPiece; 
 	
-	float m_speed;
-	bool  m_bIsDone;
-	bool  m_bIsDropped;
+	float 		 m_speed;
+	unsigned int m_timeCount;
+	bool  		 m_bIsDone;
+	bool  		 m_bIsDropped;
 	
 	GfxImageSharedPtr m_pImage;
 	shared_ptr<SmoothFollowProcess> m_pMoveProc;

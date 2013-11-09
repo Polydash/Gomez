@@ -12,6 +12,7 @@ FallingPieceProcess::FallingPieceProcess(TetrisGrid *pGrid, float speed):
 m_pGrid(pGrid),
 m_pPiece(NULL),
 m_speed(speed),
+m_timeCount(0),
 m_bIsDone(false),
 m_bIsDropped(false)
 {
@@ -23,13 +24,11 @@ FallingPieceProcess::~FallingPieceProcess()
 }
 
 void FallingPieceProcess::VUpdate(unsigned int elapsedTime)
-{
-	static unsigned int time = 0;
-	
-	time += elapsedTime*m_speed;
-	if(time >= 1000 && !m_bIsDone)
+{	
+	m_timeCount += elapsedTime*m_speed;
+	if(m_timeCount >= 1000 && !m_bIsDone)
 	{
-		time = 0;
+		m_timeCount = 0;
 		if(!Lower())
 			m_bIsDone = true;
 	}
@@ -225,23 +224,19 @@ void FallingPieceProcess::MainGameInputDelegate(EventSharedPtr pEvent)
 		switch(input)
 		{
 			case GI_MOVELEFT :
-				INFO("Moved left");
 				Move(false);
 				break;
 				
 			case GI_MOVERIGHT :
-				INFO("Moved right");
 				Move(true);
 				break;
 				
 			case GI_DROP :
-				INFO("Dropped");
 				m_bIsDone = true;
 				m_bIsDropped = true;
 				break;
 				
 			case GI_ROTATE :
-				INFO("Rotated");
 				Rotate();
 				break;
 				

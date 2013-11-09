@@ -26,7 +26,8 @@ void DroppedPieceProcess::SetVelocity(float accel, float maxSpeed)
 
 void DroppedPieceProcess::VUpdate(unsigned int elapsedTime)
 {
-	float diff = fabs(m_pImage->GetPosY() - ((m_pPiece->GetCenterY()+0.5f)*TetrisGfxBlock::s_pieceSize + 60));
+	int offsetY = m_pGrid->GetOffsetY();
+	float diff = fabs(m_pImage->GetPosY() - ((m_pPiece->GetCenterY()+0.5f)*TetrisGfxBlock::s_pieceSize + offsetY));
 	
 	m_speed += m_accel;
 	
@@ -36,7 +37,7 @@ void DroppedPieceProcess::VUpdate(unsigned int elapsedTime)
 	if(diff < m_speed)
 	{
 		float x = m_pImage->GetPosX();
-		m_pImage->SetPosition(x, (m_pPiece->GetCenterY()+0.5f)*TetrisGfxBlock::s_pieceSize + 60);
+		m_pImage->SetPosition(x, (m_pPiece->GetCenterY()+0.5f)*TetrisGfxBlock::s_pieceSize + offsetY);
 		Success();
 	}
 	else

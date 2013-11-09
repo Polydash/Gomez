@@ -31,7 +31,9 @@ class TetrisGrid
 		void InitPosition(GfxImageSharedPtr pImage);
 		
 		int GetWidth() const{ return m_width; }
-		int GetHeight() const{ return m_height; }	
+		int GetHeight() const{ return m_height; }
+		int GetOffsetX() const{ return m_posX; }
+		int GetOffsetY() const{ return m_posY; }	
 		
 	private :
 	
