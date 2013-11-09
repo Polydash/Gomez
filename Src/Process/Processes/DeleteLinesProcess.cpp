@@ -14,7 +14,7 @@ DeleteLinesProcess::~DeleteLinesProcess()
 void DeleteLinesProcess::VUpdate(unsigned int elapsedTime)
 {
 	static unsigned int time = 0;
-	time += elapsedTime;
+	time += m_speed*elapsedTime;
 	
 	if(time > 100)
 	{
@@ -56,9 +56,7 @@ bool DeleteLinesProcess::VOnInit()
 void DeleteLinesProcess::VOnSuccess()
 {
 	for(unsigned int i=0; i<m_linesToDelete.size(); i++)
-	{
 		m_pGrid->LowerBlocks(m_linesToDelete[i] + i);
-	}
 	
 	ProcessSharedPtr pProc = ProcessSharedPtr(new FallingPieceProcess(m_pGrid, 2.0f));
 	AttachChild(pProc);
