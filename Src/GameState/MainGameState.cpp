@@ -59,6 +59,15 @@ void MainGameState::VOnInput(const SDL_Event &event)
 				break;
 		}
 	}
+	else if(event.type == SDL_KEYUP)
+	{
+		shared_ptr<Evt_MainGameInput> pInput;
+		if(event.key.keysym.sym == SDLK_DOWN)
+		{
+			pInput.reset(new Evt_MainGameInput(GI_DROP, false));
+			EventManager::Get()->QueueEvent(pInput);
+		}
+	}		
 }
 
 void MainGameState::VOnEnter()

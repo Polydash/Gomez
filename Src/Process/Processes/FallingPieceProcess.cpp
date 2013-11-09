@@ -25,7 +25,12 @@ FallingPieceProcess::~FallingPieceProcess()
 
 void FallingPieceProcess::VUpdate(unsigned int elapsedTime)
 {	
-	m_timeCount += elapsedTime*m_speed;
+	if(m_bIsDropped)
+		m_timeCount += elapsedTime*m_speed*15;
+	else
+		m_timeCount += elapsedTime*m_speed;
+	
+	
 	if(m_timeCount >= 1000 && !m_bIsDone)
 	{
 		m_timeCount = 0;
@@ -36,10 +41,7 @@ void FallingPieceProcess::VUpdate(unsigned int elapsedTime)
 	if(m_bIsDone && !m_pMoveProc->IsMoving(0.5f))
 	{
 		m_pMoveProc->Success();
-		if(!m_bIsDropped)
-			PlacePiece();
-		else
-			DropPiece();
+		PlacePiece();
 		Success();
 	}
 }
@@ -232,8 +234,10 @@ void FallingPieceProcess::MainGameInputDelegate(EventSharedPtr pEvent)
 				break;
 				
 			case GI_DROP :
-				m_bIsDone = true;
-				m_bIsDropped = true;
+				if(pEvt->GetPressed())
+					m_bIsDropped = true;
+				else
+					m_bIsDropped = false;
 				break;
 				
 			case GI_ROTATE :
