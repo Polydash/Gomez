@@ -118,6 +118,6 @@ void DroppedPieceProcess::PlacePiece()
 	g_pApp->GetGfxMgr()->RemoveElement(m_pImage);
 	SAFE_DELETE(m_pPiece);
 	
-	ProcessSharedPtr pProc = ProcessSharedPtr(new DeleteLinesProcess(m_pGrid));
+	ProcessSharedPtr pProc = ProcessSharedPtr(new DeleteLinesProcess(m_pGrid, 0.01));
 	AttachChild(pProc);
 }
