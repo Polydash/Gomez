@@ -1,5 +1,6 @@
 #include "DeleteLinesProcess.h"
 #include "FallingPieceProcess.h"
+#include "FallingLinesProcess.h"
 #include "DisappearAnimationProcess.h"
 #include "../../GameApp/SDLApp.h"
 #include "../../Event/EventManager.h"
@@ -7,7 +8,8 @@
 
 DeleteLinesProcess::DeleteLinesProcess(TetrisGrid *pGrid, float speed):
 m_pGrid(pGrid),
-m_speed(speed)
+m_speed(speed),
+m_time(0)
 {
 }
 
@@ -17,12 +19,11 @@ DeleteLinesProcess::~DeleteLinesProcess()
 
 void DeleteLinesProcess::VUpdate(unsigned int elapsedTime)
 {
-	static unsigned int time = 0;
-	time += m_speed*elapsedTime;
+	m_time += m_speed*elapsedTime;
 	
-	if(time > 150)
+	if(m_time > 125)
 	{
-		time = 0;
+		m_time = 0;
 		for(unsigned int i=0; i<m_linesToDelete.size(); i++)
 		{
 			if(m_leftIt >= 0)
@@ -62,10 +63,18 @@ bool DeleteLinesProcess::VOnInit()
 
 void DeleteLinesProcess::VOnSuccess()
 {
-	for(unsigned int i=0; i<m_linesToDelete.size(); i++)
-		m_pGrid->LowerBlocks(m_linesToDelete[i] + i);
+	for(unsigned int j=0; j<m_linesToDelete.size(); j++)
+	{
+		for(int i=0; i<m_pGrid->GetWidth()-1; i++)
+			m_pGrid->RemoveBlock(i, m_linesToDelete[j]);
+	}
 	
-	ProcessSharedPtr pProc = ProcessSharedPtr(new FallingPieceProcess(m_pGrid, 2.0f));
+	ProcessSharedPtr pProc;
+	if(m_linesToDelete.size() > 0)
+		pProc.reset(new FallingLinesProcess(m_pGrid, 0.01f, m_linesToDelete));
+	else
+		pProc.reset(new FallingPieceProcess(m_pGrid, 2.0f));
+	
 	AttachChild(pProc);
 }
 

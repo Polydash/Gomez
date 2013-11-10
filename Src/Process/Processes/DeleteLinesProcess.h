@@ -10,8 +10,10 @@ class DeleteLinesProcess : public Process
 private :
 
 	TetrisGrid *m_pGrid;
+	
 	float m_speed;
 	int m_leftIt, m_rightIt;
+	unsigned int m_time;
 	
 	std::vector<int> m_linesToDelete;
 	

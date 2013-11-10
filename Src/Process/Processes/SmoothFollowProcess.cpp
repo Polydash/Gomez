@@ -1,8 +1,9 @@
 #include "SmoothFollowProcess.h"
 
-SmoothFollowProcess::SmoothFollowProcess(GfxImageSharedPtr pImage, float speed):
+SmoothFollowProcess::SmoothFollowProcess(GfxImageSharedPtr pImage, float speed, bool endIfStatic):
 m_pImage(pImage),
-m_speed(speed)
+m_speed(speed),
+m_bEndIfStatic(endIfStatic)
 {
 	m_posX  = pImage->GetPosX();
 	m_posY  = pImage->GetPosY();
@@ -42,6 +43,9 @@ void SmoothFollowProcess::VUpdate(unsigned int elapsedTime)
 		deltaAngle = diffAngle;
 		
 	m_pImage->SetAngle(m_pImage->GetAngle() + deltaAngle);
+	
+	if(!IsMoving(0.5f) && m_bEndIfStatic)
+		Success();
 }
 
 void SmoothFollowProcess::SetPosition(float posX, float posY)

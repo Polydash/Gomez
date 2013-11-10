@@ -39,7 +39,7 @@ void FallingPieceProcess::VUpdate(unsigned int elapsedTime)
 			m_bIsDone = true;
 	}
 	
-	if(m_bIsDone && !m_pMoveProc->IsMoving(0.5f))
+	if(m_bIsDone && !m_pMoveProc->IsMoving(1.0f))
 	{
 		m_pMoveProc->Success();
 		PlacePiece();

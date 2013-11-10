@@ -14,10 +14,11 @@ private :
 	float m_speed;
 	
 	double m_angle;
+	bool m_bEndIfStatic;
 
 public :
 
-	SmoothFollowProcess(GfxImageSharedPtr pImage, float speed);
+	SmoothFollowProcess(GfxImageSharedPtr pImage, float speed, bool endIfStatic = false);
 	~SmoothFollowProcess();
 	
 	virtual void VUpdate(unsigned int elapsedTime);
