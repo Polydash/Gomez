@@ -15,6 +15,8 @@ private :
 	
 	std::vector<int> m_linesToDelete;
 	
+	ProcessSharedPtr m_pLastAnimProc[2];
+	
 public :
 
 	DeleteLinesProcess(TetrisGrid *pGrid, float speed);
@@ -30,6 +32,7 @@ protected :
 private :
 
 	bool IsLineFull(int i) const;
+	void AttachAnimationProc(int i, int j);
 };
 	
 #endif

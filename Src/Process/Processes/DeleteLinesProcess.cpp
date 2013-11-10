@@ -1,5 +1,9 @@
 #include "DeleteLinesProcess.h"
 #include "FallingPieceProcess.h"
+#include "DisappearAnimationProcess.h"
+#include "../../GameApp/SDLApp.h"
+#include "../../Event/EventManager.h"
+#include "../../Event/Events/Evt_AttachLogicProcess.h"
 
 DeleteLinesProcess::DeleteLinesProcess(TetrisGrid *pGrid, float speed):
 m_pGrid(pGrid),
@@ -16,22 +20,25 @@ void DeleteLinesProcess::VUpdate(unsigned int elapsedTime)
 	static unsigned int time = 0;
 	time += m_speed*elapsedTime;
 	
-	if(time > 100)
+	if(time > 150)
 	{
 		time = 0;
 		for(unsigned int i=0; i<m_linesToDelete.size(); i++)
 		{
 			if(m_leftIt >= 0)
-				m_pGrid->RemoveBlock(m_leftIt, m_linesToDelete[i]);
+				AttachAnimationProc(m_leftIt, m_linesToDelete[i]);
 			
 			if(m_rightIt <= m_pGrid->GetWidth()-1)
-				m_pGrid->RemoveBlock(m_rightIt, m_linesToDelete[i]);
+				AttachAnimationProc(m_rightIt, m_linesToDelete[i]);
 		}
 		
 		m_leftIt--;
 		m_rightIt++;
-		
-		if(m_leftIt < 0 && m_rightIt > m_pGrid->GetWidth() - 1)
+	}
+	
+	if(m_pLastAnimProc[0] && m_pLastAnimProc[1])
+	{
+		if(m_pLastAnimProc[0]->IsDone() && m_pLastAnimProc[1]->IsDone())
 			Success();
 	}
 	
@@ -71,4 +78,25 @@ bool DeleteLinesProcess::IsLineFull(int j) const
 	}
 	
 	return true;
+}
+
+void DeleteLinesProcess::AttachAnimationProc(int i, int j)
+{
+	GfxImageSharedPtr pImage = m_pGrid->GetBlock(i, j)->GetGfxImage();
+	
+	ProcessSharedPtr pProc;
+	shared_ptr<Evt_AttachLogicProcess> pEvt;
+	
+	pProc.reset(new DisappearAnimationProcess(pImage, 1.0f));
+	pEvt.reset(new Evt_AttachLogicProcess(pProc));
+	EventManager::Get()->QueueEvent(pEvt);
+	
+	if(i == 0)
+	{
+		m_pLastAnimProc[0] = pProc;
+	}
+	else if(i == m_pGrid->GetWidth() - 1)
+	{
+		m_pLastAnimProc[1] = pProc;
+	}
 }
