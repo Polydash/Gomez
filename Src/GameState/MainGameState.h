@@ -3,17 +3,22 @@
 
 #include "BaseGameState.h"
 #include "../Event/IEvent.h"
+#include "../Graphics/GfxImage.h"
 
 class TetrisGrid;
+class TetrisScore;
 
 class MainGameState : public BaseGameState
 {
 private :
 
-	TetrisGrid* m_pTetrisGrid;
+	TetrisGrid*  m_pTetrisGrid;
+	TetrisScore* m_pTetrisScore;
 	
 	bool m_moveRight, m_moveLeft;
 	unsigned int m_inputRepeat;
+	
+	GfxImageSharedPtr m_pBackgroundImage;
 	
 public:
 

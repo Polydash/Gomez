@@ -3,6 +3,10 @@
 
 #include "GfxImage.h"
 
+class GfxText;
+
+typedef shared_ptr<GfxText> GfxTextSharedPtr;
+
 class GfxText : public GfxImage
 {
 private :

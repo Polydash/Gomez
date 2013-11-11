@@ -12,6 +12,7 @@ enum eEventType{ ET_STATECHANGE,
 				 ET_LOSTFOCUS,
 				 ET_ATTACHLOGICPROCESS,
 				 ET_MAINGAMEINPUT,
+				 ET_ADDSCORE,
 				 EVENT_NB
 			   };
 			   

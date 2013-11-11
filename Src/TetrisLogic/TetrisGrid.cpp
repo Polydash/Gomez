@@ -8,7 +8,7 @@ m_height(height),
 m_posX(posX),
 m_posY(posY)
 {
-	m_pGfxGrid = shared_ptr<GfxImage>(new GfxImage(1, "grid24.png"));
+	m_pGfxGrid = shared_ptr<GfxImage>(new GfxImage(2, "grid24.png"));
 	float posGridX = TetrisGfxBlock::s_pieceSize*m_width/2 + m_posX;
 	float posGridY = TetrisGfxBlock::s_pieceSize*m_height/2 + m_posY;
 	m_pGfxGrid->SetPosition(posGridX, posGridY);
@@ -32,7 +32,7 @@ void TetrisGrid::AddBlock(int i, int j, ePieceType pieceType)
 		return;
 	}
 	
-	m_pBlocksArray[j*m_width + i] = new TetrisGfxBlock(0, pieceType);
+	m_pBlocksArray[j*m_width + i] = new TetrisGfxBlock(1, pieceType);
 	
 	float posX = TetrisGfxBlock::s_pieceSize*(i + 0.5f) + m_posX;
 	float posY = TetrisGfxBlock::s_pieceSize*(j + 0.5f) + m_posY; 

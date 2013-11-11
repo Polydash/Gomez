@@ -4,6 +4,8 @@
 #include "../../GameApp/SDLApp.h"
 #include "../../Event/EventManager.h"
 #include "../../Event/Events/Evt_AttachLogicProcess.h"
+#include "../../Event/Events/Evt_AddScore.h"
+#include "../../TetrisLogic/TetrisScore.h"
 
 FallingLinesProcess::FallingLinesProcess(TetrisGrid *pGrid, float speed, const std::vector<int> &linesToDelete):
 m_pGrid(pGrid),
@@ -46,6 +48,13 @@ bool FallingLinesProcess::VOnInit()
 		{
 			AttachLineAnimProc(j, i+1);
 		}
+	}
+	
+	if(m_linesToDelete.size() > 0)
+	{
+		EventSharedPtr pEvt;
+		pEvt.reset(new Evt_AddScore(TetrisScore::GetScoreValue(m_linesToDelete.size())));
+		EventManager::Get()->QueueEvent(pEvt);
 	}
 	
 	return true;

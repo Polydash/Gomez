@@ -1,14 +1,18 @@
 #include "MainGameState.h"
 #include "../GameStd.h"
+#include "../GameApp/SDLApp.h"
+#include "../Graphics/GfxManager.h"
 #include "../Event/EventManager.h"
 #include "../Event/Events/Evt_MainGameInput.h"
 #include "../Event/Events/Evt_LostFocus.h"
 #include "../Resource/ResourceManager.h"
 #include "../Process/Processes/FallingPieceProcess.h"
 #include "../TetrisLogic/TetrisGrid.h"
+#include "../TetrisLogic/TetrisScore.h"
 
 MainGameState::MainGameState():
 m_pTetrisGrid(NULL),
+m_pTetrisScore(NULL),
 m_moveRight(false),
 m_moveLeft(false),
 m_inputRepeat(0)
@@ -19,9 +23,11 @@ m_inputRepeat(0)
 MainGameState::~MainGameState()
 {
 	EventManager::Get()->RemoveListener(MakeDelegate(this, &MainGameState::LostFocusDelegate), ET_LOSTFOCUS);
-
-	if(m_pTetrisGrid)
-		SAFE_DELETE(m_pTetrisGrid);
+	
+	g_pApp->GetGfxMgr()->RemoveElement(m_pBackgroundImage);
+	
+	SAFE_DELETE(m_pTetrisScore);
+	SAFE_DELETE(m_pTetrisGrid);
 }
 
 void MainGameState::LostFocusDelegate(EventSharedPtr pEvent)
@@ -122,7 +128,12 @@ void MainGameState::VOnEnter()
 	LOG("Entering MAINGAME state");
 	ResourceManager::Get()->Clear();
 	
-	m_pTetrisGrid = new TetrisGrid(10, 20, 60, 60);
+	m_pTetrisGrid = new TetrisGrid(10, 20, g_pApp->GetScreenHeight()/10, g_pApp->GetScreenHeight()/10);
+	m_pTetrisScore = new TetrisScore(240, 150, 500, 60);
+	
+	m_pBackgroundImage.reset(new GfxImage(2, "background.png"));
+	g_pApp->GetGfxMgr()->AddElement(m_pBackgroundImage);
+	m_pBackgroundImage->SetPosition(g_pApp->GetScreenWidth()/2, g_pApp->GetScreenHeight()/2);
 	
 	ProcessSharedPtr pProcess = ProcessSharedPtr(new FallingPieceProcess(m_pTetrisGrid, 2.0f));
 	AttachLogicProcess(pProcess);

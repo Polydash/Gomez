@@ -35,7 +35,7 @@ protected :
 private :
 
 	//Gameplay methods
-	void Move(bool bMoveToRight);
+	bool Move(bool bMoveToRight);
 	bool Lower();
 	void Rotate();
 	bool CheckCollision();

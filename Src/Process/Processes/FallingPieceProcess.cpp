@@ -57,7 +57,7 @@ bool FallingPieceProcess::VOnInit()
 	return true;
 }
 
-void FallingPieceProcess::Move(bool bMoveToRight)
+bool FallingPieceProcess::Move(bool bMoveToRight)
 {
 	int x = 1;
 	if(!bMoveToRight)
@@ -65,9 +65,15 @@ void FallingPieceProcess::Move(bool bMoveToRight)
 	
 	m_pPiece->Move(x, 0);
 	if(CheckCollision())
+	{
 		m_pPiece->Move(-x, 0);
+		return false;
+	}
 	else
+	{
 		m_pMoveProc->Translate(x*TetrisGfxBlock::s_pieceSize, 0);
+		return true;
+	}
 }
 
 bool FallingPieceProcess::Lower()
@@ -88,10 +94,16 @@ bool FallingPieceProcess::Lower()
 
 void FallingPieceProcess::Rotate()
 {
+	bool result = true;
+	
 	m_pPiece->RotateRight();
-	if(CheckCollision())
+	if(CheckCollision() && !Move(true) && !Move(false))
+	{
 		m_pPiece->RotateLeft();
-	else
+		result = false;
+	}
+	
+	if(result)
 		m_pMoveProc->AddAngle(90);
 }
 
