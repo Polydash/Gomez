@@ -42,7 +42,7 @@ void ScoreCounterProcess::VUpdate(unsigned int elapsedTime)
 	if(m_bIsCounting)
 	{
 		m_angle += elapsedTime*0.008f;
-		if(m_angle > 5*PI/2)
+		if(m_angle > 3*PI/2)
 		{
 			if(m_currentScore == m_score)
 			{
@@ -53,7 +53,7 @@ void ScoreCounterProcess::VUpdate(unsigned int elapsedTime)
 				m_angle -= PI;
 		}
 			
-		m_currentScale = m_scale + cos(m_angle)*0.15f;
+		m_currentScale = m_scale + fabs(cos(m_angle)*0.3f);
 		UpdateScale();
 	}
 }
