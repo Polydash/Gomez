@@ -7,7 +7,53 @@
 #include "../Process/Processes/HorizontalScrollProcess.h"
 #include "../Process/Processes/ScaleProcess.h"
 #include "../Process/Processes/FadeProcess.h"
+#include "../Process/Processes/BlinkingProcess.h"
 #include "../Resource/ResourceManager.h"
+
+MenuState::MenuState():
+m_bIsDone(false),
+m_bHasInput(false),
+m_option(0)
+{
+}
+
+void MenuState::VOnInput(const SDL_Event &event)
+{
+	if(m_bHasInput)
+	{
+		if(event.type == SDL_KEYDOWN && !event.key.repeat)
+		{
+			switch(event.key.keysym.sym)
+			{		
+				case SDLK_DOWN :
+					m_option = (m_option+1)%2;
+					m_pBlink->Success();
+					m_pBlink.reset(new BlinkingProcess(m_pOptions[m_option], 0.05f, 192, 0.01f));
+					AttachLogicProcess(m_pBlink);
+					break;
+					
+				case SDLK_UP :
+					m_option = (m_option-1)%2;
+					m_pBlink->Success();
+					m_pBlink.reset(new BlinkingProcess(m_pOptions[m_option], 0.05f, 192, 0.01f));
+					AttachLogicProcess(m_pBlink);
+					break;
+				
+				case SDLK_RETURN :
+					m_bHasInput = false;
+					m_bIsDone = true;
+					m_pFadeRect->VSetColor(0, 0, 0);
+					m_pFadeOutProc.reset(new FadeProcess(m_pFadeRect, 0, 255, 0.4f));
+					AttachLogicProcess(m_pFadeOutProc);
+					break;
+				
+				default :
+					break;
+			}
+		}
+	
+	}
+}
 
 void MenuState::VOnUpdate(unsigned int elapsedTime)
 { 
@@ -30,6 +76,9 @@ void MenuState::VOnUpdate(unsigned int elapsedTime)
 	{
 		m_pScale.reset();
 		
+		m_pBlink.reset(new BlinkingProcess(m_pOptions[m_option], 0.05f, 192, 0.01f));
+		AttachLogicProcess(m_pBlink);
+		
 		g_pApp->GetGfxMgr()->AddElement(m_pOptions[0]);
 		g_pApp->GetGfxMgr()->AddElement(m_pOptions[1]);
 		
@@ -40,6 +89,14 @@ void MenuState::VOnUpdate(unsigned int elapsedTime)
 		AttachLogicProcess(m_pScrollingProc[0]);
 		AttachLogicProcess(m_pScrollingProc[1]);
 		AttachLogicProcess(m_pScrollingProc[2]);
+		
+		m_bHasInput = true;
+	}
+	
+	if(m_bIsDone && m_pFadeOutProc->IsDone())
+	{
+		shared_ptr<Evt_StateChange> pEvent(new Evt_StateChange(GS_MAINGAME));
+		EventManager::Get()->QueueEvent(pEvent);
 	}
 }
 
@@ -55,15 +112,16 @@ void MenuState::VOnEnter()
 
 void MenuState::VOnLeave()
 {
+	m_pScrollingProc[0]->Success();
+	m_pScrollingProc[1]->Success();
+	m_pScrollingProc[2]->Success();
+	m_pBlink->Success();
+	
 	g_pApp->GetGfxMgr()->RemoveElement(m_pTitle[0]);
 	g_pApp->GetGfxMgr()->RemoveElement(m_pTitle[1]);
 	g_pApp->GetGfxMgr()->RemoveElement(m_pFadeRect);
 	g_pApp->GetGfxMgr()->RemoveElement(m_pOptions[0]);
 	g_pApp->GetGfxMgr()->RemoveElement(m_pOptions[1]);
-	
-	m_pScrollingProc[0]->Success();
-	m_pScrollingProc[1]->Success();
-	m_pScrollingProc[2]->Success();
 }
 
 void MenuState::SetDisplay()

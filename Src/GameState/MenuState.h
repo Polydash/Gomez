@@ -14,19 +14,24 @@ private :
 	ProcessSharedPtr  m_pFadeInProc;
 	ProcessSharedPtr  m_pFadeOutProc;
 	ProcessSharedPtr  m_pScale;
+	ProcessSharedPtr  m_pBlink;
 	GfxRectSharedPtr  m_pFadeRect;
 	GfxImageSharedPtr m_pTitle[2];
 	GfxTextSharedPtr  m_pOptions[2];
 	
+	bool m_bIsDone, m_bHasInput;
+	int m_option;
+	
 public :
 
-	MenuState(){}
+	MenuState();
 	virtual ~MenuState(){}
 	
+	virtual void VOnInput(const SDL_Event &event);
 	virtual void VOnUpdate(unsigned int elapsedTime);
 	virtual void VOnEnter();						
 	virtual void VOnLeave();						
-												  
+								  
 	virtual eGameState VGetState() const { return GS_MENU; }
 	
 private :

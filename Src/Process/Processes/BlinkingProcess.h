@@ -1,0 +1,30 @@
+#ifndef BLINKINGPROCESS_H
+#define BLINKINGPROCESS_H
+
+#include "../Process.h"
+#include "../../Graphics/GfxImage.h"
+
+class BlinkingProcess : public Process
+{
+private :
+
+	GfxImageSharedPtr m_pImage;
+	
+	float m_initScale;
+	float m_scaleAmplitude, m_fadeAmplitude;
+	float m_angle, m_speed;
+	
+public :
+
+	BlinkingProcess(GfxImageSharedPtr pImage, float scaleAmplitude, float fadeAmplitude, float speed);
+	~BlinkingProcess();
+	
+	void VUpdate(unsigned int elapsedTime);
+	
+private :
+
+	bool VOnInit();
+	void VOnSuccess();
+};
+
+#endif
