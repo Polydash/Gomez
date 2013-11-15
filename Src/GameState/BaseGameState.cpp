@@ -31,8 +31,8 @@ bool BaseGameState::Init()
 
 void BaseGameState::VUpdate(unsigned int elapsedTime)
 {
-	m_pProcessMgr->UpdateProcesses(elapsedTime);
 	VOnUpdate(elapsedTime);
+	m_pProcessMgr->UpdateProcesses(elapsedTime);
 }
 
 void BaseGameState::AttachLogicProcessDelegate(EventSharedPtr pEvent)

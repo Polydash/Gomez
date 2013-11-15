@@ -233,12 +233,12 @@ bool SDLApp::SDLInit()
 	}
 	
 	SDL_ShowCursor(SDL_DISABLE);
-	if(!SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1"))
-	{
-		ERROR("Failed to enable linear texture filtering");
-		return false;
-	}
-		
+	//~ if(!SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1"))
+	//~ {
+		//~ ERROR("Failed to enable linear texture filtering");
+		//~ return false;
+	//~ }
+		//~ 
 	LOG("SDL_image Init");
 	int flags = IMG_INIT_PNG;
 	if(!(IMG_Init(flags) & flags))

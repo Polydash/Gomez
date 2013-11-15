@@ -12,7 +12,7 @@ void IntroState::VOnUpdate(unsigned int elapsedTime)
 {
 	if(m_pFadeOutProc->IsDone())
 	{
-		shared_ptr<Evt_StateChange> pEvent(new Evt_StateChange(GS_MAINGAME));
+		shared_ptr<Evt_StateChange> pEvent(new Evt_StateChange(GS_MENU));
 		EventManager::Get()->QueueEvent(pEvent);
 	}
 }
