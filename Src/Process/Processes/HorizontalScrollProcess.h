@@ -16,6 +16,7 @@ public :
 protected :
 
 	virtual void VOnSuccess();
+	virtual void VOnAbort();
 };
 
 #endif

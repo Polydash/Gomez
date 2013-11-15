@@ -54,6 +54,14 @@ bool DroppedPieceProcess::VOnInit()
 void DroppedPieceProcess::VOnSuccess()
 {
 	PlacePiece();
+	g_pApp->GetGfxMgr()->RemoveElement(m_pImage);
+	SAFE_DELETE(m_pPiece);
+}
+
+void DroppedPieceProcess::VOnAbort()
+{
+	g_pApp->GetGfxMgr()->RemoveElement(m_pImage);
+	SAFE_DELETE(m_pPiece);
 }
 
 bool DroppedPieceProcess::Lower()
@@ -113,9 +121,6 @@ void DroppedPieceProcess::PlacePiece()
 		
 		m_pGrid->AddBlock(x, y, type);
 	}
-	
-	g_pApp->GetGfxMgr()->RemoveElement(m_pImage);
-	SAFE_DELETE(m_pPiece);
 	
 	ProcessSharedPtr pProc = ProcessSharedPtr(new DeleteLinesProcess(m_pGrid, 0.01));
 	AttachChild(pProc);

@@ -52,4 +52,5 @@ void FadeProcess::VUpdate(unsigned int elapsedTime)
 
 void FadeProcess::VOnSuccess()
 {
+	m_pElement->VSetAlpha((byte)m_targetAlpha);
 }

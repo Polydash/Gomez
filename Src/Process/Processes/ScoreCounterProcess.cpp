@@ -18,7 +18,6 @@ m_bIsCounting(false)
 
 ScoreCounterProcess::~ScoreCounterProcess()
 {
-	g_pApp->GetGfxMgr()->RemoveElement(m_pScoreImage);
 }
 
 void ScoreCounterProcess::VUpdate(unsigned int elapsedTime)
@@ -63,6 +62,16 @@ bool ScoreCounterProcess::VOnInit()
 {
 	UpdateImage();
 	return true;
+}
+
+void ScoreCounterProcess::VOnSuccess()
+{
+	g_pApp->GetGfxMgr()->RemoveElement(m_pScoreImage);
+}
+
+void ScoreCounterProcess::VOnAbort()
+{
+	g_pApp->GetGfxMgr()->RemoveElement(m_pScoreImage);
 }
 
 void ScoreCounterProcess::UpdateImage()

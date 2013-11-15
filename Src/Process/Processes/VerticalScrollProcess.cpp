@@ -73,3 +73,9 @@ void VerticalScrollProcess::VOnSuccess()
 	g_pApp->GetGfxMgr()->RemoveElement(m_pFirstImage);
 	g_pApp->GetGfxMgr()->RemoveElement(m_pSecondImage);
 }
+
+void VerticalScrollProcess::VOnAbort()
+{
+	g_pApp->GetGfxMgr()->RemoveElement(m_pFirstImage);
+	g_pApp->GetGfxMgr()->RemoveElement(m_pSecondImage);
+}

@@ -14,6 +14,7 @@ private :
 	ProcessSharedPtr  m_pFadeInProc;
 	ProcessSharedPtr  m_pFadeOutProc;
 	ProcessSharedPtr  m_pScale;
+	ProcessSharedPtr  m_pFlash;
 	ProcessSharedPtr  m_pBlink;
 	GfxRectSharedPtr  m_pFadeRect;
 	GfxImageSharedPtr m_pTitle[2];

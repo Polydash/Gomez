@@ -46,6 +46,11 @@ void BaseGameState::AttachLogicProcess(ProcessSharedPtr pProcess)
 	m_pProcessMgr->AttachProcess(pProcess);
 }
 
+void BaseGameState::AbortAllProcesses()
+{
+	m_pProcessMgr->AbortAllProcesses();
+}
+
 void BaseGameState::RegisterEvents()
 {
 	EventManager::Get()->AddListener(MakeDelegate(this, &BaseGameState::AttachLogicProcessDelegate), ET_ATTACHLOGICPROCESS);

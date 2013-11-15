@@ -38,6 +38,7 @@ public :
 protected :
 
 	void AttachLogicProcess(ProcessSharedPtr pProcess);
+	void AbortAllProcesses();
 	
 private :
 

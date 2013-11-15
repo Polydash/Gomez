@@ -73,3 +73,9 @@ void HorizontalScrollProcess::VOnSuccess()
 	g_pApp->GetGfxMgr()->RemoveElement(m_pFirstImage);
 	g_pApp->GetGfxMgr()->RemoveElement(m_pSecondImage);
 }
+
+void HorizontalScrollProcess::VOnAbort()
+{
+	g_pApp->GetGfxMgr()->RemoveElement(m_pFirstImage);
+	g_pApp->GetGfxMgr()->RemoveElement(m_pSecondImage);
+}

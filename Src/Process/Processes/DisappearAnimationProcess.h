@@ -11,13 +11,15 @@ private :
 	GfxImageSharedPtr m_pImage;
 
 	float m_speed;
+	bool m_bRemove;
 
 public :
 
-	DisappearAnimationProcess(GfxImageSharedPtr pImage, float speed);
+	DisappearAnimationProcess(GfxImageSharedPtr pImage, float speed, bool bRemove = false);
 	~DisappearAnimationProcess();
 	
 	virtual void VUpdate(unsigned int elapsedTime);
+	virtual void VOnSuccess();
 };
 
 #endif

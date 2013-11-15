@@ -42,7 +42,6 @@ void FallingPieceProcess::VUpdate(unsigned int elapsedTime)
 	if(m_bIsDone && !m_pMoveProc->IsMoving(1.0f))
 	{
 		m_pMoveProc->Success();
-		PlacePiece();
 		Success();
 	}
 }
@@ -53,6 +52,17 @@ bool FallingPieceProcess::VOnInit()
 	SetProc();
 		
 	return true;
+}
+
+void FallingPieceProcess::VOnSuccess()
+{
+	PlacePiece();
+	g_pApp->GetGfxMgr()->RemoveElement(m_pImage);
+}
+
+void FallingPieceProcess::VOnAbort()
+{
+	g_pApp->GetGfxMgr()->RemoveElement(m_pImage);
 }
 
 bool FallingPieceProcess::Move(bool bMoveToRight)
@@ -150,8 +160,6 @@ void FallingPieceProcess::PlacePiece()
 		
 		m_pGrid->AddBlock(x, y, type);
 	}
-	
-	g_pApp->GetGfxMgr()->RemoveElement(m_pImage);
 	
 	ProcessSharedPtr pProc = ProcessSharedPtr(new DeleteLinesProcess(m_pGrid, 1.0f));
 	AttachChild(pProc);

@@ -31,6 +31,8 @@ public :
 protected :
 
 	virtual bool VOnInit();
+	virtual void VOnSuccess();
+	virtual void VOnAbort();
 	
 private :
 

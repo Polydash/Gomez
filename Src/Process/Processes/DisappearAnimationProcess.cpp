@@ -1,8 +1,11 @@
 #include "DisappearAnimationProcess.h"
+#include "../../GameApp/SDLApp.h"
+#include "../../Graphics/GfxManager.h"
 
-DisappearAnimationProcess::DisappearAnimationProcess(GfxImageSharedPtr pImage, float speed):
+DisappearAnimationProcess::DisappearAnimationProcess(GfxImageSharedPtr pImage, float speed, bool bRemove):
 m_pImage(pImage),
-m_speed(speed)
+m_speed(speed),
+m_bRemove(bRemove)
 {
 }
 
@@ -29,4 +32,12 @@ void DisappearAnimationProcess::VUpdate(unsigned int elapsedTime)
 	}
 	else
 		m_pImage->VSetAlpha(alpha);
+}
+
+void DisappearAnimationProcess::VOnSuccess()
+{
+	if(m_bRemove)
+	{
+		g_pApp->GetGfxMgr()->RemoveElement(m_pImage);
+	}
 }

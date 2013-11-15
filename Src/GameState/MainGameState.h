@@ -4,6 +4,7 @@
 #include "BaseGameState.h"
 #include "../Event/IEvent.h"
 #include "../Graphics/GfxImage.h"
+#include "../Graphics/GfxRect.h"
 
 class TetrisGrid;
 class TetrisScore;
@@ -17,6 +18,9 @@ private :
 	TetrisScore *m_pTetrisScore;
 	TetrisPiece *m_pCurrentPiece, *m_pNextPiece;
 	
+	GfxRectSharedPtr m_pFadeRect;
+	ProcessSharedPtr m_pDisappearProc;
+	
 	bool m_moveRight, m_moveLeft;
 	unsigned int m_inputRepeat;
 	
@@ -29,11 +33,15 @@ public:
 	
 	virtual void VOnInput(const SDL_Event &event);
 	virtual void VOnUpdate(unsigned int elapsedTime);
-	virtual void VOnEnter();						
+	virtual void VOnEnter();
+	virtual void VOnLeave();					
 												  
 	virtual eGameState VGetState() const { return GS_MAINGAME; }
 
 private :
+
+	void SetProc();
+	void UpdatePieces();
 
 	void LostFocusDelegate(EventSharedPtr pEvent);
 	void EndTetrisLoopDelegate(EventSharedPtr pEvent);

@@ -33,7 +33,8 @@ void MenuState::VOnInput(const SDL_Event &event)
 					break;
 					
 				case SDLK_UP :
-					m_option = (m_option-1)%2;
+					m_option = (m_option-1);
+					if(m_option < 0) m_option = 1;
 					m_pBlink->Success();
 					m_pBlink.reset(new BlinkingProcess(m_pOptions[m_option], 0.05f, 192, 0.01f));
 					AttachLogicProcess(m_pBlink);
@@ -42,6 +43,10 @@ void MenuState::VOnInput(const SDL_Event &event)
 				case SDLK_RETURN :
 					m_bHasInput = false;
 					m_bIsDone = true;
+					
+					if(m_pFlash)
+						m_pFlash->Abort();
+						
 					m_pFadeRect->VSetColor(0, 0, 0);
 					m_pFadeOutProc.reset(new FadeProcess(m_pFadeRect, 0, 255, 0.4f));
 					AttachLogicProcess(m_pFadeOutProc);
@@ -64,11 +69,10 @@ void MenuState::VOnUpdate(unsigned int elapsedTime)
 		g_pApp->GetGfxMgr()->AddElement(m_pTitle[0]);
 		m_pScale.reset(new ScaleProcess(m_pTitle[0], 15, 1.0f, 0.01f, 0.0001f));
 	
-		ProcessSharedPtr pFlash;
 		m_pFadeRect->VSetColor(255, 255, 255);
-		pFlash.reset(new FadeProcess(m_pFadeRect, 255, 0, 0.25f));
+		m_pFlash.reset(new FadeProcess(m_pFadeRect, 255, 0, 0.25f));
 		
-		m_pScale->AttachChild(pFlash);
+		m_pScale->AttachChild(m_pFlash);
 		AttachLogicProcess(m_pScale);
 	}
 	
@@ -93,8 +97,9 @@ void MenuState::VOnUpdate(unsigned int elapsedTime)
 		m_bHasInput = true;
 	}
 	
-	if(m_bIsDone && m_pFadeOutProc->IsDone())
+	if(m_bIsDone && m_pFadeOutProc && m_pFadeOutProc->IsDone())
 	{
+		m_pFadeOutProc.reset();
 		if(m_option == 0)
 		{
 			shared_ptr<Evt_StateChange> pEvent(new Evt_StateChange(GS_MAINGAME));
@@ -124,9 +129,9 @@ void MenuState::VOnLeave()
 	
 	g_pApp->GetGfxMgr()->RemoveElement(m_pTitle[0]);
 	g_pApp->GetGfxMgr()->RemoveElement(m_pTitle[1]);
-	g_pApp->GetGfxMgr()->RemoveElement(m_pFadeRect);
 	g_pApp->GetGfxMgr()->RemoveElement(m_pOptions[0]);
 	g_pApp->GetGfxMgr()->RemoveElement(m_pOptions[1]);
+	g_pApp->GetGfxMgr()->RemoveElement(m_pFadeRect);
 }
 
 void MenuState::SetDisplay()
