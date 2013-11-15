@@ -15,7 +15,6 @@ m_maxSpeed(15.0f)
 
 DroppedPieceProcess::~DroppedPieceProcess()
 {
-	SAFE_DELETE(m_pPiece);
 }
 
 void DroppedPieceProcess::SetVelocity(float accel, float maxSpeed)

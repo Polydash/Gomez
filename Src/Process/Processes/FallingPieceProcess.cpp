@@ -9,9 +9,9 @@
 #include "../../Event/Events/Evt_MainGameInput.h"
 #include "../../Event/Events/Evt_AttachLogicProcess.h"
 
-FallingPieceProcess::FallingPieceProcess(TetrisGrid *pGrid, float speed):
+FallingPieceProcess::FallingPieceProcess(TetrisGrid *pGrid, TetrisPiece *pPiece, float speed):
 m_pGrid(pGrid),
-m_pPiece(NULL),
+m_pPiece(pPiece),
 m_speed(speed),
 m_timeCount(0),
 m_bIsDone(false),
@@ -50,8 +50,6 @@ void FallingPieceProcess::VUpdate(unsigned int elapsedTime)
 bool FallingPieceProcess::VOnInit()
 {
 	RegisterEvents();
-	
-	SetPiece();
 	SetProc();
 		
 	return true;
@@ -154,7 +152,6 @@ void FallingPieceProcess::PlacePiece()
 	}
 	
 	g_pApp->GetGfxMgr()->RemoveElement(m_pImage);
-	SAFE_DELETE(m_pPiece);
 	
 	ProcessSharedPtr pProc = ProcessSharedPtr(new DeleteLinesProcess(m_pGrid, 1.0f));
 	AttachChild(pProc);
@@ -180,13 +177,6 @@ void FallingPieceProcess::SetProc()
 	
 	pEvt.reset(new Evt_AttachLogicProcess(m_pSpawn));
 	EventManager::Get()->QueueEvent(pEvt);
-}
-
-void FallingPieceProcess::SetPiece()
-{
-	ePieceType type = static_cast<ePieceType>(rand()%PIECETYPE_NB);
-	m_pPiece = new TetrisPiece(type);
-	m_pGrid->InitPosition(m_pPiece);
 }
 
 void FallingPieceProcess::SetImage(TetrisPiece *pPiece)

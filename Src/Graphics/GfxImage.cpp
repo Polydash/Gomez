@@ -5,6 +5,7 @@
 
 GfxImage::GfxImage(int layer, const std::string &fileName):
 GfxElement(layer),
+m_pTexture(NULL),
 m_fileName(fileName),
 m_width(0),
 m_height(0),
@@ -15,6 +16,7 @@ m_scale(1.0f)
 
 GfxImage::GfxImage(int layer, const std::string &fileName, float posX, float posY):
 GfxElement(layer, posX, posY),
+m_pTexture(NULL),
 m_fileName(fileName),
 m_width(0),
 m_height(0),

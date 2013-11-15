@@ -4,6 +4,7 @@
 #include "../../GameApp/SDLApp.h"
 #include "../../Event/EventManager.h"
 #include "../../Event/Events/Evt_AttachLogicProcess.h"
+#include "../../Event/Events/Evt_EndTetrisLoop.h"
 #include "../../Event/Events/Evt_AddScore.h"
 #include "../../TetrisLogic/TetrisScore.h"
 
@@ -29,9 +30,9 @@ void FallingLinesProcess::VOnSuccess()
 	for(unsigned int i=0; i<m_linesToDelete.size(); i++)
 		m_pGrid->LowerBlocks(m_linesToDelete[i] + i);
 		
-	ProcessSharedPtr pProc;
-	pProc.reset(new FallingPieceProcess(m_pGrid, 2.0f));
-	AttachChild(pProc);
+	EventSharedPtr pEvt;
+	pEvt.reset(new Evt_EndTetrisLoop());
+	EventManager::Get()->QueueEvent(pEvt);
 }
 
 bool FallingLinesProcess::VOnInit()

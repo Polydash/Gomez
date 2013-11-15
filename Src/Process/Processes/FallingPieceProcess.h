@@ -23,7 +23,7 @@ private :
 	
 public :
 
-	FallingPieceProcess(TetrisGrid *pGrid, float speed);
+	FallingPieceProcess(TetrisGrid *pGrid, TetrisPiece *pPiece, float speed);
 	~FallingPieceProcess(); 
 
 	virtual void VUpdate(unsigned int elapsedTime);
@@ -45,7 +45,6 @@ private :
 	void DropPiece();
 	
 	//Init methods
-	void SetPiece();
 	void SetProc();
 	void SetImage(TetrisPiece *pPiece);
 	void RegisterEvents();

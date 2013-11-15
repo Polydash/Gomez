@@ -3,6 +3,10 @@
 
 #include "GfxElement.h"
 
+class GfxRect;
+
+typedef shared_ptr<GfxRect> GfxRectSharedPtr;
+
 class GfxRect : public GfxElement
 {
 	private :

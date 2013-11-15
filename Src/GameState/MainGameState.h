@@ -7,13 +7,15 @@
 
 class TetrisGrid;
 class TetrisScore;
+class TetrisPiece;
 
 class MainGameState : public BaseGameState
 {
 private :
 
-	TetrisGrid*  m_pTetrisGrid;
-	TetrisScore* m_pTetrisScore;
+	TetrisGrid  *m_pTetrisGrid;
+	TetrisScore *m_pTetrisScore;
+	TetrisPiece *m_pCurrentPiece, *m_pNextPiece;
 	
 	bool m_moveRight, m_moveLeft;
 	unsigned int m_inputRepeat;
@@ -31,7 +33,13 @@ public:
 												  
 	virtual eGameState VGetState() const { return GS_MAINGAME; }
 
+private :
+
 	void LostFocusDelegate(EventSharedPtr pEvent);
+	void EndTetrisLoopDelegate(EventSharedPtr pEvent);
+
+	void RegisterEvents();
+	void UnregisterEvents();
 };
 
 #endif

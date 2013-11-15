@@ -13,6 +13,7 @@ enum eEventType{ ET_STATECHANGE,
 				 ET_ATTACHLOGICPROCESS,
 				 ET_MAINGAMEINPUT,
 				 ET_ADDSCORE,
+				 ET_ENDTETRISLOOP,
 				 EVENT_NB
 			   };
 			   

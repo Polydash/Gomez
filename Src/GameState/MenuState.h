@@ -5,7 +5,11 @@
 
 class MenuState : public BaseGameState
 {
-public:
+private :
+
+	ProcessSharedPtr m_pScrollingProc[2];
+	
+public :
 
 	MenuState(){}
 	virtual ~MenuState(){}

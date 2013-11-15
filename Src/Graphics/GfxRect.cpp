@@ -17,6 +17,12 @@ GfxRect::~GfxRect()
 
 bool GfxRect::VInit(SDL_Renderer *pRenderer)
 { 
+	if(SDL_SetRenderDrawBlendMode(pRenderer, SDL_BLENDMODE_BLEND) < 0)
+	{
+		ERROR("Failed to enable blending mode");
+		return false;
+	}
+	
 	return true;
 }
 
@@ -29,7 +35,7 @@ void GfxRect::VRender(SDL_Renderer* pRenderer)
 	renderingPos.w = m_width;
 	renderingPos.h = m_height;
 	
-	SDL_SetRenderDrawColor(pRenderer, m_color.r, m_color.g, m_color.b, m_color.a);
+	SDL_SetRenderDrawColor(pRenderer, m_color.r, m_color.g, m_color.b, m_alpha);
 	SDL_RenderFillRect(pRenderer, &renderingPos);
 }
 

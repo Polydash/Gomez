@@ -22,7 +22,7 @@ bool GfxManager::Init(SDL_Window* pScreen)
 	if(!m_pScreen)
 		return false;
 	
-	m_pRenderer = SDL_CreateRenderer(m_pScreen, -1, SDL_RENDERER_ACCELERATED);
+	m_pRenderer = SDL_CreateRenderer(m_pScreen, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	if(!m_pRenderer)
 	{
 		ERROR("Failed to create SDL_Renderer");

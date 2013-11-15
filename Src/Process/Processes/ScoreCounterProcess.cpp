@@ -11,6 +11,7 @@ m_posX(posX),
 m_posY(posY),
 m_scale(scale),
 m_currentScale(scale),
+m_angle(0),
 m_bIsCounting(false)
 {
 }

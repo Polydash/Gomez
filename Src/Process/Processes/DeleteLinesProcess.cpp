@@ -5,6 +5,7 @@
 #include "../../GameApp/SDLApp.h"
 #include "../../Event/EventManager.h"
 #include "../../Event/Events/Evt_AttachLogicProcess.h"
+#include "../../Event/Events/Evt_EndTetrisLoop.h"
 
 DeleteLinesProcess::DeleteLinesProcess(TetrisGrid *pGrid, float speed):
 m_pGrid(pGrid),
@@ -69,13 +70,18 @@ void DeleteLinesProcess::VOnSuccess()
 			m_pGrid->RemoveBlock(i, m_linesToDelete[j]);
 	}
 	
-	ProcessSharedPtr pProc;
 	if(m_linesToDelete.size() > 0)
+	{
+		ProcessSharedPtr pProc;
 		pProc.reset(new FallingLinesProcess(m_pGrid, 0.01f, m_linesToDelete));
+		AttachChild(pProc);
+	}
 	else
-		pProc.reset(new FallingPieceProcess(m_pGrid, 2.0f));
-	
-	AttachChild(pProc);
+	{
+		EventSharedPtr pEvt;
+		pEvt.reset(new Evt_EndTetrisLoop());
+		EventManager::Get()->QueueEvent(pEvt);
+	}
 }
 
 bool DeleteLinesProcess::IsLineFull(int j) const

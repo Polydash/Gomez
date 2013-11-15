@@ -5,34 +5,34 @@
 #include "../Event/EventManager.h"
 #include "../Event/Events/Evt_MainGameInput.h"
 #include "../Event/Events/Evt_LostFocus.h"
+#include "../Event/Events/Evt_EndTetrisLoop.h"
 #include "../Resource/ResourceManager.h"
 #include "../Process/Processes/FallingPieceProcess.h"
 #include "../TetrisLogic/TetrisGrid.h"
+#include "../TetrisLogic/TetrisPiece.h"
 #include "../TetrisLogic/TetrisScore.h"
 
 MainGameState::MainGameState():
 m_pTetrisGrid(NULL),
 m_pTetrisScore(NULL),
+m_pCurrentPiece(NULL),
+m_pNextPiece(NULL),
 m_moveRight(false),
 m_moveLeft(false),
 m_inputRepeat(0)
 {
-	EventManager::Get()->AddListener(MakeDelegate(this, &MainGameState::LostFocusDelegate), ET_LOSTFOCUS);
+	RegisterEvents();
 }
 
 MainGameState::~MainGameState()
 {
-	EventManager::Get()->RemoveListener(MakeDelegate(this, &MainGameState::LostFocusDelegate), ET_LOSTFOCUS);
-	
+	UnregisterEvents();
 	g_pApp->GetGfxMgr()->RemoveElement(m_pBackgroundImage);
 	
 	SAFE_DELETE(m_pTetrisScore);
 	SAFE_DELETE(m_pTetrisGrid);
-}
-
-void MainGameState::LostFocusDelegate(EventSharedPtr pEvent)
-{
-	//Toggle Pause
+	SAFE_DELETE(m_pCurrentPiece);
+	SAFE_DELETE(m_pNextPiece);
 }
 
 void MainGameState::VOnInput(const SDL_Event &event)
@@ -134,7 +134,52 @@ void MainGameState::VOnEnter()
 	m_pBackgroundImage.reset(new GfxImage(2, "background.png"));
 	g_pApp->GetGfxMgr()->AddElement(m_pBackgroundImage);
 	m_pBackgroundImage->SetPosition(g_pApp->GetScreenWidth()/2, g_pApp->GetScreenHeight()/2);
+
+	EventSharedPtr pEvt;
+	EndTetrisLoopDelegate(pEvt);
+}
+
+void MainGameState::LostFocusDelegate(EventSharedPtr pEvent)
+{
+	//Toggle Pause
+}
+
+void MainGameState::EndTetrisLoopDelegate(EventSharedPtr pEvent)
+{
+	ePieceType type;
 	
-	ProcessSharedPtr pProcess = ProcessSharedPtr(new FallingPieceProcess(m_pTetrisGrid, 2.0f));
+	SAFE_DELETE(m_pCurrentPiece);
+
+	if(!m_pNextPiece)
+	{
+		type = static_cast<ePieceType>(rand()%PIECETYPE_NB);
+		m_pNextPiece = new TetrisPiece(type);
+		m_pTetrisGrid->InitPosition(m_pNextPiece);
+	}
+	
+	m_pCurrentPiece = m_pNextPiece;
+	
+	do
+	{
+		type = static_cast<ePieceType>(rand()%PIECETYPE_NB);
+	}
+	while(type == m_pCurrentPiece->GetPieceType());
+	
+	m_pNextPiece = new TetrisPiece(type);
+	m_pTetrisGrid->InitPosition(m_pNextPiece);
+	
+	ProcessSharedPtr pProcess = ProcessSharedPtr(new FallingPieceProcess(m_pTetrisGrid, m_pCurrentPiece, 2.0f));
 	AttachLogicProcess(pProcess);
+}
+
+void MainGameState::RegisterEvents()
+{
+	EventManager::Get()->AddListener(MakeDelegate(this, &MainGameState::LostFocusDelegate), ET_LOSTFOCUS);
+	EventManager::Get()->AddListener(MakeDelegate(this, &MainGameState::EndTetrisLoopDelegate), ET_ENDTETRISLOOP);
+}
+
+void MainGameState::UnregisterEvents()
+{
+	EventManager::Get()->RemoveListener(MakeDelegate(this, &MainGameState::LostFocusDelegate), ET_LOSTFOCUS);
+	EventManager::Get()->RemoveListener(MakeDelegate(this, &MainGameState::EndTetrisLoopDelegate), ET_ENDTETRISLOOP);
 }

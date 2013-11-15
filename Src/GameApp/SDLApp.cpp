@@ -233,7 +233,7 @@ bool SDLApp::SDLInit()
 	}
 	
 	SDL_ShowCursor(SDL_DISABLE);
-	if(!SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "1"))
+	if(!SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1"))
 	{
 		ERROR("Failed to enable linear texture filtering");
 		return false;
