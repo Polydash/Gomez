@@ -95,8 +95,13 @@ void MenuState::VOnUpdate(unsigned int elapsedTime)
 	
 	if(m_bIsDone && m_pFadeOutProc->IsDone())
 	{
-		shared_ptr<Evt_StateChange> pEvent(new Evt_StateChange(GS_MAINGAME));
-		EventManager::Get()->QueueEvent(pEvent);
+		if(m_option == 0)
+		{
+			shared_ptr<Evt_StateChange> pEvent(new Evt_StateChange(GS_MAINGAME));
+			EventManager::Get()->QueueEvent(pEvent);
+		}
+		else
+			g_pApp->RequestExit();
 	}
 }
 

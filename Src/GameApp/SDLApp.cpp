@@ -19,6 +19,7 @@ m_height(600),
 m_title("Tetris"),
 m_imgPath("Data/Images"),
 m_fontPath("Data/Fonts"),
+m_bIsDone(false),
 m_pScreen(NULL),
 m_pGameStateMgr(NULL),
 m_pGfxMgr(NULL)
@@ -110,13 +111,12 @@ void SDLApp::MainLoop()
 {
 	SDL_Event event;
 	unsigned int startTime, elapsedTime, FPSTime;
-	bool bIsDone = false;
 	bool bIsMinimized = false;
 	
 	FPSTime = 1000 / 60;
 	startTime = SDL_GetTicks();
 	
-	while(!bIsDone)
+	while(!m_bIsDone)
 	{		
 		//60 FPS Limit	
 		elapsedTime = SDL_GetTicks() - startTime;	
@@ -132,7 +132,7 @@ void SDLApp::MainLoop()
 		while(SDL_PollEvent(&event))
 		{
 			if(event.type == SDL_QUIT)
-				bIsDone = true;
+				RequestExit();
 				
 			if(event.type == SDL_WINDOWEVENT)
 			{
@@ -233,12 +233,12 @@ bool SDLApp::SDLInit()
 	}
 	
 	SDL_ShowCursor(SDL_DISABLE);
-	//~ if(!SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1"))
-	//~ {
-		//~ ERROR("Failed to enable linear texture filtering");
-		//~ return false;
-	//~ }
-		//~ 
+	//if(!SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1"))
+	//{
+		//ERROR("Failed to enable linear texture filtering");
+		//return false;
+	//}
+		
 	LOG("SDL_image Init");
 	int flags = IMG_INIT_PNG;
 	if(!(IMG_Init(flags) & flags))

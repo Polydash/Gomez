@@ -16,6 +16,7 @@ class SDLApp
 private :
 
 	int m_width, m_height;
+	bool m_bIsDone;
 	std::string m_title, m_imgPath, m_fontPath;
 
 	SDL_Window *m_pScreen;
@@ -33,6 +34,8 @@ public :
 	
 	GameStateManager* GetGameStateMgr() const;
 	GfxManager* GetGfxMgr() const;
+	
+	void RequestExit(){ m_bIsDone = true; }
 	
 	int GetScreenWidth()  const{ return m_width;  }
 	int GetScreenHeight() const{ return m_height; }
