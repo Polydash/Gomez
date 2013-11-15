@@ -9,13 +9,15 @@
 class TetrisGrid;
 class TetrisScore;
 class TetrisPiece;
+class TetrisNextPiece;
 
 class MainGameState : public BaseGameState
 {
 private :
 
-	TetrisGrid  *m_pTetrisGrid;
-	TetrisScore *m_pTetrisScore;
+	TetrisGrid      *m_pTetrisGrid;
+	TetrisScore     *m_pTetrisScore;
+	TetrisNextPiece *m_pTetrisGfxNextPiece;
 	TetrisPiece *m_pCurrentPiece, *m_pNextPiece;
 	
 	GfxRectSharedPtr m_pFadeRect;

@@ -13,6 +13,47 @@ TetrisPiece::~TetrisPiece()
 	DeallocateArray();
 }
 
+std::string TetrisPiece::GetPieceFile(ePieceType type)
+{
+	std::string fileName;
+	
+	switch(type)
+	{
+		case PT_IBLOCK : 
+			fileName = "ipiece24.png";
+			break;
+			
+		case PT_JBLOCK :
+			fileName = "jpiece24.png";
+			break;
+			
+		case PT_TBLOCK :
+			fileName = "tpiece24.png";
+			break;
+		
+		case PT_LBLOCK :
+			fileName = "lpiece24.png";
+			break;
+		
+		case PT_ZBLOCK :
+			fileName = "zpiece24.png";
+			break;
+		
+		case PT_OBLOCK :
+			fileName = "opiece24.png";
+			break;
+			
+		case PT_SBLOCK :
+			fileName = "spiece24.png";
+			break;
+		
+		default :
+			break;
+	}
+	
+	return fileName;
+}
+
 void TetrisPiece::InitPosition(int centerX, int centerY)
 {
 	m_centerX = centerX;

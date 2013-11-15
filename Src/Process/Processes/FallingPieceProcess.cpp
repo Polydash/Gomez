@@ -193,41 +193,7 @@ void FallingPieceProcess::SetImage(TetrisPiece *pPiece)
 	SDL_Color color;
 	
 	color = TetrisGfxBlock::GetColor(type);
-	
-	switch(type)
-	{
-		case PT_IBLOCK : 
-			m_pImage.reset(new GfxImage(0, "ipiece24.png"));
-			break;
-			
-		case PT_JBLOCK :
-			m_pImage.reset(new GfxImage(0, "jpiece24.png"));
-			break;
-			
-		case PT_TBLOCK :
-			m_pImage.reset(new GfxImage(0, "tpiece24.png"));
-			break;
-		
-		case PT_LBLOCK :
-			m_pImage.reset(new GfxImage(0, "lpiece24.png"));
-			break;
-		
-		case PT_ZBLOCK :
-			m_pImage.reset(new GfxImage(0, "zpiece24.png"));
-			break;
-		
-		case PT_OBLOCK :
-			m_pImage.reset(new GfxImage(0, "opiece24.png"));
-			break;
-			
-		case PT_SBLOCK :
-			m_pImage.reset(new GfxImage(0, "spiece24.png"));
-			break;
-		
-		default :
-			break;
-	}
-	
+	m_pImage.reset(new GfxImage(0, TetrisPiece::GetPieceFile(type)));
 	g_pApp->GetGfxMgr()->AddElement(m_pImage);
 	m_pImage->VSetColor(color.r, color.g, color.b);
 	m_pGrid->InitPosition(m_pImage);

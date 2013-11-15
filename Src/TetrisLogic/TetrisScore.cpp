@@ -14,7 +14,7 @@ m_posX(posX),
 m_posY(posY),
 m_score(0)
 {
-	m_pTitle.reset(new GfxText(2, "operator.ttf", "SCORE"));
+	m_pTitle.reset(new GfxText(2, "operator.ttf", "Score"));
 	m_pTitle->SetPosition(posX + width/2, posY + height/8);
 	m_pTitle->SetScale((width/240)*0.4f);
 	g_pApp->GetGfxMgr()->AddElement(m_pTitle);
@@ -62,6 +62,7 @@ unsigned int TetrisScore::GetScoreValue(int lineNb)
 	
 	return value;
 }
+
 void TetrisScore::RegisterEvents()
 {
 	EventManager::Get()->AddListener(MakeDelegate(this, &TetrisScore::AddScoreDelegate), ET_ADDSCORE);

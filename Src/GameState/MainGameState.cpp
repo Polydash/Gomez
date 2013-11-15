@@ -16,10 +16,12 @@
 #include "../TetrisLogic/TetrisGrid.h"
 #include "../TetrisLogic/TetrisPiece.h"
 #include "../TetrisLogic/TetrisScore.h"
+#include "../TetrisLogic/TetrisNextPiece.h"
 
 MainGameState::MainGameState():
 m_pTetrisGrid(NULL),
 m_pTetrisScore(NULL),
+m_pTetrisGfxNextPiece(NULL),
 m_pCurrentPiece(NULL),
 m_pNextPiece(NULL),
 m_moveRight(false),
@@ -34,6 +36,7 @@ MainGameState::~MainGameState()
 	UnregisterEvents();
 	
 	SAFE_DELETE(m_pTetrisScore);
+	SAFE_DELETE(m_pTetrisGfxNextPiece);
 	SAFE_DELETE(m_pTetrisGrid);
 	SAFE_DELETE(m_pCurrentPiece);
 	SAFE_DELETE(m_pNextPiece);
@@ -144,6 +147,7 @@ void MainGameState::VOnEnter()
 	
 	m_pTetrisGrid = new TetrisGrid(10, 20, g_pApp->GetScreenHeight()/10, g_pApp->GetScreenHeight()/10);
 	m_pTetrisScore = new TetrisScore(240, 150, 500, 60);
+	m_pTetrisGfxNextPiece = new TetrisNextPiece(240, 200, 500, 260);
 	
 	m_pBackgroundImage.reset(new GfxImage(2, "background.png"));
 	g_pApp->GetGfxMgr()->AddElement(m_pBackgroundImage);
@@ -210,6 +214,7 @@ void MainGameState::UpdatePieces()
 	
 	m_pNextPiece = new TetrisPiece(type);
 	m_pTetrisGrid->InitPosition(m_pNextPiece);
+	m_pTetrisGfxNextPiece->UpdateNextPiece(m_pNextPiece->GetPieceType());
 }
 
 void MainGameState::LostFocusDelegate(EventSharedPtr pEvent)

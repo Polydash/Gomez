@@ -1,6 +1,8 @@
 #ifndef TETRISPIECE_H
 #define TETRISPIECE_H
 
+#include <string>
+
 #include "TetrisGfxBlock.h"
 
 class TetrisPiece
@@ -14,6 +16,8 @@ private :
 	ePieceType m_pieceType;
 
 public :
+
+	static std::string GetPieceFile(ePieceType type); 
 
 	TetrisPiece(ePieceType pieceType);
 	~TetrisPiece();
