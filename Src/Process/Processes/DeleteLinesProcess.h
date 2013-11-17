@@ -24,12 +24,12 @@ public :
 	DeleteLinesProcess(TetrisGrid *pGrid, float speed);
 	~DeleteLinesProcess();
 	
-	void VUpdate(unsigned int elapsedTime);
+	virtual void VUpdate(unsigned int elapsedTime);
 	
 protected :
 
-	bool VOnInit();
-	void VOnSuccess();
+	virtual bool VOnInit();
+	virtual void VOnSuccess();
 
 private :
 

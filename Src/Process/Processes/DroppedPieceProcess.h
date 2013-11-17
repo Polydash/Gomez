@@ -24,7 +24,7 @@ class DroppedPieceProcess : public Process
 		
 		void SetVelocity(float accel, float maxSpeed);
 		
-		void VUpdate(unsigned int elapsedTime);
+		virtual void VUpdate(unsigned int elapsedTime);
 	
 	protected :
 	

@@ -7,12 +7,15 @@
 #include "../Event/Events/Evt_LostFocus.h"
 #include "../Event/Events/Evt_EndTetrisLoop.h"
 #include "../Event/Events/Evt_StateChange.h"
+#include "../Event/Events/Evt_AddScore.h"
 #include "../Resource/ResourceManager.h"
 #include "../Process/Processes/FallingPieceProcess.h"
 #include "../Process/Processes/SpawnAnimationProcess.h"
 #include "../Process/Processes/DisappearAnimationProcess.h"
+#include "../Process/Processes/HorizontalScrollProcess.h"
 #include "../Process/Processes/DelayProcess.h"
 #include "../Process/Processes/FadeProcess.h"
+#include "../Process/Processes/LinearMoveProcess.h"
 #include "../TetrisLogic/TetrisGrid.h"
 #include "../TetrisLogic/TetrisPiece.h"
 #include "../TetrisLogic/TetrisScore.h"
@@ -52,7 +55,7 @@ void MainGameState::VOnInput(const SDL_Event &event)
 		switch(event.key.keysym.sym)
 		{
 			case SDLK_ESCAPE :
-				if(m_pDisappearProc && m_pDisappearProc->IsDone())
+				if(!m_pFadeOutProc && m_pDisappearProc && m_pDisappearProc->IsDone())
 				{				
 					pEvt.reset(new Evt_StateChange(GS_MENU));
 					EventManager::Get()->QueueEvent(pEvt);
@@ -112,6 +115,13 @@ void MainGameState::VOnInput(const SDL_Event &event)
 
 void MainGameState::VOnUpdate(unsigned int elapsedTime)
 {	
+	if(m_pFadeOutProc && m_pFadeOutProc->IsDone())
+	{
+		EventSharedPtr pEvt;
+		pEvt.reset(new Evt_StateChange(GS_MENU));
+		EventManager::Get()->QueueEvent(pEvt);
+	}
+	
 	//Key repeat handling
 	if(m_moveLeft && !m_moveRight)
 	{
@@ -159,14 +169,55 @@ void MainGameState::VOnEnter()
 	m_pFadeRect->VSetColor(0, 0, 0);
 	g_pApp->GetGfxMgr()->AddElement(m_pFadeRect);
 	
+	m_pScrollingProc[0].reset(new HorizontalScrollProcess(0.05f, 5, "starsBG.png"));
+	m_pScrollingProc[1].reset(new HorizontalScrollProcess(0.07f, 4, "starsFG.png"));
+	m_pScrollingProc[2].reset(new HorizontalScrollProcess(0.1f, 3, "starsFG2.png"));
+	
+	AttachLogicProcess(m_pScrollingProc[0]);
+	AttachLogicProcess(m_pScrollingProc[1]);
+	AttachLogicProcess(m_pScrollingProc[2]);
+	
 	UpdatePieces();
 	SetProc();
 }
 
 void MainGameState::VOnLeave()
 {
+	m_pScrollingProc[0]->Success();
+	m_pScrollingProc[1]->Success();
+	m_pScrollingProc[2]->Success();
+	
 	g_pApp->GetGfxMgr()->RemoveElement(m_pBackgroundImage);
 	g_pApp->GetGfxMgr()->RemoveElement(m_pFadeRect);
+}
+
+bool MainGameState::CheckCollision()
+{
+	int **positions = m_pCurrentPiece->GetPositions();
+	int centerX = m_pCurrentPiece->GetCenterX();
+	int centerY = m_pCurrentPiece->GetCenterY();
+	int gridWidth = m_pTetrisGrid->GetWidth();
+	int gridHeight = m_pTetrisGrid->GetHeight();
+	
+	if(centerX < 0 || centerX >= gridWidth || centerY < 0 || centerY >= gridHeight)
+		return true;
+		
+	if(m_pTetrisGrid->GetBlock(centerX, centerY) != NULL)
+		return true;
+		
+	for(int i=0; i<3; i++)
+	{
+		int x = centerX + positions[i][0];
+		int y = centerY + positions[i][1];
+		
+		if(x < 0 || x >= gridWidth || y < 0 || y >= gridHeight)
+			return true;
+			
+		if(m_pTetrisGrid->GetBlock(x, y) != NULL)
+			return true;
+	}
+		
+	return false;
 }
 
 void MainGameState::SetProc()
@@ -174,7 +225,7 @@ void MainGameState::SetProc()
 	ProcessSharedPtr pFadeInProc;
 	pFadeInProc.reset(new FadeProcess(m_pFadeRect, 255, 0, 0.3f));
 	
-	GfxTextSharedPtr pText = GfxTextSharedPtr(new GfxText(-1, "operator.ttf", "GO !"));
+	GfxTextSharedPtr pText = GfxTextSharedPtr(new GfxText(1, "operator.ttf", "GO !"));
 	pText->SetPosition(g_pApp->GetScreenWidth()/2, g_pApp->GetScreenHeight()/2);
 	g_pApp->GetGfxMgr()->AddElement(pText);
 	ProcessSharedPtr pSpawnProc = ProcessSharedPtr(new SpawnAnimationProcess(pText, 0.004f));
@@ -225,18 +276,78 @@ void MainGameState::LostFocusDelegate(EventSharedPtr pEvent)
 void MainGameState::EndTetrisLoopDelegate(EventSharedPtr pEvent)
 {
 	UpdatePieces();
-	ProcessSharedPtr pProcess = ProcessSharedPtr(new FallingPieceProcess(m_pTetrisGrid, m_pCurrentPiece, 2.0f));
-	AttachLogicProcess(pProcess);
+	
+	if(!CheckCollision())
+	{
+		ProcessSharedPtr pProcess = ProcessSharedPtr(new FallingPieceProcess(m_pTetrisGrid, m_pCurrentPiece, 2.0f));
+		AttachLogicProcess(pProcess);
+	}
+	else
+	{
+		ProcessSharedPtr pFadeProc = ProcessSharedPtr(new FadeProcess(m_pFadeRect, 0, 192, 0.3f));
+		
+		GfxTextSharedPtr pText = GfxTextSharedPtr(new GfxText(-1, "operator.ttf", "Game Over"));
+		pText->SetPosition(g_pApp->GetScreenWidth()/2, g_pApp->GetScreenHeight()/2);
+		g_pApp->GetGfxMgr()->AddElement(pText);
+		ProcessSharedPtr pSpawnProc = ProcessSharedPtr(new SpawnAnimationProcess(pText, 0.004f));
+		pFadeProc->AttachChild(pSpawnProc);
+		
+		ProcessSharedPtr pDelayProc = ProcessSharedPtr(new DelayProcess(2500));
+		pSpawnProc->AttachChild(pDelayProc);
+		
+		ProcessSharedPtr pDisappearProc = ProcessSharedPtr(new DisappearAnimationProcess(pText, 1.0f, true));
+		pDelayProc->AttachChild(pDisappearProc);
+		
+		m_pFadeOutProc.reset(new FadeProcess(m_pFadeRect, 255, 0.3f));
+		pDisappearProc->AttachChild(m_pFadeOutProc);
+		
+		AttachLogicProcess(pFadeProc);
+	}
+}
+
+void MainGameState::AddScoreDelegate(EventSharedPtr pEvent)
+{
+	shared_ptr<Evt_AddScore> pEvt = static_pointer_cast<Evt_AddScore>(pEvent);
+	unsigned int scoreToAdd = pEvt->GetScore();
+	
+	int max = 1;
+	if(scoreToAdd == TetrisScore::GetScoreValue(4))
+		max = 10;
+		
+	for(int i=0; i<max; i++)
+	{
+		float source = -100;
+		float dest = g_pApp->GetScreenWidth() + 100;
+		
+		ProcessSharedPtr pEasterEggProc;
+		GfxImageSharedPtr pImage;
+		pImage.reset(new GfxImage(4, "easter.png"));
+		pImage->SetPosition(source, ((float) rand()/RAND_MAX)*g_pApp->GetScreenHeight());
+		g_pApp->GetGfxMgr()->AddElement(pImage);
+		pEasterEggProc.reset(new LinearMoveProcess(pImage, dest, ((float) rand()/RAND_MAX)*g_pApp->GetScreenHeight(), 0.6f, true));
+		
+		if(i > 0)
+		{
+			ProcessSharedPtr pDelayProc;
+			pDelayProc.reset(new DelayProcess(250*i));
+			pDelayProc->AttachChild(pEasterEggProc);
+			AttachLogicProcess(pDelayProc);			
+		}
+		else
+			AttachLogicProcess(pEasterEggProc);
+	}
 }
 
 void MainGameState::RegisterEvents()
 {
 	EventManager::Get()->AddListener(MakeDelegate(this, &MainGameState::LostFocusDelegate), ET_LOSTFOCUS);
 	EventManager::Get()->AddListener(MakeDelegate(this, &MainGameState::EndTetrisLoopDelegate), ET_ENDTETRISLOOP);
+	EventManager::Get()->AddListener(MakeDelegate(this, &MainGameState::AddScoreDelegate), ET_ADDSCORE);
 }
 
 void MainGameState::UnregisterEvents()
 {
 	EventManager::Get()->RemoveListener(MakeDelegate(this, &MainGameState::LostFocusDelegate), ET_LOSTFOCUS);
 	EventManager::Get()->RemoveListener(MakeDelegate(this, &MainGameState::EndTetrisLoopDelegate), ET_ENDTETRISLOOP);
+	EventManager::Get()->RemoveListener(MakeDelegate(this, &MainGameState::AddScoreDelegate), ET_ADDSCORE);
 }

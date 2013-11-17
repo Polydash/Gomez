@@ -58,7 +58,7 @@ typedef unsigned char byte;
 
 	/// No output in release mode
 	#define ERROR(str) do{}while(0)
-	#define INFO(str) do{]}while(0)
+	#define INFO(str) do{}while(0)
 	#define LOG(str) do{}while(0)
 
 #endif

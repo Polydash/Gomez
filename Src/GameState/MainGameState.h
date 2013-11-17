@@ -22,6 +22,9 @@ private :
 	
 	GfxRectSharedPtr m_pFadeRect;
 	ProcessSharedPtr m_pDisappearProc;
+	ProcessSharedPtr m_pFadeOutProc;
+	ProcessSharedPtr m_pScrollingProc[3];
+	ProcessSharedPtr m_pEasterEggProc;
 	
 	bool m_moveRight, m_moveLeft;
 	unsigned int m_inputRepeat;
@@ -42,11 +45,13 @@ public:
 
 private :
 
+	bool CheckCollision();
 	void SetProc();
 	void UpdatePieces();
 
 	void LostFocusDelegate(EventSharedPtr pEvent);
 	void EndTetrisLoopDelegate(EventSharedPtr pEvent);
+	void AddScoreDelegate(EventSharedPtr pEvent);
 
 	void RegisterEvents();
 	void UnregisterEvents();

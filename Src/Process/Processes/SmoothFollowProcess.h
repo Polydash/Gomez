@@ -32,7 +32,7 @@ public :
 
 protected :
 
-	void VOnSuccess();
+	virtual void VOnSuccess();
 
 private :
 

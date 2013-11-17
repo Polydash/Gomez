@@ -19,12 +19,12 @@ public :
 	BlinkingProcess(GfxImageSharedPtr pImage, float scaleAmplitude, float fadeAmplitude, float speed);
 	~BlinkingProcess();
 	
-	void VUpdate(unsigned int elapsedTime);
+	virtual void VUpdate(unsigned int elapsedTime);
 	
 private :
 
-	bool VOnInit();
-	void VOnSuccess();
+	virtual bool VOnInit();
+	virtual void VOnSuccess();
 };
 
 #endif
