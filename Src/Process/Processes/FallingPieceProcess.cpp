@@ -104,6 +104,12 @@ void FallingPieceProcess::Rotate()
 {
 	bool result = true;
 	
+	if(m_pPiece->GetPieceType() == PT_OBLOCK)
+	{
+		m_pMoveProc->AddAngle(90);
+		return;
+	}
+	
 	m_pPiece->RotateRight();
 	if(CheckCollision() && !Move(true) && !Move(false))
 	{
@@ -197,6 +203,9 @@ void FallingPieceProcess::SetImage(TetrisPiece *pPiece)
 	g_pApp->GetGfxMgr()->AddElement(m_pImage);
 	m_pImage->VSetColor(color.r, color.g, color.b);
 	m_pGrid->InitPosition(m_pImage);
+	
+	if(m_pPiece->GetPieceType() == PT_OBLOCK)
+		m_pImage->Translate(TetrisGfxBlock::s_pieceSize*0.5f, TetrisGfxBlock::s_pieceSize*0.5f);
 }
 
 void FallingPieceProcess::MainGameInputDelegate(EventSharedPtr pEvent)

@@ -316,15 +316,16 @@ void MainGameState::AddScoreDelegate(EventSharedPtr pEvent)
 		
 	for(int i=0; i<max; i++)
 	{
-		float source = -100;
-		float dest = g_pApp->GetScreenWidth() + 100;
+		float sourceX = -100;
+		float destX = g_pApp->GetScreenWidth() + 100;
+		float posY = ((float) rand()/RAND_MAX)*g_pApp->GetScreenHeight();
 		
 		ProcessSharedPtr pEasterEggProc;
 		GfxImageSharedPtr pImage;
 		pImage.reset(new GfxImage(4, "easter.png"));
-		pImage->SetPosition(source, ((float) rand()/RAND_MAX)*g_pApp->GetScreenHeight());
+		pImage->SetPosition(sourceX, posY);
 		g_pApp->GetGfxMgr()->AddElement(pImage);
-		pEasterEggProc.reset(new LinearMoveProcess(pImage, dest, ((float) rand()/RAND_MAX)*g_pApp->GetScreenHeight(), 0.6f, true));
+		pEasterEggProc.reset(new LinearMoveProcess(pImage, destX, posY, 0.6f, true));
 		
 		if(i > 0)
 		{
