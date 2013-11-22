@@ -5,9 +5,11 @@
 #include "../../GameStd.h"
 #include "../../GameApp/SDLApp.h"
 #include "../../Graphics/GfxManager.h"
+#include "../../Network/Server.h"
 #include "../../Event/EventManager.h"
 #include "../../Event/Events/Evt_MainGameInput.h"
 #include "../../Event/Events/Evt_AttachLogicProcess.h"
+#include "../../Event/Events/Evt_NewTetrisLoop.h"
 
 FallingPieceProcess::FallingPieceProcess(TetrisGrid *pGrid, TetrisPiece *pPiece, float speed):
 m_pGrid(pGrid),
@@ -50,6 +52,7 @@ bool FallingPieceProcess::VOnInit()
 {
 	RegisterEvents();
 	SetProc();
+	BroadcastNewLoop();
 		
 	return true;
 }
@@ -240,6 +243,16 @@ void FallingPieceProcess::MainGameInputDelegate(EventSharedPtr pEvent)
 				break;
 		}
 	}
+}
+
+void FallingPieceProcess::BroadcastNewLoop()
+{
+	EventSharedPtr pEvt;
+	pEvt.reset(new Evt_NewTetrisLoop(m_pGrid, m_pPiece->GetPieceType()));
+	
+	std::ostringstream oss;
+	pEvt->VSerialize(oss);
+	g_pApp->GetServer()->Broadcast(oss);
 }
 
 void FallingPieceProcess::RegisterEvents()

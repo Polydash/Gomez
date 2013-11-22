@@ -49,6 +49,7 @@ private :
 	//Init methods
 	void SetProc();
 	void SetImage(TetrisPiece *pPiece);
+	void BroadcastNewLoop();
 	void RegisterEvents();
 	void UnregisterEvents();
 	

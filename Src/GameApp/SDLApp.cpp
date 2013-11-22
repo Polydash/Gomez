@@ -10,6 +10,7 @@
 #include "../GameState/GameStateManager.h"
 #include "../Resource/ResourceManager.h"
 #include "../Graphics/GfxManager.h"
+#include "../Network/Server.h"
 
 SDLApp* g_pApp = NULL;
 
@@ -28,14 +29,14 @@ m_pGfxMgr(NULL)
 
 SDLApp::~SDLApp()
 {
+	LOG("Server Destruction");
+	SAFE_DELETE(m_pServer);
+	
 	LOG("GameState Manager Destruction");
 	SAFE_DELETE(m_pGameStateMgr);
 	
-	if(m_pGfxMgr)
-	{
-		LOG("Graphics Manager Destruction");
-		SAFE_DELETE(m_pGfxMgr);
-	}
+	LOG("Graphics Manager Destruction");
+	SAFE_DELETE(m_pGfxMgr);
 	
 	if(EventManager::Get())
 	{
@@ -104,6 +105,14 @@ bool SDLApp::Init()
 		return false;
 	}
 	
+	LOG("Server Init");
+	m_pServer = new Server("127.0.0.1", 4000);
+	if(!m_pServer->Init())
+	{
+		ERROR("Failed to init Server");
+		return false;
+	}
+	
 	return true;
 }
 
@@ -168,6 +177,9 @@ void SDLApp::MainLoop()
 			}
 		}
 		
+		//Network update
+		m_pServer->Select();
+		
 		//Run game if not minimized
 		if(!bIsMinimized)
 		{			
@@ -188,6 +200,11 @@ GameStateManager* SDLApp::GetGameStateMgr() const
 GfxManager* SDLApp::GetGfxMgr() const
 {
 	return m_pGfxMgr;
+}
+
+Server* SDLApp::GetServer() const
+{
+	return m_pServer;
 }
 
 void SDLApp::LoadConfig()

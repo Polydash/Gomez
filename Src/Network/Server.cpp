@@ -6,6 +6,8 @@
 
 #include "Server.h"
 #include "../GameStd.h"
+#include "../Event/EventManager.h"
+#include "../Event/Events/Evt_MainGameInput.h"
 
 Server::Server(const char* ipAddress, short int port, unsigned int maxConnections):
 m_maxConnections(maxConnections)
@@ -17,7 +19,7 @@ m_maxConnections(maxConnections)
 }
 
 Server::~Server()
-{
+{	
 	SocketList::iterator i;
 	for(i=m_clients.begin(); i!=m_clients.end(); i++)
 	{
@@ -56,6 +58,9 @@ void Server::Select()
 {
 	fd_set in;
 	int maxFd = m_sockfd;
+	timeval tv;
+	tv.tv_sec = 0;
+	tv.tv_usec = 100;
 	
 	FD_ZERO(&in);
 	FD_SET(m_sockfd, &in);
@@ -71,7 +76,7 @@ void Server::Select()
 	}
 	
 	int value;
-	value = select(maxFd + 1, &in, NULL, NULL, 0);
+	value = select(maxFd + 1, &in, NULL, NULL, &tv);	
 	if(value == -1)
 	{
 		ERROR("Failed to update connections with select");
@@ -115,15 +120,19 @@ void Server::Send(SockFd sockfd, const std::ostringstream &oss)
 	int size = strlen(str.c_str());
 	if(size > MAX_PACKET_SIZE)
 	{
-		size = MAX_PACKET_SIZE;
-		ERROR("Sent message was truncated");
-	}
-	
-	if(send(sockfd, str.c_str(), size, MSG_DONTWAIT) == -1)
-	{
-		ERROR("Failed to send message to : " << sockfd);
+		ERROR("Packet size exceeded its maximum value");
 		return;
 	}
+	
+	char* pBuffer = new char[size + sizeof(int)];
+	memcpy(pBuffer, &size, sizeof(int));
+	memcpy(pBuffer+sizeof(int), str.c_str(), size);
+	
+	int value;
+	if((value = send(sockfd, pBuffer, size+sizeof(int), MSG_DONTWAIT)) == -1)
+		ERROR("Failed to send packet to client" << sockfd);
+		
+	delete [] pBuffer;
 }
 
 void Server::AcceptClient()
@@ -150,24 +159,55 @@ void Server::RemoveClient(SockFd sockfd)
 
 bool Server::HandleInput(SockFd sockfd)
 {
-	char buffer[MAX_PACKET_SIZE+1];
+	bool result = false;
 	
-	int value;
-	if((value = recv(sockfd, buffer, MAX_PACKET_SIZE, MSG_DONTWAIT)) == -1)
+	int value, size;
+	while((value = recv(sockfd, &size, sizeof(int), MSG_DONTWAIT)) > 0)
+	{	
+		char* pBuffer = new char[size+1];
+		if((value = recv(sockfd, pBuffer, size, MSG_DONTWAIT)) != size)
+		{
+			ERROR("Incomplete packet");
+			return false;
+		}
+		else
+		{
+			pBuffer[size] = '\0';
+			std::istringstream iss;
+			iss.str(pBuffer);
+			HandleEvent(iss);
+			result = true;
+		}
+		delete [] pBuffer;
+	}
+	
+	if(value == -1)
 	{
-		ERROR("Failed to receive message from client : " << sockfd);
+		ERROR("Failed to receive packets from client : " << sockfd);
 		return false;
 	}
-	else if(value)
+	
+	return result;
+}
+
+void Server::HandleEvent(std::istringstream &iss)
+{
+	int type;
+	iss >> type;
+	
+	EventSharedPtr pEvt;
+	switch(type)
 	{
-		buffer[value] = '\0';
-		std::istringstream iss;
-		iss.str(buffer);
-		//QueueEvent
-		std::cout << "Message received" << std::endl;
+		case ET_MAINGAMEINPUT :
+			pEvt.reset(new Evt_MainGameInput());
+			pEvt->VDeserialize(iss);
+			break;
+			
+		default :
+			ERROR("Unsupported network event");
+			break;
 	}
-	else
-		return false;
-		
-	return true;
+	
+	if(pEvt)
+		EventManager::Get()->QueueEvent(pEvt);
 }

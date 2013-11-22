@@ -35,6 +35,7 @@ private :
 	void AcceptClient();
 	void RemoveClient(SockFd sockfd);
 	bool HandleInput(SockFd sockfd);
+	void HandleEvent(std::istringstream &iss);
 };
 
 #endif

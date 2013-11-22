@@ -31,7 +31,7 @@ void SmoothFollowProcess::VUpdate(unsigned int elapsedTime)
 	m_pImage->Translate(deltaX, deltaY);
 	
 	double diffAngle = m_angle - m_pImage->GetAngle();
-	
+		
 	if(diffAngle < -180)
 		diffAngle += 360;
 	else if(diffAngle > 180)
@@ -75,10 +75,15 @@ bool SmoothFollowProcess::IsMoving(float diff) const
 	float diffX = m_posX - m_pImage->GetPosX();
 	float diffY = m_posY - m_pImage->GetPosY();
 	double diffAngle = m_angle - m_pImage->GetAngle();
+	
+	if(diffAngle < -180)
+		diffAngle += 360;
+	else if(diffAngle > 180)
+		diffAngle -= 360;
 
 	if(fabs(diffX) > diff || fabs(diffY) > diff || fabs(diffAngle) > diff)
 		return true;
-		
+	
 	return false;
 }
 

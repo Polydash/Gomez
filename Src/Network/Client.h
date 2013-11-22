@@ -30,6 +30,7 @@ public :
 private :
 
 	bool HandleInput();
+	void HandleEvent(std::istringstream &iss);
 };
 
 #endif

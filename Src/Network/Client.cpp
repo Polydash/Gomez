@@ -1,9 +1,13 @@
 #include <unistd.h>
 #include <string.h>
 #include <iostream>
+#include <errno.h>
 
 #include "Client.h"
 #include "../GameStd.h"
+#include "../Event/EventManager.h"
+#include "../Event/IEvent.h"
+#include "../Event/Events/Evt_NewTetrisLoop.h"
 
 Client::Client():
 m_bIsConnected(false)
@@ -79,38 +83,81 @@ void Client::Send(const std::ostringstream &oss)
 	int size = strlen(str.c_str());
 	if(size > MAX_PACKET_SIZE)
 	{
-		size = MAX_PACKET_SIZE;
-		ERROR("Sent message was truncated");
-	}
-	
-	if(send(m_sockfd, str.c_str(), size, MSG_DONTWAIT) == -1)
-	{
-		ERROR("Failed to send message to server");
-		m_bIsConnected = false;
+		ERROR("Packet size exceeded its maximum value");
 		return;
 	}
+	
+	char* pBuffer = new char[size + sizeof(int)];
+	memcpy(pBuffer, &size, sizeof(int));
+	memcpy(pBuffer+sizeof(int), str.c_str(), size);
+	
+	int value;
+	if((value = send(m_sockfd, pBuffer, size+sizeof(int), MSG_DONTWAIT)) == -1)
+	{
+		ERROR("Failed to send packet to server");
+		m_bIsConnected = false;
+	}
+	
+	delete [] pBuffer;
 }
 
 bool Client::HandleInput()
 {
-	char buffer[MAX_PACKET_SIZE+1];
+	bool result = false;
 	
-	int value;
-	if((value = recv(m_sockfd, buffer, MAX_PACKET_SIZE, MSG_DONTWAIT)) == -1)
+	int value, size;
+	while((value = recv(m_sockfd, &size, sizeof(int), MSG_DONTWAIT)) > 0)
+	{	
+		char* pBuffer = new char[size+1];
+		if((value = recv(m_sockfd, pBuffer, size, MSG_DONTWAIT)) != size)
+		{
+			ERROR("Incomplete packet");
+			return false;
+		}
+		else
+		{
+			pBuffer[size] = '\0';
+			std::istringstream iss;
+			iss.str(pBuffer);
+			HandleEvent(iss);
+			result = true;
+		}
+		delete [] pBuffer;
+	}
+	
+	if(value == -1 && errno != EAGAIN && errno != EWOULDBLOCK)
 	{
-		ERROR("Failed to receive message from server");
+		ERROR("Failed to receive packets from server");
 		return false;
 	}
-	else if(value)
-	{
-		buffer[value] = '\0';
-		std::istringstream iss;
-		iss.str(buffer);
-		//QueueEvent
-		INFO("Message received");
-	}
-	else
-		return false;
-		
-	return true;
+	
+	return result;
 }
+
+void Client::HandleEvent(std::istringstream &iss)
+{
+	int type;
+	iss >> type;
+	
+	//Debugging 
+	INFO(iss.str());
+	
+	EventSharedPtr pEvt;
+	switch(type)
+	{	
+		case ET_NEWTETRISLOOP :
+			pEvt.reset(new Evt_NewTetrisLoop());
+			pEvt->VDeserialize(iss);
+			break;
+		
+		default :
+			ERROR("Unsupported network event");
+			break;
+	}
+	
+	//This line needs to be uncommented as soon as TetrisAI gets its EventManager
+	
+	//if(pEvt)
+		//EventManager::Get()->QueueEvent(pEvt);
+}
+

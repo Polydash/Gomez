@@ -10,6 +10,7 @@ extern SDLApp* g_pApp;
 
 class GameStateManager;
 class GfxManager;
+class Server;
 
 class SDLApp
 {
@@ -23,6 +24,7 @@ private :
 	
 	GameStateManager *m_pGameStateMgr;
 	GfxManager *m_pGfxMgr;
+	Server *m_pServer;
 
 public :
 	
@@ -34,6 +36,7 @@ public :
 	
 	GameStateManager* GetGameStateMgr() const;
 	GfxManager* GetGfxMgr() const;
+	Server* GetServer() const;
 	
 	void RequestExit(){ m_bIsDone = true; }
 	
