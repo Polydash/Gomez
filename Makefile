@@ -1,7 +1,7 @@
 # Where to find libraries and source directories
 LFLAGS = -L./Libraries/TinyXML/lib -lSDL2 -lSDL2_image -lSDL2_ttf -ltinyxml
 IFLAGS = -I./Libraries/TinyXML/include -I./Libraries/FastDelegate/include
-SRCDIR = Src Src/Event Src/Events Src/GameState Src/GameApp Src/Graphics Src/Resource Src/Process Src/Process/Processes Src/TetrisLogic
+SRCDIR = Src Src/Event Src/Events Src/GameState Src/GameApp Src/Graphics Src/Resource Src/Process Src/Process/Processes Src/TetrisLogic Src/Network
 
 # Lists of .cpp, .o and .d files
 SRCLIST = $(foreach DIR, $(SRCDIR), $(patsubst $(DIR)/%.cpp, %.cpp, $(wildcard $(DIR)/*.cpp)))
