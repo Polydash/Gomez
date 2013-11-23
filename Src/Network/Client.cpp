@@ -155,9 +155,7 @@ void Client::HandleEvent(std::istringstream &iss)
 			break;
 	}
 	
-	//This line needs to be uncommented as soon as TetrisAI gets its EventManager
-	
-	//if(pEvt)
-		//EventManager::Get()->QueueEvent(pEvt);
+	if(pEvt)
+		EventManager::Get()->QueueEvent(pEvt);
 }
 

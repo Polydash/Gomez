@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <errno.h>
 #include <sstream>
+#include <errno.h>
 
 #include "Server.h"
 #include "../GameStd.h"
@@ -181,7 +182,7 @@ bool Server::HandleInput(SockFd sockfd)
 		delete [] pBuffer;
 	}
 	
-	if(value == -1)
+	if(value == -1 && errno != EAGAIN && errno != EWOULDBLOCK)
 	{
 		ERROR("Failed to receive packets from client : " << sockfd);
 		return false;

@@ -23,6 +23,9 @@ public :
 	
 	virtual eEventType VGetType() const{ return ET_NEWTETRISLOOP; }
 	
+	const GridVector& GetGrid() const{ return m_grid; }
+	ePieceType GetPieceType() const{ return m_pieceType; }
+	
 	virtual void VSerialize(std::ostringstream &oss);
 	virtual void VDeserialize(std::istringstream &iss);
 	
