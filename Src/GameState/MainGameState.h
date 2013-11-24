@@ -27,6 +27,7 @@ private :
 	ProcessSharedPtr m_pEasterEggProc;
 	
 	bool m_moveRight, m_moveLeft;
+	bool m_joystickDeadZone;
 	unsigned int m_inputRepeat;
 	
 	GfxImageSharedPtr m_pBackgroundImage;
@@ -48,6 +49,9 @@ private :
 	bool CheckCollision();
 	void SetProc();
 	void UpdatePieces();
+	
+	void OnKeyboardEvent(const SDL_Event &event);
+	void OnJoystickEvent(const SDL_Event &event);
 
 	void LostFocusDelegate(EventSharedPtr pEvent);
 	void EndTetrisLoopDelegate(EventSharedPtr pEvent);

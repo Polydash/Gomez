@@ -13,51 +13,15 @@
 MenuState::MenuState():
 m_bIsDone(false),
 m_bHasInput(false),
+m_joystickDeadZone(true),
 m_option(0)
 {
 }
 
 void MenuState::VOnInput(const SDL_Event &event)
 {
-	if(m_bHasInput)
-	{
-		if(event.type == SDL_KEYDOWN && !event.key.repeat)
-		{
-			switch(event.key.keysym.sym)
-			{		
-				case SDLK_DOWN :
-					m_option = (m_option+1)%2;
-					m_pBlink->Success();
-					m_pBlink.reset(new BlinkingProcess(m_pOptions[m_option], 0.05f, 192, 0.01f));
-					AttachLogicProcess(m_pBlink);
-					break;
-					
-				case SDLK_UP :
-					m_option = (m_option-1);
-					if(m_option < 0) m_option = 1;
-					m_pBlink->Success();
-					m_pBlink.reset(new BlinkingProcess(m_pOptions[m_option], 0.05f, 192, 0.01f));
-					AttachLogicProcess(m_pBlink);
-					break;
-				
-				case SDLK_RETURN :
-					m_bHasInput = false;
-					m_bIsDone = true;
-					
-					if(m_pFlash)
-						m_pFlash->Abort();
-						
-					m_pFadeRect->VSetColor(0, 0, 0);
-					m_pFadeOutProc.reset(new FadeProcess(m_pFadeRect, 0, 255, 0.4f));
-					AttachLogicProcess(m_pFadeOutProc);
-					break;
-				
-				default :
-					break;
-			}
-		}
-	
-	}
+	OnKeyboardEvent(event);
+	OnJoystickEvent(event);
 }
 
 void MenuState::VOnUpdate(unsigned int elapsedTime)
@@ -118,6 +82,94 @@ void MenuState::VOnEnter()
 	
 	SetDisplay();
 	SetProc();
+}
+
+void MenuState::OnKeyboardEvent(const SDL_Event &event)
+{
+	if(m_bHasInput)
+	{
+		if(event.type == SDL_KEYDOWN && !event.key.repeat)
+		{
+			switch(event.key.keysym.sym)
+			{		
+				case SDLK_DOWN :
+					m_option = (m_option+1)%2;
+					m_pBlink->Success();
+					m_pBlink.reset(new BlinkingProcess(m_pOptions[m_option], 0.05f, 192, 0.01f));
+					AttachLogicProcess(m_pBlink);
+					break;
+					
+				case SDLK_UP :
+					m_option = (m_option-1);
+					if(m_option < 0) m_option = 1;
+					m_pBlink->Success();
+					m_pBlink.reset(new BlinkingProcess(m_pOptions[m_option], 0.05f, 192, 0.01f));
+					AttachLogicProcess(m_pBlink);
+					break;
+				
+				case SDLK_RETURN :
+					m_bHasInput = false;
+					m_bIsDone = true;
+					
+					if(m_pFlash)
+						m_pFlash->Abort();
+						
+					m_pFadeRect->VSetColor(0, 0, 0);
+					m_pFadeOutProc.reset(new FadeProcess(m_pFadeRect, 0, 255, 0.4f));
+					AttachLogicProcess(m_pFadeOutProc);
+					break;
+				
+				default :
+					break;
+			}
+		}
+	}
+}
+
+void MenuState::OnJoystickEvent(const SDL_Event &event)
+{
+	const int inputZone = 30000;
+	const int deadZone = 10000;
+	
+	if(m_bHasInput)
+	{
+		if(event.type == SDL_JOYAXISMOTION && event.jaxis.axis == 1)
+		{
+			EventSharedPtr pEvt;
+			if(event.jaxis.value > inputZone && m_joystickDeadZone)
+			{
+				m_joystickDeadZone = false;
+				m_option = (m_option+1)%2;
+				m_pBlink->Success();
+				m_pBlink.reset(new BlinkingProcess(m_pOptions[m_option], 0.05f, 192, 0.01f));
+				AttachLogicProcess(m_pBlink);
+			}
+			else if(event.jaxis.value < -inputZone && m_joystickDeadZone)
+			{
+				m_joystickDeadZone = false;
+				m_option = (m_option-1);
+				if(m_option < 0) m_option = 1;
+				m_pBlink->Success();
+				m_pBlink.reset(new BlinkingProcess(m_pOptions[m_option], 0.05f, 192, 0.01f));
+				AttachLogicProcess(m_pBlink);
+			}
+			else if(fabs(event.jaxis.value) < deadZone)
+				m_joystickDeadZone = true;
+		}
+		
+		if(event.type == SDL_JOYBUTTONDOWN && (event.jbutton.button == 0 || event.jbutton.button == 7))
+		{
+			m_bHasInput = false;
+			m_bIsDone = true;
+			
+			if(m_pFlash)
+				m_pFlash->Abort();
+				
+			m_pFadeRect->VSetColor(0, 0, 0);
+			m_pFadeOutProc.reset(new FadeProcess(m_pFadeRect, 0, 255, 0.4f));
+			AttachLogicProcess(m_pFadeOutProc);
+		}
+	}
 }
 
 void MenuState::VOnLeave()

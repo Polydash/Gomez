@@ -21,6 +21,7 @@ private :
 	GfxTextSharedPtr  m_pOptions[2];
 	
 	bool m_bIsDone, m_bHasInput;
+	bool m_joystickDeadZone;
 	int m_option;
 	
 public :
@@ -36,6 +37,9 @@ public :
 	virtual eGameState VGetState() const { return GS_MENU; }
 	
 private :
+
+	void OnKeyboardEvent(const SDL_Event &event);
+	void OnJoystickEvent(const SDL_Event &event);
 
 	void SetDisplay();
 	void SetProc();

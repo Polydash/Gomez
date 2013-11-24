@@ -22,6 +22,7 @@ m_imgPath("Data/Images"),
 m_fontPath("Data/Fonts"),
 m_bIsDone(false),
 m_pScreen(NULL),
+m_pJoystick(NULL),
 m_pGameStateMgr(NULL),
 m_pGfxMgr(NULL)
 {
@@ -46,6 +47,12 @@ SDLApp::~SDLApp()
 	
 	LOG("Resource Manager Destruction");
 	ResourceManager::Destroy();
+	
+	if(m_pJoystick)
+	{
+		SDL_JoystickClose(m_pJoystick);
+		m_pJoystick = NULL;
+	}
 	
 	SDL_DestroyWindow(m_pScreen);
 	
@@ -166,8 +173,24 @@ void SDLApp::MainLoop()
 			{
 				switch(event.type)
 				{
+					case SDL_JOYDEVICEREMOVED :
+						if(m_pJoystick)
+						{
+							SDL_JoystickClose(m_pJoystick);
+							m_pJoystick = NULL;
+						}
+						break;
+			
+					case SDL_JOYDEVICEADDED :
+						if(!m_pJoystick)
+							m_pJoystick = SDL_JoystickOpen(0);
+						break;
+					
 					case SDL_KEYDOWN :
 					case SDL_KEYUP :
+					case SDL_JOYAXISMOTION :
+					case SDL_JOYBUTTONDOWN :
+					case SDL_JOYBUTTONUP :
 						m_pGameStateMgr->OnInput(event);
 						break;
 						
@@ -235,7 +258,7 @@ void SDLApp::LoadConfig()
 bool SDLApp::SDLInit()
 {
 	LOG("SDL Init");
-	if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER) == -1)
+	if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_JOYSTICK) == -1)
 	{
 		ERROR("Failed to init SDL");
 		return false;
@@ -270,5 +293,9 @@ bool SDLApp::SDLInit()
 		return false;
 	}
 	
+	SDL_JoystickEventState(SDL_ENABLE);
+	if(SDL_NumJoysticks() > 0)
+		m_pJoystick = SDL_JoystickOpen(0);
+		
 	return true;
 }

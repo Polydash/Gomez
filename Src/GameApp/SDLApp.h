@@ -21,6 +21,7 @@ private :
 	std::string m_title, m_imgPath, m_fontPath;
 
 	SDL_Window *m_pScreen;
+	SDL_Joystick *m_pJoystick;
 	
 	GameStateManager *m_pGameStateMgr;
 	GfxManager *m_pGfxMgr;

@@ -140,7 +140,7 @@ void Client::HandleEvent(std::istringstream &iss)
 	iss >> type;
 	
 	//Debugging 
-	INFO(iss.str());
+	LOG(iss.str());
 	
 	EventSharedPtr pEvt;
 	switch(type)

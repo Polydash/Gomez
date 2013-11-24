@@ -29,6 +29,7 @@ m_pCurrentPiece(NULL),
 m_pNextPiece(NULL),
 m_moveRight(false),
 m_moveLeft(false),
+m_joystickDeadZone(true),
 m_inputRepeat(0)
 {
 	RegisterEvents();
@@ -49,68 +50,11 @@ void MainGameState::VOnInput(const SDL_Event &event)
 {
 	//Possibly send some input to UI
 	
-	if(event.type == SDL_KEYDOWN && !event.key.repeat)
-	{
-		EventSharedPtr pEvt;
-		switch(event.key.keysym.sym)
-		{
-			case SDLK_ESCAPE :
-				if(!m_pFadeOutProc && m_pDisappearProc && m_pDisappearProc->IsDone())
-				{				
-					pEvt.reset(new Evt_StateChange(GS_MENU));
-					EventManager::Get()->QueueEvent(pEvt);
-					AbortAllProcesses();
-				}
-				break;
-			
-			case SDLK_LEFT :
-				m_moveLeft = true;
-				pEvt.reset(new Evt_MainGameInput(GI_MOVELEFT));
-				EventManager::Get()->QueueEvent(pEvt);
-				break;
-				
-			case SDLK_RIGHT :
-				m_moveRight = true;
-				pEvt.reset(new Evt_MainGameInput(GI_MOVERIGHT));
-				EventManager::Get()->QueueEvent(pEvt);
-				break;
-				
-			case SDLK_DOWN : 
-				pEvt.reset(new Evt_MainGameInput(GI_DROP));
-				EventManager::Get()->QueueEvent(pEvt);
-				break;
-				
-			case SDLK_UP :
-				pEvt.reset(new Evt_MainGameInput(GI_ROTATE));
-				EventManager::Get()->QueueEvent(pEvt);
-				break;
-				
-			default :
-				break;
-		}
-	}
-	else if(event.type == SDL_KEYUP)
-	{
-		shared_ptr<Evt_MainGameInput> pEvt;
-		switch(event.key.keysym.sym)
-		{
-			case SDLK_DOWN :
-				pEvt.reset(new Evt_MainGameInput(GI_DROP, false));
-				EventManager::Get()->QueueEvent(pEvt);
-				break;
-				
-			case SDLK_LEFT : 
-				m_moveLeft = false;
-				break;
-				
-			case SDLK_RIGHT :
-				m_moveRight = false;
-				break;
-				
-			default :
-				break;
-		}
-	}		
+	if(event.type == SDL_KEYDOWN || event.type == SDL_KEYUP)
+		OnKeyboardEvent(event);	
+		
+	if(event.type == SDL_JOYAXISMOTION || event.type == SDL_JOYBUTTONDOWN || event.type == SDL_JOYBUTTONUP)
+		OnJoystickEvent(event);
 }
 
 void MainGameState::VOnUpdate(unsigned int elapsedTime)
@@ -266,6 +210,135 @@ void MainGameState::UpdatePieces()
 	m_pNextPiece = new TetrisPiece(type);
 	m_pTetrisGrid->InitPosition(m_pNextPiece);
 	m_pTetrisGfxNextPiece->UpdateNextPiece(m_pNextPiece->GetPieceType());
+}
+
+void MainGameState::OnKeyboardEvent(const SDL_Event &event)
+{
+	if(event.type == SDL_KEYDOWN && !event.key.repeat)
+	{
+		EventSharedPtr pEvt;
+		switch(event.key.keysym.sym)
+		{
+			case SDLK_ESCAPE :
+				if(!m_pFadeOutProc && m_pDisappearProc && m_pDisappearProc->IsDone())
+				{				
+					pEvt.reset(new Evt_StateChange(GS_MENU));
+					EventManager::Get()->QueueEvent(pEvt);
+					AbortAllProcesses();
+				}
+				break;
+			
+			case SDLK_LEFT :
+				m_moveLeft = true;
+				pEvt.reset(new Evt_MainGameInput(GI_MOVELEFT));
+				EventManager::Get()->QueueEvent(pEvt);
+				break;
+				
+			case SDLK_RIGHT :
+				m_moveRight = true;
+				pEvt.reset(new Evt_MainGameInput(GI_MOVERIGHT));
+				EventManager::Get()->QueueEvent(pEvt);
+				break;
+				
+			case SDLK_DOWN : 
+				pEvt.reset(new Evt_MainGameInput(GI_DROP));
+				EventManager::Get()->QueueEvent(pEvt);
+				break;
+				
+			case SDLK_UP :
+				pEvt.reset(new Evt_MainGameInput(GI_ROTATE));
+				EventManager::Get()->QueueEvent(pEvt);
+				break;
+				
+			default :
+				break;
+		}
+	}
+	else if(event.type == SDL_KEYUP)
+	{
+		shared_ptr<Evt_MainGameInput> pEvt;
+		switch(event.key.keysym.sym)
+		{
+			case SDLK_DOWN :
+				pEvt.reset(new Evt_MainGameInput(GI_DROP, false));
+				EventManager::Get()->QueueEvent(pEvt);
+				break;
+				
+			case SDLK_LEFT : 
+				m_moveLeft = false;
+				break;
+				
+			case SDLK_RIGHT :
+				m_moveRight = false;
+				break;
+				
+			default :
+				break;
+		}
+	}
+}
+
+void MainGameState::OnJoystickEvent(const SDL_Event &event)
+{
+	const int inputZone = 20000;
+	const int deadZone = 10000;
+	
+	if(event.type == SDL_JOYAXISMOTION && event.jaxis.axis == 0)
+	{
+		EventSharedPtr pEvt;
+		if(event.jaxis.value > inputZone && m_joystickDeadZone)
+		{
+			m_moveRight = true;
+			m_joystickDeadZone = false;
+			pEvt.reset(new Evt_MainGameInput(GI_MOVERIGHT));
+			EventManager::Get()->QueueEvent(pEvt);
+		}
+		else if(event.jaxis.value < -inputZone && m_joystickDeadZone)
+		{
+			m_moveLeft = true;
+			m_joystickDeadZone = false;
+			pEvt.reset(new Evt_MainGameInput(GI_MOVELEFT));
+			EventManager::Get()->QueueEvent(pEvt);
+		}
+		else if(fabs(event.jaxis.value) < deadZone)
+		{
+			m_joystickDeadZone = true;
+			m_moveLeft = false;
+			m_moveRight = false;
+		}
+	}
+	
+	if(event.type == SDL_JOYBUTTONDOWN)
+	{
+		EventSharedPtr pEvt;
+		switch(event.jbutton.button)
+		{
+			case 2 : 
+				pEvt.reset(new Evt_MainGameInput(GI_ROTATE));
+				EventManager::Get()->QueueEvent(pEvt);
+				break;
+				
+			case 0 :
+				pEvt.reset(new Evt_MainGameInput(GI_DROP, true));
+				EventManager::Get()->QueueEvent(pEvt);
+				break;
+				
+			case 7 :
+				if(!m_pFadeOutProc && m_pDisappearProc && m_pDisappearProc->IsDone())
+				{				
+					pEvt.reset(new Evt_StateChange(GS_MENU));
+					EventManager::Get()->QueueEvent(pEvt);
+					AbortAllProcesses();
+				}
+				break;
+		}
+	}
+	else if(event.type == SDL_JOYBUTTONUP && event.jbutton.button == 0)
+	{
+		EventSharedPtr pEvt;
+		pEvt.reset(new Evt_MainGameInput(GI_DROP, false));
+		EventManager::Get()->QueueEvent(pEvt);
+	}
 }
 
 void MainGameState::LostFocusDelegate(EventSharedPtr pEvent)
