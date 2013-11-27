@@ -17,6 +17,7 @@ m_pPiece(pPiece),
 m_speed(speed),
 m_timeCount(0),
 m_bIsDone(false),
+m_bLowerAccel(false),
 m_bIsDropped(false)
 {
 }
@@ -28,7 +29,7 @@ FallingPieceProcess::~FallingPieceProcess()
 
 void FallingPieceProcess::VUpdate(unsigned int elapsedTime)
 {	
-	if(m_bIsDropped)
+	if(m_bLowerAccel)
 		m_timeCount += elapsedTime*m_speed*15;
 	else
 		m_timeCount += elapsedTime*m_speed;
@@ -59,8 +60,13 @@ bool FallingPieceProcess::VOnInit()
 
 void FallingPieceProcess::VOnSuccess()
 {
-	PlacePiece();
-	g_pApp->GetGfxMgr()->RemoveElement(m_pImage);
+	if(!m_bIsDropped)
+	{	
+		PlacePiece();
+		g_pApp->GetGfxMgr()->RemoveElement(m_pImage);
+	}
+	else
+		DropPiece();
 }
 
 void FallingPieceProcess::VOnAbort()
@@ -228,11 +234,16 @@ void FallingPieceProcess::MainGameInputDelegate(EventSharedPtr pEvent)
 				Move(true);
 				break;
 				
-			case GI_DROP :
+			case GI_LOWER :
 				if(pEvt->GetPressed())
-					m_bIsDropped = true;
+					m_bLowerAccel = true;
 				else
-					m_bIsDropped = false;
+					m_bLowerAccel = false;
+				break;
+			
+			case GI_DROP :
+				m_bIsDone = true;
+				m_bIsDropped = true;
 				break;
 				
 			case GI_ROTATE :

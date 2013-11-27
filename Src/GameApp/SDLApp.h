@@ -4,6 +4,8 @@
 #include <SDL2/SDL.h>
 #include <string>
 
+extern int g_linesCleared;
+
 //Game Application Global
 class SDLApp;
 extern SDLApp* g_pApp;

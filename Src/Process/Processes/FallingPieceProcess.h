@@ -16,6 +16,7 @@ private :
 	float 		 m_speed;
 	unsigned int m_timeCount;
 	bool  		 m_bIsDone;
+	bool  		 m_bLowerAccel;
 	bool  		 m_bIsDropped;
 	
 	GfxImageSharedPtr m_pImage;

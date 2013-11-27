@@ -12,6 +12,7 @@
 #include "../Graphics/GfxManager.h"
 #include "../Network/Server.h"
 
+int g_linesCleared;
 SDLApp* g_pApp = NULL;
 
 SDLApp::SDLApp():
@@ -127,6 +128,7 @@ void SDLApp::MainLoop()
 {
 	SDL_Event event;
 	unsigned int startTime, elapsedTime, FPSTime;
+	int speed = 1;
 	bool bIsMinimized = false;
 	
 	FPSTime = 1000 / 60;
@@ -171,6 +173,14 @@ void SDLApp::MainLoop()
 			
 			if(!bIsMinimized)
 			{
+				#ifdef DEBUG
+				if(event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_s)
+				{
+					if(speed == 50) speed = 1;
+					else speed = 50;
+				}
+				#endif
+				
 				switch(event.type)
 				{
 					case SDL_JOYDEVICEREMOVED :
@@ -207,7 +217,7 @@ void SDLApp::MainLoop()
 		if(!bIsMinimized)
 		{			
 			EventManager::Get()->Update();
-			m_pGameStateMgr->Update(elapsedTime);
+			m_pGameStateMgr->Update(speed*elapsedTime);
 			m_pGfxMgr->PreRender();
 			m_pGfxMgr->Render();
 			m_pGfxMgr->PostRender();

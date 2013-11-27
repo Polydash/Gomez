@@ -7,9 +7,9 @@ DroppedPieceProcess::DroppedPieceProcess(TetrisGrid *pGrid, TetrisPiece *pPiece,
 m_pGrid(pGrid),
 m_pPiece(pPiece),
 m_pImage(pImage),
-m_accel(0.75f),
+m_accel(0.05f),
 m_speed(0.0f),
-m_maxSpeed(15.0f)
+m_maxSpeed(1.0f)
 {
 }
 
@@ -26,14 +26,22 @@ void DroppedPieceProcess::SetVelocity(float accel, float maxSpeed)
 void DroppedPieceProcess::VUpdate(unsigned int elapsedTime)
 {
 	int offsetY = m_pGrid->GetOffsetY();
-	float diff = fabs(m_pImage->GetPosY() - ((m_pPiece->GetCenterY()+0.5f)*TetrisGfxBlock::s_pieceSize + offsetY));
+	float centerY;
+	float diff;
 	
+	if(m_pPiece->GetPieceType() == PT_OBLOCK)
+		centerY = m_pImage->GetPosY() - TetrisGfxBlock::s_pieceSize*0.5f;
+	else
+		centerY = m_pImage->GetPosY();
+	
+	diff = fabs(centerY - ((m_pPiece->GetCenterY()+0.5f)*TetrisGfxBlock::s_pieceSize + offsetY));
+		
 	m_speed += m_accel;
 	
 	if(m_speed > m_maxSpeed)
 		m_speed = m_maxSpeed;
 	
-	if(diff < m_speed)
+	if(diff < m_speed*elapsedTime)
 	{
 		float x = m_pImage->GetPosX();
 		m_pImage->SetPosition(x, (m_pPiece->GetCenterY()+0.5f)*TetrisGfxBlock::s_pieceSize + offsetY);
@@ -41,7 +49,7 @@ void DroppedPieceProcess::VUpdate(unsigned int elapsedTime)
 	}
 	else
 	{
-		m_pImage->Translate(0, m_speed);
+		m_pImage->Translate(0, m_speed*elapsedTime);
 	}
 }
 
@@ -55,13 +63,11 @@ void DroppedPieceProcess::VOnSuccess()
 {
 	PlacePiece();
 	g_pApp->GetGfxMgr()->RemoveElement(m_pImage);
-	SAFE_DELETE(m_pPiece);
 }
 
 void DroppedPieceProcess::VOnAbort()
 {
 	g_pApp->GetGfxMgr()->RemoveElement(m_pImage);
-	SAFE_DELETE(m_pPiece);
 }
 
 bool DroppedPieceProcess::Lower()
@@ -122,6 +128,6 @@ void DroppedPieceProcess::PlacePiece()
 		m_pGrid->AddBlock(x, y, type);
 	}
 	
-	ProcessSharedPtr pProc = ProcessSharedPtr(new DeleteLinesProcess(m_pGrid, 0.01));
+	ProcessSharedPtr pProc = ProcessSharedPtr(new DeleteLinesProcess(m_pGrid, 1.0f));
 	AttachChild(pProc);
 }

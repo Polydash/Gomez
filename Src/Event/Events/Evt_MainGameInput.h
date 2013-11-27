@@ -6,6 +6,7 @@
 enum eGameInput{ GI_MOVELEFT,
 				 GI_MOVERIGHT,
 				 GI_ROTATE,
+				 GI_LOWER,
 				 GI_DROP
 			   };
 

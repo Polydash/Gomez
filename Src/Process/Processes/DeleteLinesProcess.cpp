@@ -55,6 +55,8 @@ bool DeleteLinesProcess::VOnInit()
 		if(IsLineFull(j))
 			m_linesToDelete.push_back(j);
 	}
+
+	g_linesCleared += m_linesToDelete.size();
 	
 	m_leftIt = (m_pGrid->GetWidth() - 1)/2;
 	m_rightIt = m_leftIt + 1;

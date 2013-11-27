@@ -95,6 +95,7 @@ void MainGameState::VOnUpdate(unsigned int elapsedTime)
 
 void MainGameState::VOnEnter()
 {
+	g_linesCleared = 0;
 	INFO("Entering MAINGAME state");
 	LOG("Entering MAINGAME state");
 	ResourceManager::Get()->Clear();
@@ -127,6 +128,7 @@ void MainGameState::VOnEnter()
 
 void MainGameState::VOnLeave()
 {
+	INFO("Lines : " << g_linesCleared);
 	m_pScrollingProc[0]->Success();
 	m_pScrollingProc[1]->Success();
 	m_pScrollingProc[2]->Success();
@@ -228,6 +230,11 @@ void MainGameState::OnKeyboardEvent(const SDL_Event &event)
 				}
 				break;
 			
+			case SDLK_SPACE :
+				pEvt.reset(new Evt_MainGameInput(GI_DROP));
+				EventManager::Get()->QueueEvent(pEvt);
+				break;
+			
 			case SDLK_LEFT :
 				m_moveLeft = true;
 				pEvt.reset(new Evt_MainGameInput(GI_MOVELEFT));
@@ -241,7 +248,7 @@ void MainGameState::OnKeyboardEvent(const SDL_Event &event)
 				break;
 				
 			case SDLK_DOWN : 
-				pEvt.reset(new Evt_MainGameInput(GI_DROP));
+				pEvt.reset(new Evt_MainGameInput(GI_LOWER, true));
 				EventManager::Get()->QueueEvent(pEvt);
 				break;
 				
@@ -260,7 +267,7 @@ void MainGameState::OnKeyboardEvent(const SDL_Event &event)
 		switch(event.key.keysym.sym)
 		{
 			case SDLK_DOWN :
-				pEvt.reset(new Evt_MainGameInput(GI_DROP, false));
+				pEvt.reset(new Evt_MainGameInput(GI_LOWER, false));
 				EventManager::Get()->QueueEvent(pEvt);
 				break;
 				
@@ -319,10 +326,15 @@ void MainGameState::OnJoystickEvent(const SDL_Event &event)
 				break;
 				
 			case 0 :
-				pEvt.reset(new Evt_MainGameInput(GI_DROP, true));
+				pEvt.reset(new Evt_MainGameInput(GI_LOWER, true));
 				EventManager::Get()->QueueEvent(pEvt);
 				break;
-				
+			
+			case 1 :
+				pEvt.reset(new Evt_MainGameInput(GI_DROP));
+				EventManager::Get()->QueueEvent(pEvt);
+				break;
+			
 			case 7 :
 				if(!m_pFadeOutProc && m_pDisappearProc && m_pDisappearProc->IsDone())
 				{				
@@ -336,7 +348,7 @@ void MainGameState::OnJoystickEvent(const SDL_Event &event)
 	else if(event.type == SDL_JOYBUTTONUP && event.jbutton.button == 0)
 	{
 		EventSharedPtr pEvt;
-		pEvt.reset(new Evt_MainGameInput(GI_DROP, false));
+		pEvt.reset(new Evt_MainGameInput(GI_LOWER, false));
 		EventManager::Get()->QueueEvent(pEvt);
 	}
 }
