@@ -1,6 +1,11 @@
 #ifndef EVT_ATTACHLOGICPROCESS_H
 #define EVT_ATTACHLOGICPROCESS_H
 
+/**
+ * \file Evt_AttachLogicProcess.h 
+ * \brief Attach Logic Process Event
+ */
+
 #include "../IEvent.h"
 
 class Evt_AttachLogicProcess : public IEvent

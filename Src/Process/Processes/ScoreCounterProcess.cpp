@@ -1,3 +1,8 @@
+/**
+ * \file ScoreCounterProcess.cpp 
+ * \brief Process managing a score counter with animations 
+ */
+
 #include <sstream>
 
 #include "ScoreCounterProcess.h"

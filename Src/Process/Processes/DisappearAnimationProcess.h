@@ -1,6 +1,11 @@
 #ifndef DISAPPEARANIMATIONPROCESS_H
 #define DISAPPEARANIMATIONPROCESS_H
 
+/**
+ * \file DisappearAnimationProcess.h 
+ * \brief Process allowing an image to disappear with an animation
+ */
+
 #include "../Process.h"
 #include "../../Graphics/GfxImage.h"
 

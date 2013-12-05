@@ -1,6 +1,11 @@
 #ifndef LINEARMOVEPROCESS_H
 #define LINEARMOVEPROCESS_H
 
+/**
+ * \file LinearMoveProcess.h 
+ * \brief Process allowing an image to move linearly to a target position
+ */
+
 #include "../Process.h"
 #include "../../Graphics/GfxElement.h"
 

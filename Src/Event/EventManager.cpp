@@ -1,3 +1,8 @@
+/**
+ * \file EventManager.cpp 
+ * \brief Manager allowing Events to be triggered 
+ */
+
 #include <iostream>
 
 #include "EventManager.h"

@@ -1,6 +1,11 @@
 #ifndef SMOOTHFOLLOWPROCESS_H
 #define SMOOTHFOLLOWPROCESS_H
 
+/**
+ * \file SmoothFollowProcess.h 
+ * \brief Process allowing an image to fluently follow a target position and angle 
+ */
+
 #include "../Process.h"
 #include "../../Graphics/GfxImage.h"
 

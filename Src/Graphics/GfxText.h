@@ -1,6 +1,11 @@
 #ifndef GFXTEXT_H
 #define GFXTEXT_H
 
+/**
+ * \file GfxText.h 
+ * \brief Graphic Element representing a Text 
+ */
+
 #include "GfxImage.h"
 
 class GfxText;

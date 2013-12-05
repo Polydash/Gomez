@@ -1,3 +1,8 @@
+/**
+ * \file DroppedPieceProcess.cpp 
+ * \brief Process allowing a piece to fall on the grid with animation
+ */
+
 #include "DroppedPieceProcess.h"
 #include "DeleteLinesProcess.h"
 #include "../../GameApp/SDLApp.h"

@@ -1,6 +1,11 @@
 #ifndef GAMESTATEMANAGER_H
 #define GAMESTATEMANAGER_H
 
+/**
+ * \file GameStateManager.h 
+ * \brief Manager allowing Game State changes
+ */
+
 #include <SDL2/SDL.h>
 #include <string>
 

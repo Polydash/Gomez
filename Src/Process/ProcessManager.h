@@ -1,6 +1,11 @@
 #ifndef PROCESSMANAGER_H
 #define PROCESSMANAGER_H
 
+/**
+ * \file ProcessManager.h 
+ * \brief Manager allowing processes to be updated and queued 
+ */
+
 #include <list>
 
 #include "Process.h"

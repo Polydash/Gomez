@@ -1,6 +1,11 @@
 #ifndef BLINKINGPROCESS_H
 #define BLINKINGPROCESS_H
 
+/**
+ * \file BlinkingProcess.h 
+ * \brief Process allowing an image to blink repeatedly 
+ */
+
 #include "../Process.h"
 #include "../../Graphics/GfxImage.h"
 

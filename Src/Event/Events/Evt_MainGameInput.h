@@ -1,6 +1,11 @@
 #ifndef EVT_MAINGAMEINPUT
 #define EVT_MAINGAMEINPUT
 
+/**
+ * \file Evt_MainGameInput.h 
+ * \brief Main Game Input Event
+ */
+
 #include "../IEvent.h"
 
 enum eGameInput{ GI_MOVELEFT,

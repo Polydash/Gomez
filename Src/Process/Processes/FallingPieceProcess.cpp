@@ -1,3 +1,8 @@
+/**
+ * \file FallingPieceProcess.cpp 
+ * \brief Process managing a piece slowly falling on the grid
+ */
+
 #include "FallingPieceProcess.h"
 #include "DroppedPieceProcess.h"
 #include "SpawnAnimationProcess.h"

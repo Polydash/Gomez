@@ -1,3 +1,8 @@
+/**
+ * \file LinearMoveProcess.cpp 
+ * \brief Process allowing an image to move linearly to a target position
+ */
+
 #include "LinearMoveProcess.h"
 #include "../../GameStd.h"
 #include "../../GameApp/SDLApp.h"

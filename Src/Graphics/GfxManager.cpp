@@ -1,3 +1,8 @@
+/**
+ * \file GfxManager.cpp 
+ * \brief Manager allowing Graphic Elements display 
+ */
+
 #include "GfxManager.h"
 
 GfxManager::GfxManager():

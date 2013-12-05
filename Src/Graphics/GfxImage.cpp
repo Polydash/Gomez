@@ -1,3 +1,8 @@
+/**
+ * \file GfxImage.cpp 
+ * \brief Graphic Element representing an Image 
+ */
+
 #include "GfxImage.h"
 #include "../Resource/ResourceManager.h"
 #include "../Resource/ImageResource.h"

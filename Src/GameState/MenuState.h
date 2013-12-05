@@ -1,6 +1,11 @@
 #ifndef MENUSTATE_H
 #define MENUSTATE_H
 
+/**
+ * \file MenuState.h 
+ * \brief Menu State
+ */
+
 #include "BaseGameState.h"
 #include "../Graphics/GfxRect.h"
 #include "../Graphics/GfxImage.h"

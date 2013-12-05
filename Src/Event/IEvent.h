@@ -1,6 +1,11 @@
 #ifndef IEVENT_H
 #define IEVENT_H
 
+/**
+ * \file IEvent.h
+ * \brief Event interface
+ */
+
 #include <sstream>
 #include <tr1/memory>
 using std::tr1::shared_ptr;

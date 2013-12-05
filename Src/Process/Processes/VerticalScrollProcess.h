@@ -1,6 +1,11 @@
 #ifndef VERTICALSCROLLPROCESS_H
 #define VERTICALSCROLLPROCESS_H
 
+/**
+ * \file VerticalScrollProcess.h 
+ * \brief Process allowing an image to scroll vertically
+ */
+
 #include "ScrollProcess.h"
 
 class VerticalScrollProcess : public ScrollProcess

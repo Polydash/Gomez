@@ -1,3 +1,8 @@
+/**
+ * \file Process.cpp 
+ * \brief Process Base class 
+ */
+
 #include "Process.h"
 
 Process::Process():

@@ -1,6 +1,11 @@
 #ifndef SCORECOUNTERPROCESS_H
 #define SCORECOUNTERPROCESS_H
 
+/**
+ * \file ScoreCounterProcess.h 
+ * \brief Process managing a score counter with animations 
+ */
+
 #include "../Process.h"
 #include "../../Graphics/GfxText.h"
 

@@ -1,3 +1,8 @@
+/**
+ * \file EventManager.h 
+ * \brief Manager allowing Events to be triggered
+ */
+
 #ifndef EVENTMANAGER_H
 #define EVENTMANAGER_H
 

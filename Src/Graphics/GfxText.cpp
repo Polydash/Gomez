@@ -1,3 +1,8 @@
+/**
+ * \file GfxText.cpp 
+ * \brief Graphic Element representing a Text 
+ */
+
 #include "GfxText.h"
 #include "../Resource/FontResource.h"
 #include "../Resource/ResourceManager.h"

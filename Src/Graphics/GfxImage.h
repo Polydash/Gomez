@@ -1,6 +1,11 @@
 #ifndef GFXIMAGE_H
 #define GFXIMAGE_H
 
+/**
+ * \file GfxImage.h 
+ * \brief Graphic Element representing an Image 
+ */
+
 #include <SDL2/SDL.h>
 #include <string>
 

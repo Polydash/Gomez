@@ -1,6 +1,11 @@
 #ifndef PROCESS_H
 #define PROCESS_H
 
+/**
+ * \file Process.h 
+ * \brief Process Base class 
+ */
+
 #include <tr1/memory>
 using std::tr1::shared_ptr;
 

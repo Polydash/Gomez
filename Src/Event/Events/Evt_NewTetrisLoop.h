@@ -1,6 +1,11 @@
 #ifndef EVT_NEWTETRISLOOP_H
 #define EVT_NEWTETRISLOOP_H
 
+/**
+ * \file Evt_NewTetrisLoop.h 
+ * \brief New Tetris Loop Event
+ */
+
 #include <vector>
 
 #include "../IEvent.h"

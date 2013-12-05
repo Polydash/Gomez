@@ -1,3 +1,8 @@
+/**
+ * \file HorizontalScrollProcess.h 
+ * \brief Process allowing an image to scroll horizontally
+ */
+
 #include "HorizontalScrollProcess.h"
 #include "../../GameApp/SDLApp.h"
 #include "../../Graphics/GfxManager.h"

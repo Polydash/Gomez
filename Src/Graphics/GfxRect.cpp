@@ -1,3 +1,8 @@
+/**
+ * \file GfxRect.cpp 
+ * \brief Graphic Element representing a colored Rectangle 
+ */
+
 #include "GfxRect.h"
 #include "../GameApp/SDLApp.h"
 

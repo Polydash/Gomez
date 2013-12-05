@@ -1,6 +1,11 @@
 #ifndef SPAWNANIMATIONPROCESS_H
 #define SPAWNANIMATIONPROCESS_H
 
+/**
+ * \file SpawnAnimationProcess.h 
+ * \brief Process allowing an image to appear smoothly 
+ */
+
 #include "../Process.h"
 #include "../../Graphics/GfxImage.h"
 

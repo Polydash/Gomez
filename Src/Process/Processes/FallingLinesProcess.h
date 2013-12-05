@@ -1,6 +1,11 @@
 #ifndef FALLINGLINESPROCESS_H
 #define FALLINGLINESPROCESS_H
 
+/**
+ * \file FallingLinesProcess.h 
+ * \brief Process creating an animation for falling lines
+ */
+
 #include <vector>
 
 #include "../Process.h"

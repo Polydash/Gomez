@@ -1,3 +1,8 @@
+/**
+ * \file GfxElement.cpp 
+ * \brief Graphic Element base class
+ */
+
 #include "GfxElement.h"
 #include "../GameStd.h"
 #include "../GameApp/SDLApp.h"

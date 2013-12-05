@@ -1,6 +1,11 @@
 #ifndef EVT_STATECHANGE_H
 #define EVT_STATECHANGE_H
 
+/**
+ * \file Evt_StateChange.h 
+ * \brief State Change Event
+ */
+
 #include "../IEvent.h"
 #include "../../GameState/BaseGameState.h"
 

@@ -1,3 +1,8 @@
+/**
+ * \file MainGameState.cpp 
+ * \brief Main Game State
+ */
+
 #include "MainGameState.h"
 #include "../GameStd.h"
 #include "../GameApp/SDLApp.h"
@@ -95,7 +100,6 @@ void MainGameState::VOnUpdate(unsigned int elapsedTime)
 
 void MainGameState::VOnEnter()
 {
-	g_linesCleared = 0;
 	INFO("Entering MAINGAME state");
 	LOG("Entering MAINGAME state");
 	ResourceManager::Get()->Clear();
@@ -128,7 +132,6 @@ void MainGameState::VOnEnter()
 
 void MainGameState::VOnLeave()
 {
-	INFO("Lines : " << g_linesCleared);
 	m_pScrollingProc[0]->Success();
 	m_pScrollingProc[1]->Success();
 	m_pScrollingProc[2]->Success();

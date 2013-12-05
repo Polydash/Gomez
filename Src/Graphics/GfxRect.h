@@ -1,6 +1,11 @@
 #ifndef GFXRECT_H
 #define GFXRECT_H
 
+/**
+ * \file GfxRect.h 
+ * \brief Graphic Element representing a colored Rectangle 
+ */
+
 #include "GfxElement.h"
 
 class GfxRect;

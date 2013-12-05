@@ -1,3 +1,8 @@
+/**
+ * \file FallingLinesProcess.cpp 
+ * \brief Process creating an animation for falling lines
+ */
+
 #include "FallingLinesProcess.h"
 #include "SmoothFollowProcess.h"
 #include "FallingPieceProcess.h"

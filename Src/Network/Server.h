@@ -1,6 +1,11 @@
 #ifndef SERVER_H
 #define SERVER_H
 
+/**
+ * \file Server.h 
+ * \brief TCP Server 
+ */
+
 #include <list>
 #include <arpa/inet.h>
 #include <sstream>

@@ -1,3 +1,8 @@
+/**
+ * \file DelayProcess.cpp 
+ * \brief Process creating a delay
+ */
+
 #include "DelayProcess.h"
 
 DelayProcess::DelayProcess(unsigned long timeToDelay):

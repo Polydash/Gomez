@@ -1,3 +1,8 @@
+/**
+ * \file MenuState.cpp 
+ * \brief Menu State
+ */
+
 #include "MenuState.h"
 #include "../GameStd.h"
 #include "../GameApp/SDLApp.h"

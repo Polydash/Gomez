@@ -1,3 +1,8 @@
+/**
+ * \file DeleteLinesProcess.cpp 
+ * \brief Process deleting full lines in Tetris grid
+ */
+
 #include "DeleteLinesProcess.h"
 #include "FallingPieceProcess.h"
 #include "FallingLinesProcess.h"
@@ -55,8 +60,6 @@ bool DeleteLinesProcess::VOnInit()
 		if(IsLineFull(j))
 			m_linesToDelete.push_back(j);
 	}
-
-	g_linesCleared += m_linesToDelete.size();
 	
 	m_leftIt = (m_pGrid->GetWidth() - 1)/2;
 	m_rightIt = m_leftIt + 1;

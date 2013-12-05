@@ -1,3 +1,8 @@
+/**
+ * \file SpawnAnimationProcess.cpp 
+ * \brief Process allowing an image to appear smoothly 
+ */
+
 #include "SpawnAnimationProcess.h"
 
 SpawnAnimationProcess::SpawnAnimationProcess(GfxImageSharedPtr pImage, float speed):

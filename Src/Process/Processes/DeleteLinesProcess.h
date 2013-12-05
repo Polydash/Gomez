@@ -1,6 +1,11 @@
 #ifndef DELETELINESPROCESS_H
 #define DELETELINESPROCESS_H
 
+/**
+ * \file DeleteLinesProcess.h 
+ * \brief Process deleting full lines in Tetris grid
+ */
+
 #include "../Process.h"
 #include "../../TetrisLogic/TetrisGrid.h"
 #include <vector>

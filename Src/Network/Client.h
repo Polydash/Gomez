@@ -1,6 +1,11 @@
 #ifndef CLIENT_H
 #define CLIENT_H
 
+/**
+ * \file Client.h 
+ * \brief TCP Client 
+ */
+
 #include <arpa/inet.h>
 #include <sstream>
 

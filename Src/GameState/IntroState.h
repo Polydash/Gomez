@@ -1,6 +1,11 @@
 #ifndef INTROSTATE_H
 #define INTROSTATE_H
 
+/**
+ * \file IntroState.h 
+ * \brief Intro Game State
+ */
+
 #include "BaseGameState.h"
 #include "../Graphics/GfxText.h"
 #include "../Graphics/GfxRect.h"

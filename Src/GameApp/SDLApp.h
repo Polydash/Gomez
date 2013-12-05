@@ -1,10 +1,13 @@
 #ifndef SDLAPP_H
 #define SDLAPP_H
 
+/**
+ * \file SDLApp.h 
+ * \brief SDL-based Game Application
+ */
+
 #include <SDL2/SDL.h>
 #include <string>
-
-extern int g_linesCleared;
 
 //Game Application Global
 class SDLApp;

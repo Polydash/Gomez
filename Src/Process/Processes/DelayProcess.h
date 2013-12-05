@@ -1,6 +1,11 @@
 #ifndef DELAYPROCESS_H
 #define DELAYPROCESS_H
 
+/**
+ * \file DelayProcess.h 
+ * \brief Process creating a delay
+ */
+
 #include "../Process.h"
 
 class DelayProcess : public Process

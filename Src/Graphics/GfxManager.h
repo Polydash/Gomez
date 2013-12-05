@@ -1,6 +1,11 @@
 #ifndef GFXMANAGER_H
 #define GFXMANAGER_H
 
+/**
+ * \file GfxManager.h 
+ * \brief Manager allowing Graphic Elements display 
+ */
+
 #include <list>
 
 #include "GfxElement.h"

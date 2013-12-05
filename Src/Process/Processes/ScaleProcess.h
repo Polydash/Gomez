@@ -1,6 +1,11 @@
 #ifndef SCALEPROCESS_H
 #define SCALEPROCESS_H
 
+/**
+ * \file ScaleProcess.h 
+ * \brief Process allowing an image to scale to a target value
+ */
+
 #include "../Process.h"
 #include "../../Graphics/GfxImage.h"
 

@@ -1,3 +1,8 @@
+/**
+ * \file SDLApp.cpp 
+ * \brief SDL-based Game Application
+ */
+
 #include <tinyxml.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
@@ -12,7 +17,6 @@
 #include "../Graphics/GfxManager.h"
 #include "../Network/Server.h"
 
-int g_linesCleared;
 SDLApp* g_pApp = NULL;
 
 SDLApp::SDLApp():

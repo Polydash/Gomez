@@ -1,6 +1,11 @@
 #ifndef SCROLLPROCESS_H
 #define SCROLLPROCESS_H
 
+/**
+ * \file ScrollProcess.h 
+ * \brief Base Process allowing an image to scroll 
+ */
+
 #include "../Process.h"
 #include "../../Graphics/GfxImage.h"
 

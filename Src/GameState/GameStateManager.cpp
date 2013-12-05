@@ -1,3 +1,8 @@
+/**
+ * \file GameStateManager.cpp 
+ * \brief Manager allowing Game State changes
+ */
+
 #include "GameStateManager.h"
 #include "../GameStd.h"
 #include "../Event/EventManager.h"

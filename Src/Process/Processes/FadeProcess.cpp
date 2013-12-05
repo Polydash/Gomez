@@ -1,3 +1,8 @@
+/**
+ * \file FadeProcess.cpp 
+ * \brief Process allowing a Graphic Element to fade to a target alpha
+ */
+
 #include "FadeProcess.h"
 #include "../../GameApp/SDLApp.h"
 #include "../../Graphics/GfxManager.h"

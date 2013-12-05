@@ -1,3 +1,8 @@
+/**
+ * \file VerticalScrollProcess.cpp 
+ * \brief Process allowing an image to scroll vertically
+ */
+
 #include "VerticalScrollProcess.h"
 #include "../../GameApp/SDLApp.h"
 #include "../../Graphics/GfxManager.h"

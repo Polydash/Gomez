@@ -1,3 +1,8 @@
+/**
+ * \file DisappearAnimationProcess.cpp 
+ * \brief Process allowing an image to disappear with an animation
+ */
+
 #include "DisappearAnimationProcess.h"
 #include "../../GameApp/SDLApp.h"
 #include "../../Graphics/GfxManager.h"

@@ -1,3 +1,8 @@
+/**
+ * \file BaseGameState.cpp
+ * \brief Base class for Game States
+ */
+
 #include "BaseGameState.h"
 #include "../GameStd.h"
 #include "../Process/ProcessManager.h"

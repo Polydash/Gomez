@@ -1,6 +1,11 @@
 #ifndef GFXELEMENT_H
 #define GFXELEMENT_H
 
+/**
+ * \file GfxElement.h 
+ * \brief Graphic Element base class
+ */
+
 #include <SDL2/SDL.h>
 #include <tr1/memory>
 using std::tr1::shared_ptr;

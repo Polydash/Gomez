@@ -1,6 +1,11 @@
 #ifndef FADEPROCESS_H
 #define FADEPROCESS_H
 
+/**
+ * \file FadeProcess.h 
+ * \brief Process allowing a Graphic Element to fade to a target alpha
+ */
+
 #include "../Process.h"
 #include "../../Graphics/GfxElement.h"
 

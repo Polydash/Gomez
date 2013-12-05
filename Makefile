@@ -1,5 +1,5 @@
 # Where to find libraries and source directories
-LFLAGS = -L./Libraries/TinyXML/lib -lSDL2 -lSDL2_image -lSDL2_ttf -ltinyxml
+LFLAGS = -L./Libraries/TinyXML/lib -Wl,-rpath=./Libraries/SDL2 -lSDL2 -lSDL2_image -lSDL2_ttf -ltinyxml
 IFLAGS = -I./Libraries/TinyXML/include -I./Libraries/FastDelegate/include
 SRCDIR = Src Src/Event Src/Event/Events Src/GameState Src/GameApp Src/Graphics Src/Resource Src/Process Src/Process/Processes Src/TetrisLogic Src/Network
 
@@ -43,7 +43,7 @@ $(EXEC) : $(OBJLIST)
 	@mv $@ Temp
 	@mv $(patsubst %.o, %.d, $@) Temp
 
-.PHONY : clean leakcheck
+.PHONY : clean documentation
 
 # Create folders
 folders :
@@ -53,10 +53,13 @@ folders :
 
 # Clean Temp directory
 clean :
-	@rm Temp/*.o
-	@rm Temp/*.d
-	@echo "Cleaned \"Temp\" directory"
+	@rm -rf Temp
+	@rm -rf Doc
+	@rm -rf Debug
+	@rm -rf Release
+	@echo "Cleaned project"
 
-# Execute Debug mode with leak check
-leakcheck :
-	valgrind --suppressions=./Data/SDLleaks.supp --leak-check=full Debug/Tetris
+# Generate documentation
+documentation :
+	@echo "Generating documentation"
+	@doxygen Doxyfile

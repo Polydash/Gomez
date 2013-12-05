@@ -1,3 +1,8 @@
+/**
+ * \file BlinkingProcess.cpp 
+ * \brief Process allowing an image to blink repeatedly 
+ */
+
 #include "BlinkingProcess.h"
 #include "../../GameStd.h"
 

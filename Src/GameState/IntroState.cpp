@@ -1,3 +1,8 @@
+/**
+ * \file IntroState.cpp 
+ * \brief Intro Game State
+ */
+
 #include "IntroState.h"
 #include "../GameApp/SDLApp.h"
 #include "../GameStd.h"

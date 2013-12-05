@@ -1,3 +1,8 @@
+/**
+ * \file Evt_NewTetrisLoop.cpp 
+ * \brief New Tetris Loop Event
+ */
+
 #include "Evt_NewTetrisLoop.h"
 
 Evt_NewTetrisLoop::Evt_NewTetrisLoop(TetrisGrid *pGrid, ePieceType type):

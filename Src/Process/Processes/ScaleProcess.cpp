@@ -1,3 +1,8 @@
+/**
+ * \file ScaleProcess.cpp 
+ * \brief Process allowing an image to scale to a target value
+ */
+
 #include "ScaleProcess.h"
 #include "../../GameApp/SDLApp.h"
 #include "../../Graphics/GfxManager.h"

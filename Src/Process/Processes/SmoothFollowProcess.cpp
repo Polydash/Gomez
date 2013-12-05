@@ -1,3 +1,8 @@
+/**
+ * \file SmoothFollowProcess.cpp 
+ * \brief Process allowing an image to fluently follow a target position and angle 
+ */
+
 #include "SmoothFollowProcess.h"
 
 SmoothFollowProcess::SmoothFollowProcess(GfxImageSharedPtr pImage, float speed, bool endIfStatic):

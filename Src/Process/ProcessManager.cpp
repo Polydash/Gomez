@@ -1,3 +1,8 @@
+/**
+ * \file ProcessManager.cpp 
+ * \brief Manager allowing processes to be updated and queued 
+ */
+
 #include "ProcessManager.h"
 
 ProcessManager::ProcessManager()

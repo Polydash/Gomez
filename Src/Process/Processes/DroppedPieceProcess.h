@@ -1,6 +1,11 @@
 #ifndef DROPPEDPIECEPROCESS_H
 #define DROPPEDPIECEPROCESS_H
 
+/**
+ * \file DroppedPieceProcess.h 
+ * \brief Process allowing a piece to fall on the grid with animation
+ */
+
 #include "../Process.h"
 #include "../../TetrisLogic/TetrisGrid.h"
 

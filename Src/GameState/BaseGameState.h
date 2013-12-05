@@ -1,6 +1,11 @@
 #ifndef BASEGAMESTATE_H
 #define BASEGAMESTATE_H
 
+/**
+ * \file BaseGameState.h 
+ * \brief Base class for Game States
+ */
+
 #include <SDL2/SDL.h>
 
 #include "../Event/IEvent.h"

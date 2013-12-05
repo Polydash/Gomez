@@ -1,6 +1,11 @@
 #ifndef EVT_ADDSCORE_H
 #define EVT_ADDSCORE_H
 
+/**
+ * \file Evt_AddScore.h 
+ * \brief Add Score Event
+ */
+
 #include "../IEvent.h"
 
 class Evt_AddScore : public IEvent

@@ -1,6 +1,11 @@
 #ifndef MAINGAMESTATE_H
 #define MAINGAMESTATE_H
 
+/**
+ * \file MainGameState.h 
+ * \brief Main Game State
+ */
+
 #include "BaseGameState.h"
 #include "../Event/IEvent.h"
 #include "../Graphics/GfxImage.h"

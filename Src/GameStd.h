@@ -1,6 +1,11 @@
 #ifndef GAMESTD_H
 #define GAMESTD_H
 
+/**
+ * \file GameStd.h 
+ * \brief Useful macros and typedefs
+ */
+
 #include <iostream>
 #include <fstream>
 #include <stdlib.h>
@@ -13,18 +18,24 @@ typedef unsigned char byte;
 #define PI 3.1415926535
 
 /**
- * SAFE_DELETE* macros
+ * \brief SAFE_DELETE macro
  * 
- * Macros allowing a safe memory deallocation
+ * Macro allowing a safe memory deallocation
  */
 #define SAFE_DELETE(ptr) do{ if(ptr){delete ptr; ptr = NULL;} }while(0)
+
+/**
+ * \brief SAFE_DELETE macro
+ * 
+ * Macro allowing a safe memory deallocation
+ */
 #define SAFE_DELETE_ARRAY(ptr) do{ if(ptr){delete[] ptr; ptr = NULL;} }while(0)
 
-/// Macros only defined in Debug Mode
+//Macros only defined in Debug Mode
 #ifdef DEBUG
 
 	/**
-	 * ERROR macro
+	 * \brief ERROR macro
 	 * 
 	 * Useful macro to point an error out
 	 */
@@ -33,7 +44,7 @@ typedef unsigned char byte;
 					}while(0)
 
 	/**
-	 * INFO macro
+	 * \brief INFO macro
 	 * 
 	 * Useful macro to show messages while debugging
 	 */
@@ -42,7 +53,7 @@ typedef unsigned char byte;
 					}while(0)
 
 	/**
-	 * LOG macro
+	 * \brief LOG macro
 	 * 
 	 * A very specific name is chosen for the local
 	 * variable, to avoid any name collision
@@ -56,7 +67,7 @@ typedef unsigned char byte;
 					
 #else
 
-	/// No output in release mode
+	//No output in release mode
 	#define ERROR(str) do{}while(0)
 	#define INFO(str) do{}while(0)
 	#define LOG(str) do{}while(0)

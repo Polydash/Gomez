@@ -1,6 +1,11 @@
 #ifndef FALLINGPIECEPROCESS_H
 #define FALLINGPIECEPROCESS_H
 
+/**
+ * \file FallingPieceProcess.h 
+ * \brief Process managing a piece slowly falling on the grid
+ */
+
 #include "../Process.h"
 #include "../../Event/IEvent.h"
 #include "../../TetrisLogic/TetrisGrid.h"
