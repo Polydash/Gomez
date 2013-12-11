@@ -1,3 +1,8 @@
+/**
+ * \file TetrisPiece.cpp 
+ * \brief Tetris piece (logic)
+ */
+
 #include "TetrisPiece.h"
 
 TetrisPiece::TetrisPiece(ePieceType pieceType):

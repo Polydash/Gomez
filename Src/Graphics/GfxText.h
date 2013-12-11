@@ -10,8 +10,16 @@
 
 class GfxText;
 
+/// Typedef defining a text shared pointer
 typedef shared_ptr<GfxText> GfxTextSharedPtr;
 
+/**
+ * \class GfxText 
+ * \brief Graphic Element representing a Text
+ * 
+ * Graphic element inheriting from GfxImage. It allows a text to be
+ * rendered with a chosen font. It also includes effects of GfxImage.
+ */
 class GfxText : public GfxImage
 {
 private :

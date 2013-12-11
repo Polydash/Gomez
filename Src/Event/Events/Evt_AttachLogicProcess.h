@@ -8,6 +8,13 @@
 
 #include "../IEvent.h"
 
+/**
+ * \class Evt_AttachLogicProcess
+ * \brief Attach Logic Process Event
+ * 
+ * Event allowing an object to attach a logic process to the current
+ * GameState.
+ */
 class Evt_AttachLogicProcess : public IEvent
 {
 private :

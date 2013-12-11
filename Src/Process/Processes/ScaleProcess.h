@@ -9,6 +9,10 @@
 #include "../Process.h"
 #include "../../Graphics/GfxImage.h"
 
+/**
+ * \class ScaleProcess 
+ * \brief Process allowing an image to scale to a target value
+ */
 class ScaleProcess : public Process
 {
 private :

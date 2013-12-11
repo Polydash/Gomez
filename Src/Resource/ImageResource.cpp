@@ -1,3 +1,8 @@
+/**
+ * \file ImageResource.cpp 
+ * \brief Resource allowing an image to be loaded
+ */
+
 #include <SDL2/SDL_image.h>
 
 #include "ImageResource.h"

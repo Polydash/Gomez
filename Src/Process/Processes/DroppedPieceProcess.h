@@ -9,6 +9,14 @@
 #include "../Process.h"
 #include "../../TetrisLogic/TetrisGrid.h"
 
+/**
+ * \class DroppedPieceProcess 
+ * \brief Process allowing a piece to fall on the grid with animation
+ * 
+ * This Process is attached as the "Drop Piece" game input is pressed.
+ * It makes the piece fall on the grid with a "gravity" effect. Then,
+ * a DeleteLinesProcess is attached to check grid for lines to delete.
+ */
 class DroppedPieceProcess : public Process
 {
 	private :

@@ -2,12 +2,16 @@
 #define HORIZONTALSCROLLPROCESS_H
 
 /**
- * \file HorizontalScrollProcess.cpp 
+ * \file HorizontalScrollProcess.h 
  * \brief Process allowing an image to scroll horizontally
  */
 
 #include "ScrollProcess.h"
 
+/**
+ * \class HorizontalScrollProcess
+ * \brief Process allowing an image to scroll horizontally
+ */
 class HorizontalScrollProcess : public ScrollProcess
 {
 public :

@@ -12,6 +12,13 @@
 #include "BaseGameState.h"
 #include "../Event/IEvent.h"
 
+/**
+ * \class GameStateManager
+ * \brief Manager allowing Game State changes
+ * 
+ * This manager handles GameState transitions. It also sends inputs to
+ * the current GameState.
+ */
 class GameStateManager
 {
 private:

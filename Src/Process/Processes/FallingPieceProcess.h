@@ -11,6 +11,15 @@
 #include "../../TetrisLogic/TetrisGrid.h"
 #include "SmoothFollowProcess.h"
 
+/**
+ * \class FallingPieceProcess
+ * \brief Process managing a piece slowly falling on the grid
+ * 
+ * This is the core Process of the game loop. It responds to game inputs
+ * and moves the piece accordingly. It can attach a DroppedPieceProcess
+ * if the player presses the DropPiece game input, but it generally 
+ * attaches a DeleteLinesProcess when the piece has landed.
+ */
 class FallingPieceProcess : public Process
 {
 private :

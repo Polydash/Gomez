@@ -45,6 +45,13 @@ bool Server::Init()
 		return false;
     }
 	
+	int val = 1;
+	if(setsockopt(m_sockfd, SOL_SOCKET, SO_REUSEADDR, &val, sizeof(val)) == -1)
+	{
+		ERROR("Failed to set socket option");
+		return false;
+	}
+	
 	if(bind(m_sockfd, (struct sockaddr*) &m_sa, sizeof(m_sa)) == -1)
 	{
 		ERROR("Failed to bind server");

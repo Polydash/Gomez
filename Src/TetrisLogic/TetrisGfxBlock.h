@@ -1,8 +1,14 @@
 #ifndef TETRISGFXBLOCK_H
 #define TETRISGFXBLOCK_H
 
+/**
+ * \file TetrisGfxBlock.h 
+ * \brief Tetris block (graphic & logic)
+ */
+
 #include "../Graphics/GfxImage.h"
 
+/// Enumeration defining every Tetris piece type
 enum ePieceType{ PT_IBLOCK,
 				 PT_JBLOCK,
 				 PT_TBLOCK,
@@ -13,6 +19,14 @@ enum ePieceType{ PT_IBLOCK,
 				 PIECETYPE_NB
 			   };
 
+/**
+ * \class TetrisGfxBlock 
+ * \brief Tetris block (graphic & logic)
+ * 
+ * This class represent one of the four blocks contained in a Tetris 
+ * piece. It is needed by TetrisGrid to render blocks contained in the
+ * grid.
+ */
 class TetrisGfxBlock
 {
 private :

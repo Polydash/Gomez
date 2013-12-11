@@ -9,6 +9,10 @@
 #include "../Process.h"
 #include "../../Graphics/GfxImage.h"
 
+/**
+ * \class DisappearAnimationProcess 
+ * \brief Process allowing an image to disappear with an animation
+ */
 class DisappearAnimationProcess : public Process
 {
 private :

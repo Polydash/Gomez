@@ -1,3 +1,8 @@
+/**
+ * \file FontResource.cpp 
+ * \brief Resource allowing a font to be loaded
+ */
+
 #include "FontResource.h"
 #include "../GameStd.h"
 

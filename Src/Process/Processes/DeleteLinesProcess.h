@@ -10,6 +10,15 @@
 #include "../../TetrisLogic/TetrisGrid.h"
 #include <vector>
 
+/**
+ * \class DeleteLinesProcess 
+ * \brief Process deleting full lines in Tetris grid
+ * 
+ * This Process checks if the grid contains lines that should be deleted.
+ * If there are lines to delete, blocks are faded out with an animation
+ * and then a FallingLinesProcess is attached. If there are no lines to 
+ * delete, it declares the end of a game loop.
+ */
 class DeleteLinesProcess : public Process
 {
 private :

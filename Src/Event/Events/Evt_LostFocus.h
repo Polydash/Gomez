@@ -8,6 +8,12 @@
 
 #include "../IEvent.h"
 
+/**
+ * \class Evt_LostFocus
+ * \brief Lost Focus Event
+ * 
+ * Event indicating the window focus is lost.
+ */
 class Evt_LostFocus : public IEvent
 {
 public :

@@ -9,6 +9,12 @@
 #include "../IEvent.h"
 #include "../../GameState/BaseGameState.h"
 
+/**
+ * \class Evt_StateChange
+ * \brief State Change Event
+ * 
+ * Event allowing an object to request a new GameState. 
+ */
 class Evt_StateChange : public IEvent
 {
 private :

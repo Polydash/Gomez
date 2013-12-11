@@ -8,6 +8,10 @@
 
 #include "ScrollProcess.h"
 
+/**
+ * \class VerticalScrollProcess 
+ * \brief Process allowing an image to scroll vertically
+ */
 class VerticalScrollProcess : public ScrollProcess
 {
 public :

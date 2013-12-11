@@ -17,6 +17,16 @@ class GameStateManager;
 class GfxManager;
 class Server;
 
+/**
+ * \class SDLApp
+ * \brief SDL-based Game Application
+ * 
+ * SDLApp represents the game application. It manages every part of the
+ * engine and SDL initialization and shutdown.
+ * 
+ * It also takes informations from a configuration file "config.xml"
+ * thanks to the "TinyXML" library.
+ */
 class SDLApp
 {
 private :

@@ -13,12 +13,23 @@
 
 class ProcessManager;
 
+/// Enumeration defining every GameState
 enum eGameState{ GS_INVALID = -1,
 				 GS_INTRO,
 				 GS_MENU,
 				 GS_MAINGAME
 			   };
 
+/**
+ * \class BaseGameState
+ * \brief Base class for Game States
+ * 
+ * BaseGameState holds the main methods of all GameStates. It includes a
+ * ProcessManager that represents the logic processes running with each
+ * GameState.
+ * 
+ * Every GameState shall inherit from this class.
+ */
 class BaseGameState
 {
 private :

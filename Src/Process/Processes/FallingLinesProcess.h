@@ -11,6 +11,13 @@
 #include "../Process.h"
 #include "../../TetrisLogic/TetrisGrid.h"
 
+/**
+ * \class FallingLinesProcess 
+ * \brief Process creating an animation for falling lines
+ * 
+ * Creates an animation for lines to fall smoothly as other lines may
+ * have been deleted. Then, it declares the end of a game loop.
+ */
 class FallingLinesProcess : public Process
 {
 	private :

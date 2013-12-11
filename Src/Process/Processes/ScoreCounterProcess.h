@@ -9,6 +9,13 @@
 #include "../Process.h"
 #include "../../Graphics/GfxText.h"
 
+/**
+ * \class ScoreCounterProcess 
+ * \brief Process managing a score counter with animations 
+ * 
+ * This Process makes the score increase slowly to the current score
+ * value with a scale animation.
+ */
 class ScoreCounterProcess : public Process
 {
 private :

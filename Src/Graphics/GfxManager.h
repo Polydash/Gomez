@@ -10,6 +10,14 @@
 
 #include "GfxElement.h"
 
+/**
+ * \class GfxManager
+ * \brief Manager allowing Graphic Elements display
+ * 
+ * This manager allows GfxElements to be rendered on an SDL_Window with
+ * the help of an SDL_Renderer. GfxElements are rendered according to
+ * their layer value.
+ */
 class GfxManager
 {
 private :

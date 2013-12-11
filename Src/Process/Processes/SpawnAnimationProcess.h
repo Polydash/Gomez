@@ -3,12 +3,16 @@
 
 /**
  * \file SpawnAnimationProcess.h 
- * \brief Process allowing an image to appear smoothly 
+ * \brief Process allowing an image to appear quickly 
  */
 
 #include "../Process.h"
 #include "../../Graphics/GfxImage.h"
 
+/**
+ * \class SpawnAnimationProcess
+ * \brief Process allowing an image to appear quickly 
+ */
 class SpawnAnimationProcess : public Process
 {
 private :

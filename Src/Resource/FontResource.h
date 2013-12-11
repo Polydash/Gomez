@@ -1,11 +1,23 @@
 #ifndef FONTRESOURCE_H
 #define FONTRESOURCE_H
 
+/**
+ * \file FontResource.h 
+ * \brief Resource allowing a font to be loaded
+ */
+
 #include <SDL2/SDL_ttf.h>
 #include <string>
 
 #include "IResource.h"
 
+/**
+ * \class FontResource 
+ * \brief Resource allowing a font to be loaded
+ * 
+ * Resource inheriting from the IResource interface. It allows fonts to
+ * be loaded and stored in the ResourceManager.
+ */
 class FontResource : public IResource
 {
 	private :

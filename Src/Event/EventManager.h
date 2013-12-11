@@ -11,6 +11,19 @@
 
 #include "IEvent.h"
 
+/**
+ * \class EventManager
+ * \brief Manager allowing Events to be triggered
+ * 
+ * This manager allows objects to subscribe a method to an event type. 
+ * Each time an event is triggered, subscribed methods are called 
+ * according to the event type.
+ * 
+ * There is also an event queue in order to queue events and trigger
+ * them at the same time.
+ * 
+ * This manager uses delegates from the "FastDelegate" library.
+ */
 class EventManager
 {
 

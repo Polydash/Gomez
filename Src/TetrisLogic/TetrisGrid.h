@@ -1,10 +1,23 @@
 #ifndef TETRISGRID_H
 #define TETRISGRID_H
 
+/**
+ * \file TetrisGrid.h 
+ * \brief Tetris grid (graphic & logic)
+ */
+
 #include "TetrisGfxBlock.h"
 #include "TetrisPiece.h"
 #include "../Graphics/GfxImage.h"
 
+/**
+ * \class TetrisGrid 
+ * \brief Tetris grid (graphic & logic)
+ * 
+ * The TetrisGrid manages every logic information about the grid (current
+ * blocks positions) and manages GfxElements like blocks and grid
+ * background.
+ */
 class TetrisGrid
 {
 	private :

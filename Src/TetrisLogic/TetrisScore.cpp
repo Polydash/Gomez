@@ -1,3 +1,8 @@
+/**
+ * \file TetrisScore.cpp 
+ * \brief Graphic element showing current score
+ */
+
 #include "TetrisScore.h"
 #include "../GameApp/SDLApp.h"
 #include "../Graphics/GfxManager.h"

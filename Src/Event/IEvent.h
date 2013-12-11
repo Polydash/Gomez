@@ -14,6 +14,7 @@ using std::tr1::static_pointer_cast;
 #include "FastDelegate.h"
 using fastdelegate::MakeDelegate;
 
+/// Enumeration defining every Event type
 enum eEventType{ ET_STATECHANGE,
 				 ET_LOSTFOCUS,
 				 ET_ATTACHLOGICPROCESS,
@@ -26,9 +27,19 @@ enum eEventType{ ET_STATECHANGE,
 			   
 class IEvent;
 
+/// Typedef defining an Event shared pointer 
 typedef shared_ptr<IEvent> EventSharedPtr;
+
+/// Typedef defining delegates needed by EventManager
 typedef fastdelegate::FastDelegate1<EventSharedPtr> EventListenerDelegate;
 
+/**
+ * \class IEvent
+ * \brief Event interface
+ * 
+ * Event interface needed by EventManager. Events must inherit from this
+ * class.  
+ */
 class IEvent
 {
 public :

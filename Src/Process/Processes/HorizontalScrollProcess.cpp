@@ -1,5 +1,5 @@
 /**
- * \file HorizontalScrollProcess.h 
+ * \file HorizontalScrollProcess.cpp
  * \brief Process allowing an image to scroll horizontally
  */
 

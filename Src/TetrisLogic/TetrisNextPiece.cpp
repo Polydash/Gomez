@@ -1,3 +1,8 @@
+/**
+ * \file TetrisNextPiece.cpp 
+ * \brief Graphic element showing next piece
+ */
+
 #include "TetrisNextPiece.h"
 #include "../GameApp/SDLApp.h"
 #include "../Graphics/GfxManager.h"

@@ -13,8 +13,17 @@
 
 class GfxImage;
 
+/// Typedef defining an image shared pointer
 typedef shared_ptr<GfxImage> GfxImageSharedPtr;
 
+/**
+ * \class GfxImage
+ * \brief Graphic Element representing an Image
+ * 
+ * Graphic element inheriting from GfxElement. It allows any image to be
+ * rendered by loading a texture. It also allows rotation and scale
+ * effects. 
+ */
 class GfxImage : public GfxElement
 {
 	protected :

@@ -1,3 +1,8 @@
+/**
+ * \file TetrisGrid.cpp 
+ * \brief Tetris grid (graphic & logic)
+ */
+
 #include "TetrisGrid.h"
 #include "../GameApp/SDLApp.h"
 #include "../Graphics/GfxManager.h"

@@ -10,8 +10,16 @@
 
 class GfxRect;
 
+/// Typedef defining a rectangle shared pointer
 typedef shared_ptr<GfxRect> GfxRectSharedPtr;
 
+/**
+ * \class GfxRect
+ * \brief Graphic Element representing a colored Rectangle
+ * 
+ * Graphic element inheriting from GfxElement. It allows a colored 
+ * rectangle to be rendered (useful for fadein/out).
+ */
 class GfxRect : public GfxElement
 {
 	private :

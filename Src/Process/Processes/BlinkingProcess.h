@@ -9,6 +9,10 @@
 #include "../Process.h"
 #include "../../Graphics/GfxImage.h"
 
+/**
+ * \class BlinkingProcess 
+ * \brief Process allowing an image to blink repeatedly 
+ */
 class BlinkingProcess : public Process
 {
 private :

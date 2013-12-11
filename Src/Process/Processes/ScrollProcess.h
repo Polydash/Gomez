@@ -9,6 +9,10 @@
 #include "../Process.h"
 #include "../../Graphics/GfxImage.h"
 
+/**
+ * \class ScrollProcess 
+ * \brief Base Process allowing an image to scroll 
+ */
 class ScrollProcess : public Process
 {
 protected :
@@ -24,7 +28,7 @@ public :
 	ScrollProcess(float speed, int layer);
 	virtual ~ScrollProcess();
 	
-	virtual void VUpdate(unsigned int elapsedTime){}
+	virtual void VUpdate(unsigned int elapsedTime) = 0;
 };
 
 #endif

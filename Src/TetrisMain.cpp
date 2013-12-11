@@ -12,18 +12,18 @@
  */
 int main()
 {
-	/// Reset log file
+	//Reset log file
 	remove("Data/log.txt");
 	LOG("Program started"); 
 	
-	/// Create game application
+	//Create game application
 	SDLApp::Create();
 	
-	/// Init and application loop
+	//Init and application loop
 	if(g_pApp->Init())
 		g_pApp->MainLoop();
 	
-	/// End program
+	//End program
 	SDLApp::Destroy();	
 	LOG("Program ended");
 	

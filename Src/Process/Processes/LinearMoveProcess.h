@@ -9,6 +9,10 @@
 #include "../Process.h"
 #include "../../Graphics/GfxElement.h"
 
+/**
+ * \class LinearMoveProcess 
+ * \brief Process allowing an image to move linearly to a target position
+ */
 class LinearMoveProcess : public Process
 {
 private :

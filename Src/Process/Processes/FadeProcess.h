@@ -9,6 +9,10 @@
 #include "../Process.h"
 #include "../../Graphics/GfxElement.h"
 
+/**
+ * \class FadeProcess 
+ * \brief Process allowing a Graphic Element to fade to a target alpha
+ */
 class FadeProcess : public Process
 {
 private :

@@ -11,6 +11,16 @@
 #include "../IEvent.h"
 #include "../../TetrisLogic/TetrisGrid.h"
 
+/**
+ * \class Evt_NewTetrisLoop
+ * \brief New Tetris Loop Event
+ * 
+ * Event allowing information of the new game loop to be launched to 
+ * clients.
+ * 
+ * Serialize and Deserialize methods make use of stringstream to send
+ * informations on the network. 
+ */
 class Evt_NewTetrisLoop : public IEvent
 {
 private :

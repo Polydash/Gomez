@@ -8,6 +8,12 @@
 
 #include "../IEvent.h"
 
+/**
+ * \class Evt_AddScore
+ * \brief Add Score Event
+ * 
+ * Event allowing an object to add score to TetrisScore object.
+ */
 class Evt_AddScore : public IEvent
 {
 private :

@@ -10,6 +10,13 @@
 #include "../Graphics/GfxText.h"
 #include "../Graphics/GfxRect.h"
 
+/**
+ * \class IntroState
+ * \brief Intro Game State
+ * 
+ * GameState specific to the Tetris game. It manages every aspect of the
+ * introduction, as the game starts.
+ */
 class IntroState : public BaseGameState
 {
 private :

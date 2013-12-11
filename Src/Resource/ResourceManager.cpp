@@ -1,3 +1,8 @@
+/**
+ * \file ResourceManager.cpp 
+ * \brief Manager allowing resources to be loaded
+ */
+
 #include "ResourceManager.h"
 #include "ImageResource.h"
 #include "FontResource.h"

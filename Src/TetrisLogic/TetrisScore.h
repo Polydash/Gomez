@@ -1,12 +1,23 @@
 #ifndef TETRISSCORE_H
 #define TETRISSCORE_H
 
+/**
+ * \file TetrisScore.h 
+ * \brief Graphic element showing current score
+ */
+
 #include "../Graphics/GfxText.h"
 #include "../Event/IEvent.h"
 #include "../Process/Process.h"
 
 class ScoreCounterProcess;
 
+/**
+ * \class TetrisScore 
+ * \brief Graphic element showing current score
+ * 
+ * This class contains the current score and displays it.
+ */
 class TetrisScore
 {
 private :

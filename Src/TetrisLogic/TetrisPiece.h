@@ -1,10 +1,21 @@
 #ifndef TETRISPIECE_H
 #define TETRISPIECE_H
 
+/**
+ * \file TetrisPiece.h 
+ * \brief Tetris piece (logic)
+ */
+
 #include <string>
 
 #include "TetrisGfxBlock.h"
 
+/**
+ * \class TetrisPiece
+ * \brief Tetris piece (logic)
+ * 
+ * This class contains logic informations about a TetrisPiece.
+ */
 class TetrisPiece
 {
 private :

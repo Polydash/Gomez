@@ -12,6 +12,14 @@
 
 #define MAX_PACKET_SIZE 1024
 
+/**
+ * \class Server
+ * \brief TCP Server
+ * 
+ * A server accepts client connections via TCP and send/receive packets
+ * from it. These packets are then interpreted as Events and triggered
+ * into the game. 
+ */
 class Server
 {
 private :

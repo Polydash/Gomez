@@ -11,6 +11,13 @@
 #include "../Graphics/GfxImage.h"
 #include "../Graphics/GfxText.h"
 
+/**
+ * \class MenuState
+ * \brief Menu State
+ * 
+ * GameState specific to the Tetris game. It manages every aspect of the
+ * main menu, allowing a new game to start or the application to end. 
+ */
 class MenuState : public BaseGameState
 {
 private :

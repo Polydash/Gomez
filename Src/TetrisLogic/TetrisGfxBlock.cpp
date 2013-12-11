@@ -1,3 +1,8 @@
+/**
+ * \file TetrisGfxBlock.cpp
+ * \brief Tetris block (graphic & logic)
+ */
+
 #include "TetrisGfxBlock.h"
 #include "../GameApp/SDLApp.h"
 #include "../Graphics/GfxManager.h"

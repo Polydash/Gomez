@@ -8,6 +8,7 @@
 
 #include "../IEvent.h"
 
+/// Enumeration defining every game input
 enum eGameInput{ GI_MOVELEFT,
 				 GI_MOVERIGHT,
 				 GI_ROTATE,
@@ -15,6 +16,13 @@ enum eGameInput{ GI_MOVELEFT,
 				 GI_DROP
 			   };
 
+/**
+ * \class Evt_MainGameInput
+ * \brief Main Game Input Event
+ * 
+ * Event indicating a new Game Input. It also indicates wether it is
+ * pressed or not (useful for buttons, for instance) 
+ */
 class Evt_MainGameInput : public IEvent
 {
 private :

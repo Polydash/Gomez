@@ -14,8 +14,19 @@ using std::tr1::shared_ptr;
 
 class GfxElement;
 
+/// Typedef defining a graphic element shared pointer
 typedef shared_ptr<GfxElement> GfxElementSharedPtr;
 
+/**
+ * \class GfxElement
+ * \brief Graphic Element base class
+ * 
+ * Graphic element needed by GfxManager. It manages the current position,
+ * color, layer and alpha value of the current graphic element, but
+ * cannot be rendered as is.
+ * 
+ * Rendered elements must inherit from this class. 
+ */
 class GfxElement
 {
 	protected :

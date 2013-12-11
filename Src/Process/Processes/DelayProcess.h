@@ -8,6 +8,10 @@
 
 #include "../Process.h"
 
+/**
+ * \class DelayProcess 
+ * \brief Process creating a delay
+ */
 class DelayProcess : public Process
 {
 private:

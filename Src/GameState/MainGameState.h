@@ -16,6 +16,14 @@ class TetrisScore;
 class TetrisPiece;
 class TetrisNextPiece;
 
+/**
+ * \class MainGameState
+ * \brief Main Game State
+ * 
+ * GameState specific to the Tetris game. It manages every aspect of the
+ * Tetris game, sending game loop processes and requesting a transition 
+ * to the menu as the game ends. 
+ */
 class MainGameState : public BaseGameState
 {
 private :

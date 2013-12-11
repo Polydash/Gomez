@@ -3,13 +3,21 @@
 
 /**
  * \file ProcessManager.h 
- * \brief Manager allowing processes to be updated and queued 
+ * \brief Manager allowing processes to be updated and attached 
  */
 
 #include <list>
 
 #include "Process.h"
 
+/**
+ * \class ProcessManager
+ * \brief Manager allowing processes to be updated and attached
+ * 
+ * This manager allows Processes to be attached to a process list that
+ * is updated with the ProcessManager. A "child" Process may be attached
+ * on a Process success. All Processes may also be aborted.
+ */
 class ProcessManager
 {
 private :
