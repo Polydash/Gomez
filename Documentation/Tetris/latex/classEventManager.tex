@@ -1,0 +1,57 @@
+\hypertarget{classEventManager}{\section{Event\-Manager Class Reference}
+\label{classEventManager}\index{Event\-Manager@{Event\-Manager}}
+}
+
+
+Manager allowing Events to be triggered.  
+
+
+
+
+{\ttfamily \#include $<$Event\-Manager.\-h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classEventManager_a4bf667988bd84c7d8d179816adee5213}{void {\bfseries Update} ()}\label{classEventManager_a4bf667988bd84c7d8d179816adee5213}
+
+\item 
+\hypertarget{classEventManager_a67f1f819fb4a2b73332096821807efed}{void {\bfseries Add\-Listener} (const \hyperlink{IEvent_8h_aec13e0c22bae1765dcadd7f9fa55514b}{Event\-Listener\-Delegate} \&event\-Listener, \hyperlink{IEvent_8h_a052e637824ed8cb8a5e9d5d73b5b3c8b}{e\-Event\-Type} event\-Type)}\label{classEventManager_a67f1f819fb4a2b73332096821807efed}
+
+\item 
+\hypertarget{classEventManager_acefd95e8e98cb9599b4e4e7fc8d096cb}{void {\bfseries Remove\-Listener} (const \hyperlink{IEvent_8h_aec13e0c22bae1765dcadd7f9fa55514b}{Event\-Listener\-Delegate} \&event\-Listener, \hyperlink{IEvent_8h_a052e637824ed8cb8a5e9d5d73b5b3c8b}{e\-Event\-Type} event\-Type)}\label{classEventManager_acefd95e8e98cb9599b4e4e7fc8d096cb}
+
+\item 
+\hypertarget{classEventManager_a96ffc88f98bbc1216e1540d9c2f112bd}{void {\bfseries Trigger\-Event} (\hyperlink{IEvent_8h_acf266fae1ccf111c04861cc2a370b2d0}{Event\-Shared\-Ptr} p\-Event)}\label{classEventManager_a96ffc88f98bbc1216e1540d9c2f112bd}
+
+\item 
+\hypertarget{classEventManager_ab3a7c33b4f4ab18476f84f62c7a8ceea}{void {\bfseries Queue\-Event} (\hyperlink{IEvent_8h_acf266fae1ccf111c04861cc2a370b2d0}{Event\-Shared\-Ptr} p\-Event)}\label{classEventManager_ab3a7c33b4f4ab18476f84f62c7a8ceea}
+
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classEventManager_a17e2eb6bfbe1411181199cbab5f5a856}{static void {\bfseries Create} ()}\label{classEventManager_a17e2eb6bfbe1411181199cbab5f5a856}
+
+\item 
+\hypertarget{classEventManager_ac8154ede54d2ca9c81c2530f903b20fe}{static \hyperlink{classEventManager}{Event\-Manager} $\ast$ {\bfseries Get} ()}\label{classEventManager_ac8154ede54d2ca9c81c2530f903b20fe}
+
+\item 
+\hypertarget{classEventManager_a20549fbf6c5ee69f79b38d31f6194ed4}{static void {\bfseries Destroy} ()}\label{classEventManager_a20549fbf6c5ee69f79b38d31f6194ed4}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Manager allowing Events to be triggered. 
+
+This manager allows objects to subscribe a method to an event type. Each time an event is triggered, subscribed methods are called according to the event type.
+
+There is also an event queue in order to queue events and trigger them at the same time.
+
+This manager uses delegates from the \char`\"{}\-Fast\-Delegate\char`\"{} library. 
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+Src/\-Event/\hyperlink{EventManager_8h}{Event\-Manager.\-h}\item 
+Src/\-Event/\hyperlink{EventManager_8cpp}{Event\-Manager.\-cpp}\end{DoxyCompactItemize}

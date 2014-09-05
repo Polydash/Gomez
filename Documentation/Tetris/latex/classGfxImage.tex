@@ -1,0 +1,89 @@
+\hypertarget{classGfxImage}{\section{Gfx\-Image Class Reference}
+\label{classGfxImage}\index{Gfx\-Image@{Gfx\-Image}}
+}
+
+
+Graphic Element representing an Image.  
+
+
+
+
+{\ttfamily \#include $<$Gfx\-Image.\-h$>$}
+
+Inheritance diagram for Gfx\-Image\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classGfxImage}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classGfxImage_a5c7a658a17d8243fc72cdb7ccf978e88}{{\bfseries Gfx\-Image} (int layer, const std\-::string \&m\-\_\-file\-Name)}\label{classGfxImage_a5c7a658a17d8243fc72cdb7ccf978e88}
+
+\item 
+\hypertarget{classGfxImage_a22b56b6928fe10973930d3261bb3e80e}{{\bfseries Gfx\-Image} (int layer, const std\-::string \&m\-\_\-file\-Name, float pos\-X, float pos\-Y)}\label{classGfxImage_a22b56b6928fe10973930d3261bb3e80e}
+
+\item 
+\hypertarget{classGfxImage_a5ef1227e066ad472dea3953b86e84a65}{virtual bool {\bfseries V\-Init} (S\-D\-L\-\_\-\-Renderer $\ast$p\-Renderer)}\label{classGfxImage_a5ef1227e066ad472dea3953b86e84a65}
+
+\item 
+\hypertarget{classGfxImage_ac4bf4820c6a06742d1902147c135c258}{virtual void {\bfseries V\-Render} (S\-D\-L\-\_\-\-Renderer $\ast$p\-Renderer)}\label{classGfxImage_ac4bf4820c6a06742d1902147c135c258}
+
+\item 
+\hypertarget{classGfxImage_a41186f669f5f8ba7fcf65d32d8086003}{void {\bfseries Set\-Angle} (double angle)}\label{classGfxImage_a41186f669f5f8ba7fcf65d32d8086003}
+
+\item 
+\hypertarget{classGfxImage_aa78f8c12355ea7212804770320868f79}{double {\bfseries Get\-Angle} () const }\label{classGfxImage_aa78f8c12355ea7212804770320868f79}
+
+\item 
+\hypertarget{classGfxImage_ac7836cfe9867c29114dac16fc58ef22d}{void {\bfseries Set\-Scale} (float scale)}\label{classGfxImage_ac7836cfe9867c29114dac16fc58ef22d}
+
+\item 
+\hypertarget{classGfxImage_a9780c81b8a415042e01844e8bbd58df9}{float {\bfseries Get\-Scale} () const }\label{classGfxImage_a9780c81b8a415042e01844e8bbd58df9}
+
+\item 
+\hypertarget{classGfxImage_a62d118fb2b87be486bf26060079e4be5}{virtual void {\bfseries V\-Set\-Color} (\hyperlink{GameStd_8h_a0c8186d9b9b7880309c27230bbb5e69d}{byte} r, \hyperlink{GameStd_8h_a0c8186d9b9b7880309c27230bbb5e69d}{byte} g, \hyperlink{GameStd_8h_a0c8186d9b9b7880309c27230bbb5e69d}{byte} b)}\label{classGfxImage_a62d118fb2b87be486bf26060079e4be5}
+
+\item 
+\hypertarget{classGfxImage_a32a5d42b4d52cfa74167b5e8553abeda}{void {\bfseries Reset\-Color} ()}\label{classGfxImage_a32a5d42b4d52cfa74167b5e8553abeda}
+
+\item 
+\hypertarget{classGfxImage_a057ee1c70d53831b1b32b1bf885a1eae}{virtual void {\bfseries V\-Set\-Alpha} (\hyperlink{GameStd_8h_a0c8186d9b9b7880309c27230bbb5e69d}{byte} alpha)}\label{classGfxImage_a057ee1c70d53831b1b32b1bf885a1eae}
+
+\item 
+\hypertarget{classGfxImage_a16105445de1289b5ffa860cf478953e4}{virtual bool {\bfseries V\-Is\-Visible} () const }\label{classGfxImage_a16105445de1289b5ffa860cf478953e4}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classGfxImage_a61075f70a846e953f3afd6a680e02bae}{S\-D\-L\-\_\-\-Texture $\ast$ {\bfseries m\-\_\-p\-Texture}}\label{classGfxImage_a61075f70a846e953f3afd6a680e02bae}
+
+\item 
+\hypertarget{classGfxImage_a042aeda1366ed533b2ccb3ab94e8f3dd}{std\-::string {\bfseries m\-\_\-file\-Name}}\label{classGfxImage_a042aeda1366ed533b2ccb3ab94e8f3dd}
+
+\item 
+\hypertarget{classGfxImage_a619f08ff1eeac75dd923bc93892f1a6c}{int {\bfseries m\-\_\-width}}\label{classGfxImage_a619f08ff1eeac75dd923bc93892f1a6c}
+
+\item 
+\hypertarget{classGfxImage_afa1a73cd040b191d15c8b312d13da2e3}{int {\bfseries m\-\_\-height}}\label{classGfxImage_afa1a73cd040b191d15c8b312d13da2e3}
+
+\item 
+\hypertarget{classGfxImage_ac904ba078ce4fb28cc2641bb615775a0}{double {\bfseries m\-\_\-angle}}\label{classGfxImage_ac904ba078ce4fb28cc2641bb615775a0}
+
+\item 
+\hypertarget{classGfxImage_a5f6d1dc53013152f9e09004dbdd57aab}{float {\bfseries m\-\_\-scale}}\label{classGfxImage_a5f6d1dc53013152f9e09004dbdd57aab}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Graphic Element representing an Image. 
+
+Graphic element inheriting from \hyperlink{classGfxElement}{Gfx\-Element}. It allows any image to be rendered by loading a texture. It also allows rotation and scale effects. 
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+Src/\-Graphics/\hyperlink{GfxImage_8h}{Gfx\-Image.\-h}\item 
+Src/\-Graphics/\hyperlink{GfxImage_8cpp}{Gfx\-Image.\-cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,62 @@
+\hypertarget{classTetrisGrid}{\section{Tetris\-Grid Class Reference}
+\label{classTetrisGrid}\index{Tetris\-Grid@{Tetris\-Grid}}
+}
+
+
+Tetris grid (graphic \& logic)  
+
+
+
+
+{\ttfamily \#include $<$Tetris\-Grid.\-h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classTetrisGrid_a7720a869fa7feffa1a991345af7f13ed}{{\bfseries Tetris\-Grid} (int width, int height, int pos\-X, int pos\-Y)}\label{classTetrisGrid_a7720a869fa7feffa1a991345af7f13ed}
+
+\item 
+\hypertarget{classTetrisGrid_ae7533f2325688fe3645f21c34e7c728c}{void {\bfseries Add\-Block} (int i, int j, \hyperlink{TetrisGfxBlock_8h_a2592cbf66d668df0e31fa8d0d8a174de}{e\-Piece\-Type} piece\-Type)}\label{classTetrisGrid_ae7533f2325688fe3645f21c34e7c728c}
+
+\item 
+\hypertarget{classTetrisGrid_a34b01d1ff5ed251f40928cc24c6c7bb9}{void {\bfseries Move\-Block} (int i1, int j1, int i2, int j2)}\label{classTetrisGrid_a34b01d1ff5ed251f40928cc24c6c7bb9}
+
+\item 
+\hypertarget{classTetrisGrid_ac6ce9ef1829591c332500578736d8ce9}{void {\bfseries Remove\-Block} (int i, int j)}\label{classTetrisGrid_ac6ce9ef1829591c332500578736d8ce9}
+
+\item 
+\hypertarget{classTetrisGrid_a68e84fdbd1c9aa8ab580dc1e05a21574}{void {\bfseries Lower\-Blocks} (int line)}\label{classTetrisGrid_a68e84fdbd1c9aa8ab580dc1e05a21574}
+
+\item 
+\hypertarget{classTetrisGrid_a6e33007c87079a7bd4f8ec33efcfd40b}{\hyperlink{classTetrisGfxBlock}{Tetris\-Gfx\-Block} $\ast$ {\bfseries Get\-Block} (int i, int j) const }\label{classTetrisGrid_a6e33007c87079a7bd4f8ec33efcfd40b}
+
+\item 
+\hypertarget{classTetrisGrid_a051cced596b77b6daf86f243c098f70f}{void {\bfseries Init\-Position} (\hyperlink{classTetrisPiece}{Tetris\-Piece} $\ast$p\-Piece)}\label{classTetrisGrid_a051cced596b77b6daf86f243c098f70f}
+
+\item 
+\hypertarget{classTetrisGrid_a6b61c6f2d8aec1d46a962b6f87eb0dd6}{void {\bfseries Init\-Position} (\hyperlink{GfxImage_8h_a42b2baf6110731a1a358d365e303e086}{Gfx\-Image\-Shared\-Ptr} p\-Image)}\label{classTetrisGrid_a6b61c6f2d8aec1d46a962b6f87eb0dd6}
+
+\item 
+\hypertarget{classTetrisGrid_ae421a7401e743fad0ba7202af5a5e5ec}{int {\bfseries Get\-Width} () const }\label{classTetrisGrid_ae421a7401e743fad0ba7202af5a5e5ec}
+
+\item 
+\hypertarget{classTetrisGrid_a504f8c3a5ca30981811c3d010630d44f}{int {\bfseries Get\-Height} () const }\label{classTetrisGrid_a504f8c3a5ca30981811c3d010630d44f}
+
+\item 
+\hypertarget{classTetrisGrid_a34609e00cc1520f4510f732876ee99c7}{int {\bfseries Get\-Offset\-X} () const }\label{classTetrisGrid_a34609e00cc1520f4510f732876ee99c7}
+
+\item 
+\hypertarget{classTetrisGrid_a2f90c3098f0ae75645861fc66c91974c}{int {\bfseries Get\-Offset\-Y} () const }\label{classTetrisGrid_a2f90c3098f0ae75645861fc66c91974c}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Tetris grid (graphic \& logic) 
+
+The \hyperlink{classTetrisGrid}{Tetris\-Grid} manages every logic information about the grid (current blocks positions) and manages Gfx\-Elements like blocks and grid background. 
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+Src/\-Tetris\-Logic/\hyperlink{TetrisGrid_8h}{Tetris\-Grid.\-h}\item 
+Src/\-Tetris\-Logic/\hyperlink{TetrisGrid_8cpp}{Tetris\-Grid.\-cpp}\end{DoxyCompactItemize}

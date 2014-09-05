@@ -1,0 +1,47 @@
+\hypertarget{classDeleteLinesProcess}{\section{Delete\-Lines\-Process Class Reference}
+\label{classDeleteLinesProcess}\index{Delete\-Lines\-Process@{Delete\-Lines\-Process}}
+}
+
+
+\hyperlink{classProcess}{Process} deleting full lines in Tetris grid.  
+
+
+
+
+{\ttfamily \#include $<$Delete\-Lines\-Process.\-h$>$}
+
+Inheritance diagram for Delete\-Lines\-Process\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classDeleteLinesProcess}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classDeleteLinesProcess_af6f240617cb85e8f3d3a6c36ef17af65}{{\bfseries Delete\-Lines\-Process} (\hyperlink{classTetrisGrid}{Tetris\-Grid} $\ast$p\-Grid, float speed)}\label{classDeleteLinesProcess_af6f240617cb85e8f3d3a6c36ef17af65}
+
+\item 
+\hypertarget{classDeleteLinesProcess_a1c4cbbeec5485be7785426a70577cd42}{virtual void {\bfseries V\-Update} (unsigned int elapsed\-Time)}\label{classDeleteLinesProcess_a1c4cbbeec5485be7785426a70577cd42}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classDeleteLinesProcess_a52da53ec6ce9bad1e89807c41afddb38}{virtual bool {\bfseries V\-On\-Init} ()}\label{classDeleteLinesProcess_a52da53ec6ce9bad1e89807c41afddb38}
+
+\item 
+\hypertarget{classDeleteLinesProcess_aca5d8751a3d3066662529ac8e5fcc4b9}{virtual void {\bfseries V\-On\-Success} ()}\label{classDeleteLinesProcess_aca5d8751a3d3066662529ac8e5fcc4b9}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{classProcess}{Process} deleting full lines in Tetris grid. 
+
+This \hyperlink{classProcess}{Process} checks if the grid contains lines that should be deleted. If there are lines to delete, blocks are faded out with an animation and then a \hyperlink{classFallingLinesProcess}{Falling\-Lines\-Process} is attached. If there are no lines to delete, it declares the end of a game loop. 
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+Src/\-Process/\-Processes/\hyperlink{DeleteLinesProcess_8h}{Delete\-Lines\-Process.\-h}\item 
+Src/\-Process/\-Processes/\hyperlink{DeleteLinesProcess_8cpp}{Delete\-Lines\-Process.\-cpp}\end{DoxyCompactItemize}

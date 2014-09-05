@@ -1,0 +1,46 @@
+\hypertarget{IEvent_8h}{\section{Src/\-Event/\-I\-Event.h File Reference}
+\label{IEvent_8h}\index{Src/\-Event/\-I\-Event.\-h@{Src/\-Event/\-I\-Event.\-h}}
+}
+
+
+Event interface.  
+
+
+{\ttfamily \#include $<$sstream$>$}\\*
+{\ttfamily \#include $<$tr1/memory$>$}\\*
+{\ttfamily \#include \char`\"{}Fast\-Delegate.\-h\char`\"{}}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classIEvent}{I\-Event}
+\begin{DoxyCompactList}\small\item\em Event interface. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{IEvent_8h_acf266fae1ccf111c04861cc2a370b2d0}{typedef shared\-\_\-ptr$<$ \hyperlink{classIEvent}{I\-Event} $>$ \hyperlink{IEvent_8h_acf266fae1ccf111c04861cc2a370b2d0}{Event\-Shared\-Ptr}}\label{IEvent_8h_acf266fae1ccf111c04861cc2a370b2d0}
+
+\begin{DoxyCompactList}\small\item\em Typedef defining an Event shared pointer. \end{DoxyCompactList}\item 
+\hypertarget{IEvent_8h_aec13e0c22bae1765dcadd7f9fa55514b}{typedef \\*
+fastdelegate\-::\-Fast\-Delegate1\\*
+$<$ \hyperlink{IEvent_8h_acf266fae1ccf111c04861cc2a370b2d0}{Event\-Shared\-Ptr} $>$ \hyperlink{IEvent_8h_aec13e0c22bae1765dcadd7f9fa55514b}{Event\-Listener\-Delegate}}\label{IEvent_8h_aec13e0c22bae1765dcadd7f9fa55514b}
+
+\begin{DoxyCompactList}\small\item\em Typedef defining delegates needed by \hyperlink{classEventManager}{Event\-Manager}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{IEvent_8h_a052e637824ed8cb8a5e9d5d73b5b3c8b}{e\-Event\-Type} \{ \\*
+{\bfseries E\-T\-\_\-\-S\-T\-A\-T\-E\-C\-H\-A\-N\-G\-E}, 
+{\bfseries E\-T\-\_\-\-L\-O\-S\-T\-F\-O\-C\-U\-S}, 
+{\bfseries E\-T\-\_\-\-A\-T\-T\-A\-C\-H\-L\-O\-G\-I\-C\-P\-R\-O\-C\-E\-S\-S}, 
+{\bfseries E\-T\-\_\-\-M\-A\-I\-N\-G\-A\-M\-E\-I\-N\-P\-U\-T}, 
+\\*
+{\bfseries E\-T\-\_\-\-A\-D\-D\-S\-C\-O\-R\-E}, 
+{\bfseries E\-T\-\_\-\-E\-N\-D\-T\-E\-T\-R\-I\-S\-L\-O\-O\-P}, 
+{\bfseries E\-T\-\_\-\-N\-E\-W\-T\-E\-T\-R\-I\-S\-L\-O\-O\-P}, 
+{\bfseries E\-V\-E\-N\-T\-\_\-\-N\-B}
+ \}
+\begin{DoxyCompactList}\small\item\em Enumeration defining every Event type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Event interface. 

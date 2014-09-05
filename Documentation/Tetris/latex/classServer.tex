@@ -1,0 +1,41 @@
+\hypertarget{classServer}{\section{Server Class Reference}
+\label{classServer}\index{Server@{Server}}
+}
+
+
+T\-C\-P \hyperlink{classServer}{Server}.  
+
+
+
+
+{\ttfamily \#include $<$Server.\-h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classServer_acd7a368a5fa1904c01df2f50a41ba9f8}{{\bfseries Server} (const char $\ast$ip\-Address, short int port, unsigned int max\-Connections=1)}\label{classServer_acd7a368a5fa1904c01df2f50a41ba9f8}
+
+\item 
+\hypertarget{classServer_a0a0a253a6d2a2d34be6d98fd873e91bb}{bool {\bfseries Init} ()}\label{classServer_a0a0a253a6d2a2d34be6d98fd873e91bb}
+
+\item 
+\hypertarget{classServer_ac10efd7551ad566c0f5e6ed2547fcc77}{void {\bfseries Select} ()}\label{classServer_ac10efd7551ad566c0f5e6ed2547fcc77}
+
+\item 
+\hypertarget{classServer_ab498bc6ce24e39324344847f5d4e2cdf}{void {\bfseries Broadcast} (const std\-::ostringstream \&oss)}\label{classServer_ab498bc6ce24e39324344847f5d4e2cdf}
+
+\item 
+\hypertarget{classServer_a1a8df4c00589190f891f22881957aae1}{void {\bfseries Send} (Sock\-Fd sockfd, const std\-::ostringstream \&oss)}\label{classServer_a1a8df4c00589190f891f22881957aae1}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+T\-C\-P \hyperlink{classServer}{Server}. 
+
+A server accepts client connections via T\-C\-P and send/receive packets from it. These packets are then interpreted as Events and triggered into the game. 
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+Src/\-Network/\hyperlink{Server_8h}{Server.\-h}\item 
+Src/\-Network/\hyperlink{Server_8cpp}{Server.\-cpp}\end{DoxyCompactItemize}

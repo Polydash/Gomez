@@ -1,0 +1,66 @@
+\hypertarget{GameStd_8h}{\section{Src/\-Game\-Std.h File Reference}
+\label{GameStd_8h}\index{Src/\-Game\-Std.\-h@{Src/\-Game\-Std.\-h}}
+}
+
+
+Useful macros and typedefs.  
+
+
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$fstream$>$}\\*
+{\ttfamily \#include $<$stdlib.\-h$>$}\\*
+{\ttfamily \#include $<$string$>$}\\*
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{GameStd_8h_a598a3330b3c21701223ee0ca14316eca}{\#define \hyperlink{GameStd_8h_a598a3330b3c21701223ee0ca14316eca}{P\-I}~3.\-1415926535}\label{GameStd_8h_a598a3330b3c21701223ee0ca14316eca}
+
+\begin{DoxyCompactList}\small\item\em Constant defining P\-I value. \end{DoxyCompactList}\item 
+\#define \hyperlink{GameStd_8h_ad45c5447fa213228e8493458c1770e91}{S\-A\-F\-E\-\_\-\-D\-E\-L\-E\-T\-E}(ptr)~do\{ if(ptr)\{delete ptr; ptr = N\-U\-L\-L;\} \}while(0)
+\begin{DoxyCompactList}\small\item\em S\-A\-F\-E\-\_\-\-D\-E\-L\-E\-T\-E macro. \end{DoxyCompactList}\item 
+\#define \hyperlink{GameStd_8h_a7541454697b30d05714aa6b2150500b1}{S\-A\-F\-E\-\_\-\-D\-E\-L\-E\-T\-E\-\_\-\-A\-R\-R\-A\-Y}(ptr)~do\{ if(ptr)\{delete\mbox{[}$\,$\mbox{]} ptr; ptr = N\-U\-L\-L;\} \}while(0)
+\begin{DoxyCompactList}\small\item\em S\-A\-F\-E\-\_\-\-D\-E\-L\-E\-T\-E macro. \end{DoxyCompactList}\item 
+\hypertarget{GameStd_8h_a39b3cc118c8339855e5578335a0b2417}{\#define {\bfseries E\-R\-R\-O\-R}(str)~do\{\}while(0)}\label{GameStd_8h_a39b3cc118c8339855e5578335a0b2417}
+
+\item 
+\hypertarget{GameStd_8h_a1482e48c7a5fd002739cc9b33f1a292d}{\#define {\bfseries I\-N\-F\-O}(str)~do\{\}while(0)}\label{GameStd_8h_a1482e48c7a5fd002739cc9b33f1a292d}
+
+\item 
+\hypertarget{GameStd_8h_ae650092dd9e6c887c70dd101e1c50ea4}{\#define {\bfseries L\-O\-G}(str)~do\{\}while(0)}\label{GameStd_8h_ae650092dd9e6c887c70dd101e1c50ea4}
+
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{GameStd_8h_a0c8186d9b9b7880309c27230bbb5e69d}{typedef unsigned char \hyperlink{GameStd_8h_a0c8186d9b9b7880309c27230bbb5e69d}{byte}}\label{GameStd_8h_a0c8186d9b9b7880309c27230bbb5e69d}
+
+\begin{DoxyCompactList}\small\item\em Typedef allowing bytes use. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Useful macros and typedefs. 
+
+\subsection{Macro Definition Documentation}
+\hypertarget{GameStd_8h_ad45c5447fa213228e8493458c1770e91}{\index{Game\-Std.\-h@{Game\-Std.\-h}!S\-A\-F\-E\-\_\-\-D\-E\-L\-E\-T\-E@{S\-A\-F\-E\-\_\-\-D\-E\-L\-E\-T\-E}}
+\index{S\-A\-F\-E\-\_\-\-D\-E\-L\-E\-T\-E@{S\-A\-F\-E\-\_\-\-D\-E\-L\-E\-T\-E}!GameStd.h@{Game\-Std.\-h}}
+\subsubsection[{S\-A\-F\-E\-\_\-\-D\-E\-L\-E\-T\-E}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\-A\-F\-E\-\_\-\-D\-E\-L\-E\-T\-E(
+\begin{DoxyParamCaption}
+\item[{}]{ptr}
+\end{DoxyParamCaption}
+)~do\{ if(ptr)\{delete ptr; ptr = N\-U\-L\-L;\} \}while(0)}}\label{GameStd_8h_ad45c5447fa213228e8493458c1770e91}
+
+
+S\-A\-F\-E\-\_\-\-D\-E\-L\-E\-T\-E macro. 
+
+Macro allowing a safe memory deallocation \hypertarget{GameStd_8h_a7541454697b30d05714aa6b2150500b1}{\index{Game\-Std.\-h@{Game\-Std.\-h}!S\-A\-F\-E\-\_\-\-D\-E\-L\-E\-T\-E\-\_\-\-A\-R\-R\-A\-Y@{S\-A\-F\-E\-\_\-\-D\-E\-L\-E\-T\-E\-\_\-\-A\-R\-R\-A\-Y}}
+\index{S\-A\-F\-E\-\_\-\-D\-E\-L\-E\-T\-E\-\_\-\-A\-R\-R\-A\-Y@{S\-A\-F\-E\-\_\-\-D\-E\-L\-E\-T\-E\-\_\-\-A\-R\-R\-A\-Y}!GameStd.h@{Game\-Std.\-h}}
+\subsubsection[{S\-A\-F\-E\-\_\-\-D\-E\-L\-E\-T\-E\-\_\-\-A\-R\-R\-A\-Y}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\-A\-F\-E\-\_\-\-D\-E\-L\-E\-T\-E\-\_\-\-A\-R\-R\-A\-Y(
+\begin{DoxyParamCaption}
+\item[{}]{ptr}
+\end{DoxyParamCaption}
+)~do\{ if(ptr)\{delete\mbox{[}$\,$\mbox{]} ptr; ptr = N\-U\-L\-L;\} \}while(0)}}\label{GameStd_8h_a7541454697b30d05714aa6b2150500b1}
+
+
+S\-A\-F\-E\-\_\-\-D\-E\-L\-E\-T\-E macro. 
+
+Macro allowing a safe memory deallocation 

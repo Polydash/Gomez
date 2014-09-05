@@ -1,0 +1,94 @@
+\hypertarget{classGfxElement}{\section{Gfx\-Element Class Reference}
+\label{classGfxElement}\index{Gfx\-Element@{Gfx\-Element}}
+}
+
+
+Graphic Element base class.  
+
+
+
+
+{\ttfamily \#include $<$Gfx\-Element.\-h$>$}
+
+Inheritance diagram for Gfx\-Element\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classGfxElement}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classGfxElement_adf7537e47ae8bd1095e8638ba719329c}{{\bfseries Gfx\-Element} (int layer)}\label{classGfxElement_adf7537e47ae8bd1095e8638ba719329c}
+
+\item 
+\hypertarget{classGfxElement_ab29c43cd8d53744a94a92e350adc8f36}{{\bfseries Gfx\-Element} (int layer, float pos\-X, float pos\-Y)}\label{classGfxElement_ab29c43cd8d53744a94a92e350adc8f36}
+
+\item 
+\hypertarget{classGfxElement_a1586e8b645919da7b6f5523283c3e504}{virtual bool {\bfseries V\-Init} (S\-D\-L\-\_\-\-Renderer $\ast$p\-Renderer)=0}\label{classGfxElement_a1586e8b645919da7b6f5523283c3e504}
+
+\item 
+\hypertarget{classGfxElement_a2bbacedc85a38d0c689af0d544c91afc}{virtual void {\bfseries V\-Render} (S\-D\-L\-\_\-\-Renderer $\ast$p\-Renderer)=0}\label{classGfxElement_a2bbacedc85a38d0c689af0d544c91afc}
+
+\item 
+\hypertarget{classGfxElement_a46a99a31e17e22e9ee1b553074d6d4a0}{virtual bool {\bfseries V\-Is\-Visible} () const =0}\label{classGfxElement_a46a99a31e17e22e9ee1b553074d6d4a0}
+
+\item 
+\hypertarget{classGfxElement_aae748b2e2153b9ce379dd5b877ebca7d}{void {\bfseries Set\-Position} (float pos\-X, float pos\-Y)}\label{classGfxElement_aae748b2e2153b9ce379dd5b877ebca7d}
+
+\item 
+\hypertarget{classGfxElement_a7ce355c8e9f1fcde5c2396fbb21c5ed5}{void {\bfseries Translate} (float delta\-X, float delta\-Y)}\label{classGfxElement_a7ce355c8e9f1fcde5c2396fbb21c5ed5}
+
+\item 
+\hypertarget{classGfxElement_a769887fa72f8e98233fb76ea178a4863}{const float {\bfseries Get\-Pos\-X} () const }\label{classGfxElement_a769887fa72f8e98233fb76ea178a4863}
+
+\item 
+\hypertarget{classGfxElement_a7dc6347593ba1e4c9eb2a9ef068c2db8}{const float {\bfseries Get\-Pos\-Y} () const }\label{classGfxElement_a7dc6347593ba1e4c9eb2a9ef068c2db8}
+
+\item 
+\hypertarget{classGfxElement_abc161d2867f6359dc5102b24de73db47}{virtual void {\bfseries V\-Set\-Color} (\hyperlink{GameStd_8h_a0c8186d9b9b7880309c27230bbb5e69d}{byte} r, \hyperlink{GameStd_8h_a0c8186d9b9b7880309c27230bbb5e69d}{byte} g, \hyperlink{GameStd_8h_a0c8186d9b9b7880309c27230bbb5e69d}{byte} b)}\label{classGfxElement_abc161d2867f6359dc5102b24de73db47}
+
+\item 
+\hypertarget{classGfxElement_a13362b057909c8f1c3fe986252e8e59d}{S\-D\-L\-\_\-\-Color {\bfseries Get\-Color} () const }\label{classGfxElement_a13362b057909c8f1c3fe986252e8e59d}
+
+\item 
+\hypertarget{classGfxElement_a0700a28e408f8f5a6212c233f9b6f213}{virtual void {\bfseries V\-Set\-Alpha} (\hyperlink{GameStd_8h_a0c8186d9b9b7880309c27230bbb5e69d}{byte} alpha)}\label{classGfxElement_a0700a28e408f8f5a6212c233f9b6f213}
+
+\item 
+\hypertarget{classGfxElement_a6e8a0048bd82b1bf41127fc75ff36699}{\hyperlink{GameStd_8h_a0c8186d9b9b7880309c27230bbb5e69d}{byte} {\bfseries Get\-Alpha} () const }\label{classGfxElement_a6e8a0048bd82b1bf41127fc75ff36699}
+
+\item 
+\hypertarget{classGfxElement_a73f352adee885d4a799cdf960588a769}{int {\bfseries Get\-Layer} () const }\label{classGfxElement_a73f352adee885d4a799cdf960588a769}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classGfxElement_a3d9cac49620edb122236ab57ce7544bf}{float {\bfseries m\-\_\-pos\-X}}\label{classGfxElement_a3d9cac49620edb122236ab57ce7544bf}
+
+\item 
+\hypertarget{classGfxElement_a430e4d090a7ec58e1d9e252460d47a6c}{float {\bfseries m\-\_\-pos\-Y}}\label{classGfxElement_a430e4d090a7ec58e1d9e252460d47a6c}
+
+\item 
+\hypertarget{classGfxElement_a827c874f44ef28105d474a99970b5d8b}{S\-D\-L\-\_\-\-Color {\bfseries m\-\_\-color}}\label{classGfxElement_a827c874f44ef28105d474a99970b5d8b}
+
+\item 
+\hypertarget{classGfxElement_ada0d2e2e41edd4bdd900b2676f79ca1f}{int {\bfseries m\-\_\-layer}}\label{classGfxElement_ada0d2e2e41edd4bdd900b2676f79ca1f}
+
+\item 
+\hypertarget{classGfxElement_a2cb0d3c84b78f591af6f57fa7f0003c7}{\hyperlink{GameStd_8h_a0c8186d9b9b7880309c27230bbb5e69d}{byte} {\bfseries m\-\_\-alpha}}\label{classGfxElement_a2cb0d3c84b78f591af6f57fa7f0003c7}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Graphic Element base class. 
+
+Graphic element needed by \hyperlink{classGfxManager}{Gfx\-Manager}. It manages the current position, color, layer and alpha value of the current graphic element, but cannot be rendered as is.
+
+Rendered elements must inherit from this class. 
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+Src/\-Graphics/\hyperlink{GfxElement_8h}{Gfx\-Element.\-h}\item 
+Src/\-Graphics/\hyperlink{GfxElement_8cpp}{Gfx\-Element.\-cpp}\end{DoxyCompactItemize}

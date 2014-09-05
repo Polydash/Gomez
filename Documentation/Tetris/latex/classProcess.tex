@@ -1,0 +1,73 @@
+\hypertarget{classProcess}{\section{Process Class Reference}
+\label{classProcess}\index{Process@{Process}}
+}
+
+
+\hyperlink{classProcess}{Process} Base class.  
+
+
+
+
+{\ttfamily \#include $<$Process.\-h$>$}
+
+Inheritance diagram for Process\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=12.000000cm]{classProcess}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classProcess_a729e5c7d6b2497b630dba98033043fad}{void {\bfseries Success} ()}\label{classProcess_a729e5c7d6b2497b630dba98033043fad}
+
+\item 
+\hypertarget{classProcess_aafcac4d2d3bd07029079fd7bd1a4472c}{void {\bfseries Abort} ()}\label{classProcess_aafcac4d2d3bd07029079fd7bd1a4472c}
+
+\item 
+\hypertarget{classProcess_a8bb4de9f1c31ca6330a1413dc2e645ed}{bool {\bfseries Init} ()}\label{classProcess_a8bb4de9f1c31ca6330a1413dc2e645ed}
+
+\item 
+\hypertarget{classProcess_aa3bffb61c3a3f881a1405874a870ba63}{virtual void {\bfseries V\-Update} (unsigned int elapsed\-Time)=0}\label{classProcess_aa3bffb61c3a3f881a1405874a870ba63}
+
+\item 
+\hypertarget{classProcess_a7987e40f3c8b29b820e13113e88e2a7f}{bool {\bfseries Is\-Done} () const }\label{classProcess_a7987e40f3c8b29b820e13113e88e2a7f}
+
+\item 
+\hypertarget{classProcess_a9f6fb77b737aa7acd6e4a974e0cf689c}{\hyperlink{Process_8h_a05a15f01bc448f46ab33296150afb6eb}{e\-Process\-State} {\bfseries Get\-State} () const }\label{classProcess_a9f6fb77b737aa7acd6e4a974e0cf689c}
+
+\item 
+\hypertarget{classProcess_ab695f1d82267b8b6832259bb7587c9e5}{void {\bfseries Attach\-Child} (\hyperlink{Process_8h_af04951552f62d8a3c69cca91c23500cc}{Process\-Shared\-Ptr} p\-Process)}\label{classProcess_ab695f1d82267b8b6832259bb7587c9e5}
+
+\item 
+\hypertarget{classProcess_ad3b20cadfabddc4ebbbb26e6a863f39a}{\hyperlink{Process_8h_af04951552f62d8a3c69cca91c23500cc}{Process\-Shared\-Ptr} {\bfseries Get\-Child} () const }\label{classProcess_ad3b20cadfabddc4ebbbb26e6a863f39a}
+
+\item 
+\hypertarget{classProcess_a2af160117377bdf44bf7180fd9c92c44}{\hyperlink{Process_8h_af04951552f62d8a3c69cca91c23500cc}{Process\-Shared\-Ptr} {\bfseries Remove\-Child} ()}\label{classProcess_a2af160117377bdf44bf7180fd9c92c44}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classProcess_a90628278bebb912c92bc0eb66bf5b4c0}{virtual bool {\bfseries V\-On\-Init} ()}\label{classProcess_a90628278bebb912c92bc0eb66bf5b4c0}
+
+\item 
+\hypertarget{classProcess_ae0dd19c4e48b16affc7ba3a466b907d5}{virtual void {\bfseries V\-On\-Success} ()}\label{classProcess_ae0dd19c4e48b16affc7ba3a466b907d5}
+
+\item 
+\hypertarget{classProcess_ac258942f24dfa613ad5ede2225cfe191}{virtual void {\bfseries V\-On\-Abort} ()}\label{classProcess_ac258942f24dfa613ad5ede2225cfe191}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{classProcess}{Process} Base class. 
+
+\hyperlink{classProcess}{Process} class needed by \hyperlink{classProcessManager}{Process\-Manager}. Every \hyperlink{classProcess}{Process} must inherit from this class.
+
+Processes may have a \char`\"{}child\char`\"{} process attached to it. If the current process successes, its \char`\"{}child\char`\"{} process is attached (allowing processes to start one after another). 
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+Src/\-Process/\hyperlink{Process_8h}{Process.\-h}\item 
+Src/\-Process/\hyperlink{Process_8cpp}{Process.\-cpp}\end{DoxyCompactItemize}

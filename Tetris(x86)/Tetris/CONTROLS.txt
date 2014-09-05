@@ -1,0 +1,21 @@
+			CONTROLES TETRIS
+			
+=== Contrôles clavier === 
+
+Bouger la pièce gauche/droite :  Touches directionnelles gauche/droite
+
+Rotation de la pièce : 			 Touche directionnelles haut 
+
+Accélérer la chute de la pièce : Touche directionnelle bas
+
+Faire tomber la pièce :			 Touche Espace
+
+=== Contrôles Manette XBOX 360 ===
+
+Bouger la pièce gauche/droite :  Stick directionnel L
+
+Rotation de la pièce : 			 Bouton X 
+
+Accélérer la chute de la pièce : Bouton A
+
+Faire tomber la pièce :			 Bouton B

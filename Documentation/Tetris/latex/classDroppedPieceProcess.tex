@@ -1,0 +1,53 @@
+\hypertarget{classDroppedPieceProcess}{\section{Dropped\-Piece\-Process Class Reference}
+\label{classDroppedPieceProcess}\index{Dropped\-Piece\-Process@{Dropped\-Piece\-Process}}
+}
+
+
+\hyperlink{classProcess}{Process} allowing a piece to fall on the grid with animation.  
+
+
+
+
+{\ttfamily \#include $<$Dropped\-Piece\-Process.\-h$>$}
+
+Inheritance diagram for Dropped\-Piece\-Process\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classDroppedPieceProcess}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classDroppedPieceProcess_a0108f48b2ea5a994acd6516286ddbc88}{{\bfseries Dropped\-Piece\-Process} (\hyperlink{classTetrisGrid}{Tetris\-Grid} $\ast$p\-Grid, \hyperlink{classTetrisPiece}{Tetris\-Piece} $\ast$p\-Piece, \hyperlink{GfxImage_8h_a42b2baf6110731a1a358d365e303e086}{Gfx\-Image\-Shared\-Ptr} p\-Image)}\label{classDroppedPieceProcess_a0108f48b2ea5a994acd6516286ddbc88}
+
+\item 
+\hypertarget{classDroppedPieceProcess_aae4b651bdd2f18d5a4f2a5873393a40d}{void {\bfseries Set\-Velocity} (float accel, float max\-Speed)}\label{classDroppedPieceProcess_aae4b651bdd2f18d5a4f2a5873393a40d}
+
+\item 
+\hypertarget{classDroppedPieceProcess_aeaedfdb8a1c487573ccf2ba06438b5c3}{virtual void {\bfseries V\-Update} (unsigned int elapsed\-Time)}\label{classDroppedPieceProcess_aeaedfdb8a1c487573ccf2ba06438b5c3}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classDroppedPieceProcess_a3f9b6a73f8638bae6bb5713ad3e0d899}{virtual bool {\bfseries V\-On\-Init} ()}\label{classDroppedPieceProcess_a3f9b6a73f8638bae6bb5713ad3e0d899}
+
+\item 
+\hypertarget{classDroppedPieceProcess_a5fdf30a0f18ded296778bf4000a12f28}{virtual void {\bfseries V\-On\-Success} ()}\label{classDroppedPieceProcess_a5fdf30a0f18ded296778bf4000a12f28}
+
+\item 
+\hypertarget{classDroppedPieceProcess_af58fbcf677fc1a0f604d3f2b1e703681}{virtual void {\bfseries V\-On\-Abort} ()}\label{classDroppedPieceProcess_af58fbcf677fc1a0f604d3f2b1e703681}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{classProcess}{Process} allowing a piece to fall on the grid with animation. 
+
+This \hyperlink{classProcess}{Process} is attached as the \char`\"{}\-Drop Piece\char`\"{} game input is pressed. It makes the piece fall on the grid with a \char`\"{}gravity\char`\"{} effect. Then, a \hyperlink{classDeleteLinesProcess}{Delete\-Lines\-Process} is attached to check grid for lines to delete. 
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+Src/\-Process/\-Processes/\hyperlink{DroppedPieceProcess_8h}{Dropped\-Piece\-Process.\-h}\item 
+Src/\-Process/\-Processes/\hyperlink{DroppedPieceProcess_8cpp}{Dropped\-Piece\-Process.\-cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,50 @@
+\hypertarget{classFallingPieceProcess}{\section{Falling\-Piece\-Process Class Reference}
+\label{classFallingPieceProcess}\index{Falling\-Piece\-Process@{Falling\-Piece\-Process}}
+}
+
+
+\hyperlink{classProcess}{Process} managing a piece slowly falling on the grid.  
+
+
+
+
+{\ttfamily \#include $<$Falling\-Piece\-Process.\-h$>$}
+
+Inheritance diagram for Falling\-Piece\-Process\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classFallingPieceProcess}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classFallingPieceProcess_acc536145c7ed4d0e371de7413c7d8a53}{{\bfseries Falling\-Piece\-Process} (\hyperlink{classTetrisGrid}{Tetris\-Grid} $\ast$p\-Grid, \hyperlink{classTetrisPiece}{Tetris\-Piece} $\ast$p\-Piece, float speed)}\label{classFallingPieceProcess_acc536145c7ed4d0e371de7413c7d8a53}
+
+\item 
+\hypertarget{classFallingPieceProcess_a5004a880b6c10709d076e14749aa5727}{virtual void {\bfseries V\-Update} (unsigned int elapsed\-Time)}\label{classFallingPieceProcess_a5004a880b6c10709d076e14749aa5727}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classFallingPieceProcess_a75ee40dae2f16dd49985a754cdb33ab4}{virtual bool {\bfseries V\-On\-Init} ()}\label{classFallingPieceProcess_a75ee40dae2f16dd49985a754cdb33ab4}
+
+\item 
+\hypertarget{classFallingPieceProcess_a4dc0e2d17b4283c53e9797b19a677409}{virtual void {\bfseries V\-On\-Success} ()}\label{classFallingPieceProcess_a4dc0e2d17b4283c53e9797b19a677409}
+
+\item 
+\hypertarget{classFallingPieceProcess_a42e3c19c4e15f20f866a8158a487e44d}{virtual void {\bfseries V\-On\-Abort} ()}\label{classFallingPieceProcess_a42e3c19c4e15f20f866a8158a487e44d}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{classProcess}{Process} managing a piece slowly falling on the grid. 
+
+This is the core \hyperlink{classProcess}{Process} of the game loop. It responds to game inputs and moves the piece accordingly. It can attach a \hyperlink{classDroppedPieceProcess}{Dropped\-Piece\-Process} if the player presses the Drop\-Piece game input, but it generally attaches a \hyperlink{classDeleteLinesProcess}{Delete\-Lines\-Process} when the piece has landed. 
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+Src/\-Process/\-Processes/\hyperlink{FallingPieceProcess_8h}{Falling\-Piece\-Process.\-h}\item 
+Src/\-Process/\-Processes/\hyperlink{FallingPieceProcess_8cpp}{Falling\-Piece\-Process.\-cpp}\end{DoxyCompactItemize}

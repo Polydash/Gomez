@@ -1,0 +1,64 @@
+\hypertarget{classBaseGameState}{\section{Base\-Game\-State Class Reference}
+\label{classBaseGameState}\index{Base\-Game\-State@{Base\-Game\-State}}
+}
+
+
+Base class for Game States.  
+
+
+
+
+{\ttfamily \#include $<$Base\-Game\-State.\-h$>$}
+
+Inheritance diagram for Base\-Game\-State\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classBaseGameState}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classBaseGameState_a902ab7154d50a7450813e8819460983e}{bool {\bfseries Init} ()}\label{classBaseGameState_a902ab7154d50a7450813e8819460983e}
+
+\item 
+\hypertarget{classBaseGameState_a9b2255147b39b61b56bdd7b718e04aff}{virtual void {\bfseries V\-On\-Input} (const S\-D\-L\-\_\-\-Event \&event)}\label{classBaseGameState_a9b2255147b39b61b56bdd7b718e04aff}
+
+\item 
+\hypertarget{classBaseGameState_aabc175d869400a697de3fa045b3313e3}{virtual void {\bfseries V\-Update} (unsigned int elapsed\-Time)}\label{classBaseGameState_aabc175d869400a697de3fa045b3313e3}
+
+\item 
+\hypertarget{classBaseGameState_ab1e9b16178f4eef257b129bb7c229555}{virtual void {\bfseries V\-On\-Update} (unsigned int elapsed\-Time)}\label{classBaseGameState_ab1e9b16178f4eef257b129bb7c229555}
+
+\item 
+\hypertarget{classBaseGameState_ac79790443c5757d50a64491c32ffd921}{virtual void {\bfseries V\-On\-Enter} ()}\label{classBaseGameState_ac79790443c5757d50a64491c32ffd921}
+
+\item 
+\hypertarget{classBaseGameState_a91421cb56abd7f5517a70429c2fe748f}{virtual void {\bfseries V\-On\-Leave} ()}\label{classBaseGameState_a91421cb56abd7f5517a70429c2fe748f}
+
+\item 
+\hypertarget{classBaseGameState_a8173eabbdcbfbee90c83086bdf6d1fcd}{virtual \hyperlink{BaseGameState_8h_ae12dcfc1b1e01980b11e116e3af6807f}{e\-Game\-State} {\bfseries V\-Get\-State} () const =0}\label{classBaseGameState_a8173eabbdcbfbee90c83086bdf6d1fcd}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classBaseGameState_aa5fa0c918f67dda17846a7077e0aaaf6}{void {\bfseries Attach\-Logic\-Process} (\hyperlink{Process_8h_af04951552f62d8a3c69cca91c23500cc}{Process\-Shared\-Ptr} p\-Process)}\label{classBaseGameState_aa5fa0c918f67dda17846a7077e0aaaf6}
+
+\item 
+\hypertarget{classBaseGameState_afd5820eefc569b6b99eab1d055789622}{void {\bfseries Abort\-All\-Processes} ()}\label{classBaseGameState_afd5820eefc569b6b99eab1d055789622}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Base class for Game States. 
+
+\hyperlink{classBaseGameState}{Base\-Game\-State} holds the main methods of all Game\-States. It includes a \hyperlink{classProcessManager}{Process\-Manager} that represents the logic processes running with each Game\-State.
+
+Every Game\-State shall inherit from this class. 
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+Src/\-Game\-State/\hyperlink{BaseGameState_8h}{Base\-Game\-State.\-h}\item 
+Src/\-Game\-State/\hyperlink{BaseGameState_8cpp}{Base\-Game\-State.\-cpp}\end{DoxyCompactItemize}
